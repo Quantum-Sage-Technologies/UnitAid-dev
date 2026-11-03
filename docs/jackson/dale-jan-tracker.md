@@ -266,6 +266,8 @@ The email asked for more than the tracker rows showed; §1 did only the name.
   translation-memory entry, which fails CI on the pull request, and the table
   and map words would describe a layout the port does not have yet).
   **When the port is done, remove the five markers and reword the keys.**
+  Done 3 Nov on `feat/rbm-messages-tracker` with the port
+  (`docs/rbm-messages-notes.md`, decision 15).
 
 ### 7. Caveats kept (3 Nov)
 
