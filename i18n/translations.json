@@ -7809,6 +7809,13 @@
       "bucket": "data",
       "fr": "41,5 millions de dollars américains depuis 2008",
       "pt": "US$ 41,5 milhões desde 2008"
+    },
+    "ef42447c7883109a": {
+      "en": "Access stages · {medicine}",
+      "where": "i18n/ui.en.json:map.panel.stageMixTitle",
+      "bucket": "ui",
+      "fr": "Étapes d’accès · {medicine}",
+      "pt": "Etapas de acesso · {medicine}"
     }
   }
 }
