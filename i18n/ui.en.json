@@ -31,6 +31,20 @@
     "subscribed": "Thank you for subscribing. You'll receive an email whenever the dashboard's data is updated.",
     "alreadySubscribed": "This email address is already subscribed. You'll continue to receive an email whenever the dashboard's data is updated."
   },
+  "unsubscribe": {
+    "title": "Unsubscribe from LAUNCH dashboard updates?",
+    "intro": "You will stop getting emails when the dashboard's data is updated.",
+    "button": "Unsubscribe",
+    "sending": "Unsubscribing…",
+    "doneTitle": "You're unsubscribed",
+    "doneText": "You won't get any more update emails from the LAUNCH dashboard.",
+    "doneAgain": "Changed your mind? You can subscribe again from the dashboard at any time.",
+    "badLinkTitle": "This link doesn't work",
+    "badLinkText": "It may have been copied incompletely. Use the unsubscribe link in your most recent email from us.",
+    "failedTitle": "Sorry, that didn't work",
+    "failedText": "We could not unsubscribe you just now. Please try the link again in a few minutes.",
+    "back": "Back to the dashboard"
+  },
   "pathway": {
     "label": "The access pathway: eight milestones across seven stages. WHO recommendation and WHO PQ listing are parallel milestones within stage 3. Choose a stage to see what happens there and where each medicine is",
     "stageButtonLabel": "Stage {n}, {stage}. Shows what happens here and where each medicine is.",

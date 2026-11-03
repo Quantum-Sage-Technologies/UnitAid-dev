@@ -70,6 +70,19 @@
     "disclaimer.countriesNotVerified": { "parts": [{ "t": "Country stages have not been verified yet for:" }, " {medicines}."] },
 
     "common.yearsOne": { "parts": ["{n} ", { "t": "year" }] },
-    "common.yearsOther": { "parts": ["{n} ", { "t": "years" }] }
+    "common.yearsOther": { "parts": ["{n} ", { "t": "years" }] },
+
+    "unsubscribe.title": { "uiOnly": true },
+    "unsubscribe.intro": { "uiOnly": true },
+    "unsubscribe.button": { "uiOnly": true },
+    "unsubscribe.sending": { "uiOnly": true },
+    "unsubscribe.doneTitle": { "uiOnly": true },
+    "unsubscribe.doneText": { "uiOnly": true },
+    "unsubscribe.doneAgain": { "uiOnly": true },
+    "unsubscribe.badLinkTitle": { "uiOnly": true },
+    "unsubscribe.badLinkText": { "uiOnly": true },
+    "unsubscribe.failedTitle": { "uiOnly": true },
+    "unsubscribe.failedText": { "uiOnly": true },
+    "unsubscribe.back": { "uiOnly": true }
   }
 }

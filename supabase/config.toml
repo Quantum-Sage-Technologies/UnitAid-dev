@@ -1,0 +1,14 @@
+# Supabase settings for the forms service (functions/api). Only what differs
+# from the Supabase CLI's defaults. See docs/forms-service-notes.md.
+
+# Names the local containers `supabase start` runs; not the hosted project,
+# which `--project-ref` picks when deploying.
+project_id = "launch-forms"
+
+[functions.api]
+enabled = true
+# Supabase's own login check stays off: the dashboard's readers have no
+# Supabase login, so with it on, every form would be refused with a 401. The
+# service checks its callers itself (readRequest in _shared/mail.mjs).
+verify_jwt = false
+entrypoint = "./functions/api/index.js"
