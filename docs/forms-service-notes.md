@@ -427,7 +427,7 @@ anonymous form posts.
 ## 5. Status
 
 - Branch `forms/supabase`, from `main` at `11681f2`, pushed 3 Nov
-  (KylerXiv), and merged into `main` with one pull request the same day.
+  (KylerXiv), and merged into `main` the same day as PR #137 (`d007738`).
   `main` (to Oakkar's #136) and `docs/handoff-nov-3` were merged into it
   first. The only conflict was `i18n/content.en.json`, a generated file,
   which was resolved by regenerating it (`assemble-content.js --check`:
@@ -442,7 +442,8 @@ anonymous form posts.
     `scripts/test-build-rbm-messages.js`;
   - `851160a`: `RESEND_SEGMENT_ID`, and Stage 3 (§3).
 - The React side is on `launch-rbm-test` branch `feat/forms-relay`
-  (`55c66c1`), on `feat/data-route`. It is pushed, with no pull request, and
+  (`55c66c1`; the page in French and Portuguese since `c03823c`), on
+  `feat/data-route`. It is pushed, with no pull request, and
   is not mergeable into that repo's `main` (handoff §0).
 - The test project `launch-forms-test` (`tbllmexjrmjwopgrfmce`) is live with
   this code. Its secrets are in `supabase/.env.test` on Kyler's Mac only.
