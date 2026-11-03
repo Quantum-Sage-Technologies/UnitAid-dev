@@ -426,19 +426,25 @@ anonymous form posts.
 
 ## 5. Status
 
-- Branch `forms/supabase` from `main` at `11681f2` (`origin/main` is one bot
-  commit ahead). **Local only, not pushed**: both repos are public, and the
-  owner decides when RBM may see it.
-- Commit 1, `7cb9779` (3 Nov), Stage 1: `supabase/` (new: `config.toml`,
-  `functions/api/index.js`, six files in `functions/_shared/`),
-  `scripts/test-forms-service.mjs` (new), this document (new), `.gitignore`
-  (+7 lines: Supabase's local files and secrets).
-- Commit 2 (Stage 2, the LAUNCH side, §2.9): `i18n/ui.en.json`,
-  `i18n/ui.page-forms.json`, `i18n/content.en.json` (rebuilt),
-  `scripts/test-build-rbm-messages.js` (the narrowed check), this document.
-  The React side (relays, the "Unsubscribe?" page, the forms switch) is on
-  `launch-rbm-test` branch `feat/forms-relay`, from `feat/data-route`
-  `d322190`, also local.
-- Next: Stage 3 (a test project, §1 steps 1–4), which needs a free project
-  slot and a Resend test key.
-- CI: not run (nothing pushed).
+- Branch `forms/supabase`, from `main` at `11681f2`, pushed 3 Nov
+  (KylerXiv), and merged into `main` with one pull request the same day.
+  `main` (to Oakkar's #136) and `docs/handoff-nov-3` were merged into it
+  first. The only conflict was `i18n/content.en.json`, a generated file,
+  which was resolved by regenerating it (`assemble-content.js --check`:
+  current; the dry run translates exactly the 12 new keys).
+- Commits:
+  - `7cb9779`, Stage 1: `supabase/` (new: `config.toml`,
+    `functions/api/index.js`, six files in `functions/_shared/`),
+    `scripts/test-forms-service.mjs` (new), this document (new),
+    `.gitignore` (+7 lines: Supabase's local files and secrets);
+  - `cc3c69a`, Stage 2, LAUNCH side (§2.9): `i18n/ui.en.json`,
+    `i18n/ui.page-forms.json`, `i18n/content.en.json`,
+    `scripts/test-build-rbm-messages.js`;
+  - `851160a`: `RESEND_SEGMENT_ID`, and Stage 3 (§3).
+- The React side is on `launch-rbm-test` branch `feat/forms-relay`
+  (`55c66c1`), on `feat/data-route`. It is pushed, with no pull request, and
+  is not mergeable into that repo's `main` (handoff §0).
+- The test project `launch-forms-test` (`tbllmexjrmjwopgrfmce`) is live with
+  this code. Its secrets are in `supabase/.env.test` on Kyler's Mac only.
+- CI: `validate.yml` passed on `cc3c69a` (3 Nov), and on the pull request.
+- Next: handoff §0, "Still to do", item 2.

@@ -1,13 +1,13 @@
 # Handoff — RBM staging dashboard
 
 > **Read §0 first.** It is the state of the project on 3 November 2026: the
-> handover guide for RBM, the forms leaving Vercel, and what is left before
-> 10 November. §0.1 (28 October) still holds for the React port's internals,
+> handover guide for RBM, the forms service moved to Supabase (built, and
+> tested on a test project), and what is left before 10 November. §0.1 (28 October) still holds for the React port's internals,
 > and §0.2 (8 October) for the pipeline and the data, except where §0 says
 > otherwise. Everything after that is the history of September's work, kept
 > for its decisions. Where they disagree, §0 is current.
 
-## 0. Current state — 3 November 2026: the handover guide for RBM, and what is left
+## 0. Current state — 3 November 2026: the handover guide for RBM, the forms on Supabase, and what is left
 
 *Start here in a new session. §0.1 below (28 October) is still the reference
 for what `feat/react-port` holds, how to check it is stable and how interface
@@ -37,11 +37,57 @@ disagree, this section is current.*
   Vercel completely" of 27 Oct). Vercel stays only for PR previews and the
   LAUNCH copy Unitaid reviews. The forms backend (`api/subscribe`,
   `api/unsubscribe`, `api/feedback`, `RESEND_API_KEY`, `UNSUBSCRIBE_SECRET`)
-  moves to Cloudflare Workers (recommended) or Supabase: **not chosen, nothing
-  built**. The worktree `~/Downloads/launch-development-supabase-forms`
-  (`forms/supabase` at `11681f2`) is empty and was never pushed.
+  moves off Vercel; on 3 Nov the owner chose Supabase (below).
 - **2–3 Nov: the handover guide for RBM** (below) replaces the 19 Oct hosting
   guide, which described iframes, four languages and the now-dead data address.
+- **3 Nov (Oakkar):** #135 (Dale's and Jan's feedback: the Market and
+  Country Access columns, registrations from 14 more national registers) and
+  #136 ("Publish now" pushes to the data repo with a token) merged.
+- **3 Nov: RBM's module rules.** RBM gave the repository
+  `rbm-data-initiative/rbm-module-unitaid`. Its checks allow no
+  `NEXT_PUBLIC_*` setting, and every setting name must start with `UNITAID_`.
+  The browser calls only `/api/unitaid/…` on RBM's own site. Its host runs
+  Next 15.5 / React 18.3 / Node 20; ours runs 16.4 / 19.3 / 22.
+- **3 Nov: the forms service on Supabase, built and tested** (Kyler with
+  Claude Code). The full record is in
+  [docs/forms-service-notes.md](../forms-service-notes.md): decisions,
+  numbers, the setup steps and the open list. In short:
+  - **The service** (this repo, `supabase/`): one Edge Function, `api`, a port
+    of `api/` with the same emails and the same unsubscribe-link format.
+    Links already emailed from Vercel work in it, and its links work on
+    Vercel. It accepts a site's server with its token (RBM's way), or a
+    site's page with its exact Origin.
+    - Supabase's own address serves pages as plain text, so the
+      "Unsubscribe?" page lives on each site. The service redirects the
+      link (303) there and takes the page's POST.
+    - New settings: `TEAM_INBOX` (a secret, so the WHO mailbox's address is
+      in no public file), `FORMS_BASE_URL`, one `…_FORMS_TOKEN` per site,
+      and `RESEND_SEGMENT_ID` (test projects only).
+    - Tests: `node scripts/test-forms-service.mjs`, 320 passed.
+  - **The React version** (`launch-rbm-test` `feat/forms-relay`, `55c66c1`,
+    on top of `feat/data-route`):
+    - three relays, `POST /api/unitaid/{subscribe,feedback,unsubscribe}`,
+      which add the token server-side;
+    - the "Unsubscribe?" page at `/{locale}/unsubscribe`, which becomes
+      `/{locale}/unitaid/unsubscribe` in RBM's module;
+    - `NEXT_PUBLIC_LAUNCH_FORMS_URL` replaced by the server-only
+      `UNITAID_FORMS_URL` and `UNITAID_FORMS_TOKEN`.
+    - Tests: vitest 394 passed, tsc clean, `next build` OK. Decision 60 in
+      its `docs/react-port-notes.md`.
+  - **The page's words** are 12 `unsubscribe.*` keys in `i18n/ui.en.json`
+    (the first `uiOnly` messages). `test-build-rbm-messages.js` no longer
+    fails a pull request that adds new text before the bot has translated it.
+  - **Checked end to end:**
+    - An independent tester agent drove the React version through its
+      relays to the service, under Deno with Resend faked, in en/fr/pt.
+      115 of 116 browser checks passed; the four bugs it found were fixed
+      and re-tested.
+    - Then on Supabase, on the test project `launch-forms-test`
+      (`tbllmexjrmjwopgrfmce`, Free plan, Kyler's personal organisation):
+      the refusals, the preflight, and real emails (feedback, subscribe,
+      "already").
+    - Not yet: Kyler's own sign-up from the dashboard, the welcome email
+      opened, and its unsubscribe link followed.
 
 ### UNOPS's requests of 27 October, and where they stand
 
@@ -51,23 +97,35 @@ disagree, this section is current.*
 | Data through an API, no developer involved | Built on `feat/data-route` only. `feat/react-port` still defaults to the dead data address (`lib/data.ts:14`) and a 10-minute cache |
 | JSON files for `i18n.ts`, no iframes | Done: `messages/{en,fr,pt}.json` in RBM's sample structure |
 | MapLibre from npm | Done: `maplibre-gl` 6.14.0 |
-| "Why Vercel? What if that account closes?" | **Open**: the forms still post to `launch-development-test.vercel.app` |
+| "Why Vercel? What if that account closes?" | **Answered in code (3 Nov):** the forms move to Supabase, on an account Unitaid will own, and RBM's pages reach it through their own `/api/unitaid/…` relays. Built and tested on a test project; the production project waits on Unitaid. The old forms still run on Vercel until the switch |
 | Tamarind converts by 10 Nov; dates? | Code on track; the reply with dates is the owner's |
 
 ### Where things are
 
 | Repo | Branch | State |
 | --- | --- | --- |
-| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | `c34d72c` (scheduled source fetch, 2 Nov); last change by hand #133 (28 Oct) |
-| same | `docs/handoff-nov-3` | this section |
+| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | #136 (Oakkar, 3 Nov), then the pull request of `forms/supabase` (3 Nov): the forms service, the unsubscribe texts, and this section |
+| same | `forms/supabase` | merged into `main` with that pull request; it carried `docs/handoff-nov-3` too |
+| `codebyjackson/launch-rbm-test` | `feat/forms-relay` | `55c66c1` (Kyler, 3 Nov), on `feat/data-route`: the relays and the "Unsubscribe?" page. Pushed, no PR. **Not mergeable into `main`**: that would bring the whole React port and delete the static pages GitHub Pages serves (§0.1, item 4) |
+| Supabase | project `launch-forms-test` (`tbllmexjrmjwopgrfmce`) | the TEST forms service: Free plan, eu-west-1, Kyler's personal organisation. Pauses after 7 quiet days (Resume in the dashboard). Delete once production exists |
 | `codebyjackson/launch-rbm-test` | `main` | `546a6ef` (#33, 28 Oct): the static pages, still served on GitHub Pages |
 | same | `feat/react-port` | `408ed48` (Oakkar, 28 Oct), not merged, no PR. **Its default data address is dead** |
 | same | `feat/data-route` | `d322190` (Kyler, 29 Oct), from `408ed48`, no PR |
 | `Quantum-Sage-Technologies/unitaid-launch-data` | GitHub Pages | `https://quantum-sage-technologies.github.io/unitaid-launch-data/v1/dashboard.{en,fr,pt}.json`: all 200 (3 Nov) |
 
-Local on Kyler's Mac: `~/Downloads/launch-rbm-test-data-route` (worktree of
-`feat/data-route`) and `~/Downloads/launch-development-handoff-nov3` (this
-branch). The other folders listed in §0.1 are unchanged.
+Local on Kyler's Mac, all worktrees (extra folders of the same repos, each
+on its own branch; `git worktree list` shows them):
+- `~/Downloads/launch-rbm-test-data-route` (`feat/data-route`);
+- `~/Downloads/launch-development-handoff-nov3` (`docs/handoff-nov-3`, now
+  merged);
+- `~/Downloads/launch-development-supabase-forms` (`forms/supabase`). It
+  holds `supabase/.env.test`, the test project's secrets, git-ignored and
+  never shared. The CLI is linked to the test project there;
+- `~/Downloads/launch-rbm-test-forms-relay` (`feat/forms-relay`). It holds
+  `.env.local`, the test service's address and token, git-ignored.
+
+The other folders listed in §0.1 are unchanged; most are merged work and
+can be removed.
 
 ### The handover guide for RBM
 
@@ -103,20 +161,60 @@ where the forms service runs and who owns that account, and the forms URL.
 
 On Kyler's Mac a Claude Code hook flags edits to the files that feed it.
 
+**The forms work of 3 November makes the guide out of date, and it has not
+been updated yet:**
+- Step 7 and the cover table describe `NEXT_PUBLIC_LAUNCH_FORMS_URL`, a
+  browser posting to the service, and an allow-list of origins.
+- Now RBM sets two server-only settings, `UNITAID_FORMS_URL` and
+  `UNITAID_FORMS_TOKEN`, and runs three relay routes and the "Unsubscribe?"
+  page. RBM is recognised by its token.
+- Gap 2 can be filled ("Supabase, on an account Unitaid owns") once Unitaid
+  confirms. Gap 3 (the address) waits for the production project.
+- Add RBM's two requests for the unsubscribe page: a `Referrer-Policy`
+  header, and leaving that page out of its analytics (README of
+  `feat/forms-relay`).
+
 ### Still to do before 10 November
 
 1. **Bring `feat/data-route` into what RBM receives** (merge it into
    `feat/react-port`, or deliver it as is). Until then the port cannot load
    its data with default settings. The owner's and Oakkar's call.
-2. **Choose and build the forms host** (Cloudflare Workers or Supabase), then:
-   - keep the paths `/api/subscribe` and `/api/feedback`;
-   - keep the same `UNSUBSCRIBE_SECRET` and add a `vercel.json` redirect,
-     because old welcome emails link to Vercel;
-   - add LAUNCH's Vercel host to `PARTNERS`, because `sameOrigin()` means
-     nothing off-site.
-
-   Then fill the guide's forms gaps. RBM sets `NEXT_PUBLIC_LAUNCH_FORMS_URL`
-   at build time, so this comes first.
+2. **Finish the forms on Supabase.** It is built and tested (above). In
+   [forms-service-notes.md](../forms-service-notes.md), §1 lists the steps
+   and §4 the open items. In order:
+   1. **Kyler's own test** on the test project:
+      - In `~/Downloads/launch-rbm-test-forms-relay`, run
+        `npx next build && npx next start -p 3000`.
+      - Subscribe at `http://localhost:3000/en`.
+      - Open the welcome email and follow its Unsubscribe link (it works
+        only while that local dashboard runs).
+      - Try the mail app's own Unsubscribe button if it shows one.
+   2. **After this pull request reaches `main`, the translate bot
+      translates the 12 `unsubscribe.*` texts.** Then, in
+      `forms/supabase`'s folder (or any up-to-date checkout of `main`):
+      ```
+      node scripts/build-rbm-messages.js
+      node scripts/copy-rbm-messages.js --to ~/Downloads/launch-rbm-test-forms-relay
+      ```
+      Commit `messages/` there, so the page shows French and Portuguese.
+   3. **Unitaid:** written approval; an organisation on the Pro plan
+      (requested 3 Nov; $25/month, one project); Kyler and Oakkar invited as
+      Administrators. Then the **production project** in it, set up as in
+      notes §1 step 6, with:
+      - **the same `UNSUBSCRIBE_SECRET` as Vercel's**;
+      - `TEAM_INBOX` = the WHO team mailbox, once it is shown to accept
+        outside mail;
+      - `RBM_FORMS_TOKEN` and `RBM_TEST_FORMS_TOKEN`.
+   4. **Send RBM** `UNITAID_FORMS_URL` and `UNITAID_FORMS_TOKEN` privately,
+      and update the guide.
+   5. **Bring `feat/forms-relay` into what RBM receives,** with
+      `feat/data-route`, together with Oakkar.
+   6. **The LAUNCH side:**
+      - Decide whether the review site keeps its forms. If it does, add
+        LAUNCH's own static `unsubscribe.html` (old Vercel links and damaged
+        links land there) and point the site's forms at the service.
+      - Then switch off `api/` on Vercel, with a redirect that keeps the
+        method for `/api/unsubscribe`, and delete its two secrets.
 3. **Build the notification sender:** a pipeline step after
    `publish-dataset.yml` that POSTs once per locale to RBM's route with the
    bearer token, only once the publish has finished. It needs RBM's URL and
@@ -126,7 +224,9 @@ On Kyler's Mac a Claude Code hook flags edits to the files that feed it.
 5. **Test on a real iPhone and in Safari** (open since 28 Oct).
 6. After RBM tests on its staging server:
    - remove the `http://localhost:3000` entry from `PARTNERS`
-     (`api/_mail.js:72`, PR #130) and add RBM's origins;
+     (`api/_mail.js:72`, PR #130) and from `SITES`
+     (`supabase/functions/_shared/mail.mjs`), and confirm RBM's page
+     addresses there;
    - then retire the static pages (§0.1, item 4).
 
 Done since §0.1: the README for RBM (Oakkar, 28 Oct) and wiring `ui.en.json`
@@ -151,11 +251,25 @@ into `assemble-content.js` (#132).
 
   Subscribers and feedback come from our side. **Clicks inside the dashboard
   are not tracked** (owner, 3 Nov), because that would need code changes.
+- **RBM, for the forms:**
+  - **Can their server make outbound HTTPS calls at runtime** (question 4 of
+    the 3 Nov reply to Antonio)? Without it, every form fails, and the
+    dashboard cannot load its data either. Whether that reply was sent is
+    not recorded.
+  - Confirm `/{locale}/unitaid/unsubscribe` as the page's address.
+  - The `Referrer-Policy` header and the analytics exclusion for that page.
 - **Unitaid:**
-  - the owner of the forms host's account;
+  - written approval of Supabase (the proposal excludes unapproved
+    third-party services);
+  - an organisation owned by Unitaid on the Pro plan, with the team invited;
   - the owner of the Resend account;
-  - the subdomains: `forms.`, `updates.`, and `data.` for a stable data
-    address.
+  - proof that the WHO team mailbox accepts mail from outside WHO (its
+    address stays out of this public repo), and WHO IT's allow-list for the sender (`updates@tamarind.tech`,
+    or a Unitaid address if one is set up first);
+  - optional: a Unitaid sending address (three DNS records from Resend);
+  - the subdomains: `updates.`, and `data.` for a stable data address.
+    `forms.` is no longer needed, because the unsubscribe page lives on
+    RBM's site.
 
 ## 0.1 Earlier state — 28 October 2026: RBM on React + Next.js
 
