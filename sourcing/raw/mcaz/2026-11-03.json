@@ -1,0 +1,91 @@
+{
+ "retrieved": "2026-11-03",
+ "source": "https://onlineservices.mcaz.co.zw/onlineregister/Medicines/GetMedicinesByCategory?category=1",
+ "registerSize": 3172,
+ "records": [
+  {
+   "App_Id": "00H148",
+   "Trade_Name": "ARTESUNATE; AMODIAQUINE HYDROCHLORIDE WINTHROP",
+   "Generic_Name": "ARTESUNATE; AMODIAQUINE HYDROCHLORIDE",
+   "Registration_No": "2013/7.5/4808",
+   "Date_Registered": "2013-10-29T00:00:00",
+   "Forms": "TABLET; ORAL",
+   "Category": "PHARMACY MEDICINES (P.)",
+   "Strength": "25; 67.5MG",
+   "Manufacturers": "MAPHAR LABORATORIES,  KM7, ROUTE DE RABAT-AIN SEBBA, CASABLANCA, MOROCCO;  ",
+   "ApplicantName": "SANOFI-AVENTIS SOUTH AFRICA (PTY) LTD",
+   "PrincipalName": "SANOFI-AVENTIS SOUTH AFRICA (PTY) LTD",
+   "Expiry_Date": "2027-12-31T00:00:00"
+  },
+  {
+   "App_Id": "00H149",
+   "Trade_Name": "ARTESUNATE; AMODIAQUINE HYDROCHLORIDE WINTHROP",
+   "Generic_Name": "ARTESUNATE; AMODIAQUINE HYDROCHLORIDE",
+   "Registration_No": "2013/7.5/4809",
+   "Date_Registered": "2013-10-29T00:00:00",
+   "Forms": "TABLET; ORAL",
+   "Category": "PRESCRIPTION PREPARATIONS 9TH SCHEDULE,  (P.P.)",
+   "Strength": "50; 135MG",
+   "Manufacturers": "MAPHAR LABORATORIES,  KM7, ROUTE DE RABAT-AIN SEBBA, CASABLANCA, MOROCCO;  ",
+   "ApplicantName": "SANOFI-AVENTIS SOUTH AFRICA (PTY) LTD",
+   "PrincipalName": "SANOFI-AVENTIS SOUTH AFRICA (PTY) LTD",
+   "Expiry_Date": "2027-12-31T00:00:00"
+  },
+  {
+   "App_Id": "00H150",
+   "Trade_Name": "ARTESUNATE; AMODIAQUINE HYDROCHLORIDE WINTHROP",
+   "Generic_Name": "ARTESUNATE; AMODIAQUINE HYDROCHLORIDE",
+   "Registration_No": "2013/7.5/4810",
+   "Date_Registered": "2013-10-29T00:00:00",
+   "Forms": "TABLET; ORAL",
+   "Category": "PRESCRIPTION PREPARATIONS 9TH SCHEDULE,  (P.P.)",
+   "Strength": "100; 270MG",
+   "Manufacturers": "MAPHAR LABORATORIES,  KM7, ROUTE DE RABAT-AIN SEBBA, CASABLANCA, MOROCCO;  ",
+   "ApplicantName": "SANOFI-AVENTIS SOUTH AFRICA (PTY) LTD",
+   "PrincipalName": "SANOFI-AVENTIS SOUTH AFRICA (PTY) LTD",
+   "Expiry_Date": "2027-12-31T00:00:00"
+  },
+  {
+   "App_Id": "M046",
+   "Trade_Name": "DUO-COTECXIN",
+   "Generic_Name": "DIHYDROARTEMISININ ; PIPERAQUINE TETRAPHOSPHATE",
+   "Registration_No": "2025/7.5/7111",
+   "Date_Registered": "2025-10-27T00:00:00",
+   "Forms": "TABLET, COATED; ORAL",
+   "Category": "PRESCRIPTION PREPARATIONS 9TH SCHEDULE,  (P.P.)",
+   "Strength": "40MG; 320MG",
+   "Manufacturers": "KBN-ZHEJIANG PHARMACEUTICAL CO. LTD, NO 340 YUNHAI ROAD , JIAXING CITY, .., CHINA;  ",
+   "ApplicantName": "BEIJING HOLLEY-COTEC PHARMACEUTICALS CO. LTD.",
+   "PrincipalName": "BEIJING HOLLEY-COTEC PHARMACEUTICALS CO. LTD.",
+   "Expiry_Date": "2030-10-26T00:00:00"
+  },
+  {
+   "App_Id": "L416",
+   "Trade_Name": "NONE",
+   "Generic_Name": "AMODIAQUINE; ARTESUNATE",
+   "Registration_No": "2025/7.5/7218",
+   "Date_Registered": "2025-11-14T00:00:00",
+   "Forms": "TABLET; ORAL",
+   "Category": "PRESCRIPTION PREPARATIONS 9TH SCHEDULE,  (P.P.)",
+   "Strength": "135MG/50MG",
+   "Manufacturers": "MICRO LABS LIMITED, PLOT NO. S-155 TO S-159, PHASE III, VERNA INDUSTRIAL ESTATE, GOA, VERNA SALCETE, INDIA;  ",
+   "ApplicantName": "MICRO LABS LIMITED",
+   "PrincipalName": "MICRO LABS LIMITED",
+   "Expiry_Date": "2030-11-14T00:00:00"
+  },
+  {
+   "App_Id": "L417",
+   "Trade_Name": "NONE",
+   "Generic_Name": "AMODIAQUINE; ARTESUNATE",
+   "Registration_No": "2025/7.5/7219",
+   "Date_Registered": "2025-11-14T00:00:00",
+   "Forms": "TABLET; ORAL",
+   "Category": "PRESCRIPTION PREPARATIONS 9TH SCHEDULE,  (P.P.)",
+   "Strength": "270;100MG",
+   "Manufacturers": "MICRO LABS LIMITED, PLOT NO. S-155 TO S-159, PHASE III, VERNA INDUSTRIAL ESTATE, GOA, VERNA SALCETE, INDIA;  ",
+   "ApplicantName": "MICRO LABS LIMITED",
+   "PrincipalName": "MICRO LABS LIMITED",
+   "Expiry_Date": "2030-11-14T00:00:00"
+  }
+ ]
+}
