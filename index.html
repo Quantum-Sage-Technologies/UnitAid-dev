@@ -376,6 +376,7 @@
   .acc b { font-weight: 700; color: var(--ink); }
   .acc b.ok { color: var(--good-text); }
   .acc .none { color: var(--ink-3); }
+  .srow .acc small { display: none; }
   .srow.hd .c-path { display: flex; flex-direction: row; align-items: center; gap: 5px; }
   .srow.hd .info { text-transform: none; }
   .ysp { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 650; line-height: 1.4; border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
@@ -458,6 +459,7 @@
     .srow .c-mini { grid-column: 2 / -1; grid-row: 2; margin-block: 0; }
     .srow .c-bar { grid-column: 2 / -1; grid-row: 3; }
     .srow .c-stage { display: none; }
+    .srow .acc small { display: block; }
     .l1 { padding-inline: 10px; }
   }
   /* Narrow tablets (9 Oct 2026): the fixed minimums above add up to about
@@ -1713,6 +1715,9 @@
   // partner asked what Delayed refers to (19 Oct 2026). It is the hand-set
   // `late` status (docs/data-analyst-guide.md), not a measured comparison.
   const LATE_DEF = "the medicine's current stage has stalled or is moving unusually slowly, in LAUNCH's judgement from public evidence. The main barrier gives the reason. It is not measured against a set deadline.";
+  // Not shown since 3 Nov 2026: the medicines table's Status column, which
+  // carried it, became Market Access (Jan's feedback). Kept for when the
+  // status words return.
   const lateInfo = () => `<button type="button" class="info" data-tip="${esc(LABEL.late + ": " + LATE_DEF)}" aria-label="${esc(LABEL.late + ": " + LATE_DEF)}">i</button>`;
   // The 10 Nov 2026 release (partner feedback sheet, 20 Oct 2026) shows where
   // each medicine is without calling any step delayed or in progress, and
@@ -1981,9 +1986,20 @@
   // What the two figures mean, from the i beside them.
   const ACCESS_DEF = "Market Access is reached when a medicine is both recommended by WHO and WHO-prequalified. Country Access runs from then until national registration, policy adoption, procurement in significant volumes and in-country delivery are all complete.";
   const accessInfo = () => `<button type="button" class="info" data-tip="${esc(ACCESS_DEF)}" aria-label="${esc(ACCESS_DEF)}">i</button>`;
-  // the medicines table: each phase name above its figure
-  const accessCell = p => `<span class="acc">` + accessParts(p).map(([name, t, tone]) => `<small>${esc(name)}</small>` +
-    (tone === "none" ? `<span class="none">${esc(t)}</span>` : `<b${tone ? ` class="${tone}"` : ""}>${esc(t)}</b>`)).join("") + `</span>`;
+  // The medicines table gives each phase its own column (Jan's feedback,
+  // 21 Oct 2026, tracker row "Market, Country & Population Access
+  // Headings"): the Status column became Market Access and the Access column
+  // Country Access, so the table shows at a glance that ASPY and DHA–PPQ
+  // reached market access. A stage's status still shows on each medicine's
+  // journey and timeline. The phase name above a figure shows only where the
+  // header row is hidden (phones).
+  const accessFig = (name, t, tone) => `<span class="acc"><small>${esc(name)}</small>` +
+    (tone === "none" ? `<span class="none">${esc(t)}</span>` : `<b${tone ? ` class="${tone}"` : ""}>${esc(t)}</b>`) + `</span>`;
+  const marketCell = p => accessFig(...accessParts(p)[0]);
+  const countryCell = p => {
+    const c = accessParts(p)[1];
+    return c ? accessFig(...c) : accessFig(PHASES[1].name, "Not yet reached", "none");
+  };
   // the open row, in one line: "Market Access: Reached in 2022 · Country Access: 4 years so far"
   const accessLine = p => accessParts(p).map(([name, t]) => `${esc(name)}: ${esc(t)}`).join(" · ");
   // The year the current gate has been waiting since. Uses the same journey
@@ -2397,7 +2413,7 @@
 
   board.insertAdjacentHTML("afterbegin",
     `<div class="srow hd" role="presentation"><span></span><span>Medicine</span><span class="c-mini">Journey</span>` +
-    `<span class="c-stage">Current stage</span><span class="c-stat">Status</span><span class="c-path">Access ${accessInfo()}</span>${SHOW_BARRIERS ? `<span class="c-bar">Main barrier</span>` : ""}</div>`);
+    `<span class="c-stage">Current stage</span><span class="c-stat">Market Access</span><span class="c-path">Country Access ${accessInfo()}</span>${SHOW_BARRIERS ? `<span class="c-bar">Main barrier</span>` : ""}</div>`);
   if (!SHOW_BARRIERS) board.classList.add("nobar");
 
   // "Delayed" carries an i with its definition: hover, focus or tap shows it.
@@ -2511,8 +2527,8 @@
           <div class="nm"><b>${esc(p.name)}</b><small>${esc(p.inn)}</small></div>
           <div class="c-mini">${miniJourney(p)}</div>
           <span class="c-stage"><span class="stg">${esc(STAGES[p.currentStage])}</span>${SHOW_STAGE_NOTE && firstClause(p.stages[p.currentStage].date) ? `<span class="note">${esc(firstClause(p.stages[p.currentStage].date))}</span>` : ""}</span>
-          ${statusShown(p, p.stages[p.currentStage].status) ? `<span class="c-stat"><span class="light ${p.stages[p.currentStage].status}"><i></i>${LABEL[p.stages[p.currentStage].status]}${p.stages[p.currentStage].status === "late" ? lateInfo() : ""}</span></span>` : `<span class="c-stat none" aria-hidden="true">—</span>`}
-          <span class="cell c-path">${accessCell(p)}${yardBadge(p)}</span>
+          <span class="cell c-stat">${marketCell(p)}</span>
+          <span class="cell c-path">${countryCell(p)}${yardBadge(p)}</span>
           ${SHOW_BARRIERS ? `<div class="c-bar${p.barrier || p.flag ? "" : " none"}">${p.barrier || p.flag ? esc(p.barrier || p.flag) : "No publicly documented barrier identified"}</div>` : ""}
         </div>
         <div class="l1" id="${esc(p.id)}-l1">

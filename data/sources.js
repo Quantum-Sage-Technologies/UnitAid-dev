@@ -652,6 +652,23 @@ window.LAUNCH_SOURCES =
       "checked": "2026-09-21"
     },
     {
+      "id": "who-handbook-guidelines",
+      "label": "WHO handbook for guideline development, 2014",
+      "title": "WHO handbook for guideline development, 2nd edition",
+      "org": "World Health Organization",
+      "category": "Policy / guidelines",
+      "group": "document",
+      "url": "https://iris.who.int/server/api/core/bitstreams/809b813f-fcfe-451e-b242-d914d580c111/content",
+      "year": "2014",
+      "products": ["all"],
+      "plain": "WHO's rulebook for writing its guidelines, including how a Guideline Development Group agrees on a recommendation.",
+      "collection": "static",
+      "public": true,
+      "findings": "Section 10.5.1, Reaching agreement on recommendations (p. 130): \"Under the leadership of the chair, the GDG reviews and discusses the GRADE evidence profiles presented by a representative of the systematic review team. In addition, the GDG considers other relevant criteria and evidence ... The GDG needs to agree on the direction and the strength of the recommendations. WHO recommendations should be formulated by consensus\". Quoted by a partner (Jan, 21 Oct 2026), who gave this link.",
+      "relevance": "Describes what the GDG does in the WHO recommendation step, and is that step's source (partner feedback, Jan, 3 Nov 2026).",
+      "checked": "2026-11-03"
+    },
+    {
       "id": "who-guidelines",
       "label": "WHO malaria guidelines",
       "title": "WHO Guidelines for Malaria",

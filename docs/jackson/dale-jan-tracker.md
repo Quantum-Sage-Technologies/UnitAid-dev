@@ -195,7 +195,38 @@ and keeping the furthest-stage shading with reworded text.
 
 ## Status
 
-Branch `feedback/dale-jan-tracker`, 6 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up), not
+Branch `feedback/dale-jan-tracker`, 7 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up; the seventh is §5), not
 pushed. Verify block on 3 Nov: validator 0 errors / 1 warning (French
 Guiana), synthetic 0 / 0, build-dataset 58 passed (`--allow-stale`), country
 names cover all 252, rbm-messages 65, copy-rbm-messages 35, rbm-pages 36.
+
+### 5. Jan's two rows, finished (3 Nov, after the owner pasted Jan's 21 Oct email)
+
+The email asked for more than the tracker rows showed; §1 did only the name.
+
+- **Market, Country & Population Access Headings.** Earlier this note said
+  the row was done on 19 Oct; it was not. The table had a Status column and
+  one Access column holding both phases. Now `Status` → **Market Access**
+  and `Access` → **Country Access**, one figure each (`marketCell`,
+  `countryCell` replace `accessCell`). ASPY: Reached in 2022 / 4 years so
+  far; DHA–PPQ: Reached in 2015 / 11 years so far; GanLum and ALAQ: Not yet
+  reached / Not yet reached. The current stage's status word leaves the table
+  (it still shows on the journey and the timeline; `lateInfo` is kept,
+  unused, for when status words return). Below 1040 px the Country Access
+  column is hidden, as Access was; on phones, where the header row is hidden,
+  each figure carries its phase name. Population Access stays dropped (owner,
+  9 Oct). Owner's choice: "Yes, as the row says".
+- **WHO Terminology & Handbook Alignment.** The step's "what" now follows
+  the handbook's §10.5.1, p. 130 (which Jan quoted): the GDG reviews the
+  graded evidence (GRADE) and other criteria and agrees by consensus on the
+  direction and strength of each recommendation. The glossary (real and
+  synthetic) follows. New source `who-handbook-guidelines`, with Jan's IRIS
+  link. Drug-specific: the WHO PQ step adds "This is the process for
+  medicines; vector control products follow a different route" (owner's
+  choice; rejected: a box heading, or leaving it to the page header).
+  Jan's EOI question: the malaria EOI lists are WHO Prequalification's own
+  (the source is WHO PQ's 24th malaria EOI), not an MNT invention. Checking
+  the wording with the QNS team is Jan's call.
+- Checked: validator 0 / 1, synthetic 0 / 0, build-dataset 58,
+  rbm-pages 36, rbm-messages 65; table rendered at 1440, 1000 and 390 px.
+  React port: its table is its own code, not changed.
