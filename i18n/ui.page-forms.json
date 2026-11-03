@@ -52,6 +52,8 @@
     "map.panel.stageMixTitle": { "uiOnly": true, "_why": "React version's wording, until the 3 Nov 2026 page changes are ported (docs/jackson/dale-jan-tracker.md)" },
     "board.columns.access": { "uiOnly": true, "_why": "React version's wording, until the 3 Nov 2026 page changes are ported (docs/jackson/dale-jan-tracker.md)" },
     "map.note": { "uiOnly": true, "_why": "React version's wording, until the 3 Nov 2026 page changes are ported (docs/jackson/dale-jan-tracker.md)" },
+    "product.procurement.globalFundOnly": { "uiOnly": true, "_why": "React version's wording, until the 3 Nov 2026 page changes are ported (docs/jackson/dale-jan-tracker.md)" },
+    "disclaimer.notComplete": { "uiOnly": true, "_why": "React version's wording, until the 3 Nov 2026 page changes are ported (docs/jackson/dale-jan-tracker.md)" },
     "map.panel.stageMixCount": { "page": "of ${n} countries have an access stage", "holes": { "${n}": "{total}" } },
     "map.panel.donutLabelOne": { "parts": ["{count} ", { "t": "country by patient group" }] },
     "map.panel.donutLabelOther": { "parts": ["{count} ", { "t": "countries by patient group" }] },
