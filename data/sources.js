@@ -669,6 +669,27 @@ window.LAUNCH_SOURCES =
       "checked": "2026-11-03"
     },
     {
+      "id": "unitaid-stop-amdr",
+      "label": "Unitaid: STOP-AMDR project",
+      "title": "Outpacing antimalarial drug resistance (STOP-AMDR)",
+      "org": "Unitaid; Jhpiego",
+      "category": "MFT strategy",
+      "group": "document",
+      "url": "https://unitaid.org/project/stop-amdr/",
+      "alsoSee": [
+        { "label": "Unitaid's launch news, 19 Aug 2025", "url": "https://unitaid.org/news-blog/unitaid-and-jhpiego-launch-us26-5-million-initiative-to-curb-rising-antimalarial-drug-resistance-in-africa/" },
+        { "label": "Jhpiego's project page", "url": "https://jhpiego.org/areas-of-expertise/stop-amdr/" }
+      ],
+      "year": "2025",
+      "products": ["pyramax", "dhappq"],
+      "plain": "Unitaid's grant to Jhpiego to help six African countries use several first-line malaria treatments.",
+      "collection": "static",
+      "public": true,
+      "findings": "Grant value US$26.5 million; time frame 2025-2029; lead grantee Jhpiego. \"The project will be implemented in Burkina Faso, the Democratic Republic of Congo, Kenya, Nigeria, Rwanda, and Uganda.\" Jhpiego names twelve further observer countries. Neither Unitaid's nor Jhpiego's pages name the medicines used in each country.",
+      "relevance": "The STOP-AMDR line in the ASPY and DHA–PPQ research cards (partner feedback, Dale's tracker, 3 Nov 2026).",
+      "checked": "2026-11-03"
+    },
+    {
       "id": "who-guidelines",
       "label": "WHO malaria guidelines",
       "title": "WHO Guidelines for Malaria",

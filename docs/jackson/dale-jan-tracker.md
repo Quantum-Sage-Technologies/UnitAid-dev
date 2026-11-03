@@ -195,7 +195,7 @@ and keeping the furthest-stage shading with reworded text.
 
 ## Status
 
-Branch `feedback/dale-jan-tracker`, 7 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up; the seventh is §5), not
+Branch `feedback/dale-jan-tracker`, 8 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up; the seventh is §5; the eighth is §6), not
 pushed. Verify block on 3 Nov: validator 0 errors / 1 warning (French
 Guiana), synthetic 0 / 0, build-dataset 58 passed (`--allow-stale`), country
 names cover all 252, rbm-messages 65, copy-rbm-messages 35, rbm-pages 36.
@@ -230,3 +230,39 @@ The email asked for more than the tracker rows showed; §1 did only the name.
 - Checked: validator 0 / 1, synthetic 0 / 0, build-dataset 58,
   rbm-pages 36, rbm-messages 65; table rendered at 1440, 1000 and 390 px.
   React port: its table is its own code, not changed.
+
+### 6. Doing the rows' own actions where we can (3 Nov, the owner: "just do what it says")
+
+- **STOP-AMDR (both rows).** The research cards' existing four fields carry
+  it, so the LAUNCH page and the React port both show it with no code
+  change: lead adds "Jhpiego, funded by Unitaid (STOP-AMDR)"; geographies add
+  the six countries and each one's MFT plan with the medicine where a public
+  source gives it (Kenya pilot 2020–22, Burkina Faso pilot in Kaya, Rwanda
+  2024–25, Nigeria planned, all already cited on the map; Uganda "considering"
+  rotation, WHO MFT guide; DR Congo none published); timeline adds
+  "STOP-AMDR 2025–2029". New source `unitaid-stop-amdr` (Unitaid's project
+  page; launch news and Jhpiego's page in alsoSee). Still open: Dale's "ASPY
+  in all STOP-AMDR countries, DHA–PPQ in all but DRC" has no public source
+  (none of Unitaid's or Jhpiego's pages names the medicines per country).
+- **Caveats (Data Transparency row; the caveat half of the Maisha Meds row).**
+  Disclaimer, first paragraph, adds "Each figure reflects the best available
+  reporting on the date shown; some countries, years or purchasing channels
+  may be missing." Procurement note names what is left out: orders paid for
+  by other donors, national governments or private buyers. No Maisha Meds
+  figure or wording is used (confidential). For the Steering Committee to
+  review on the page.
+- **React port wording.** `i18n/ui.en.json` is the React version's text and
+  must say what the page says (rbm-messages decision 12). Five messages now
+  differ because the page changed and the port has not: `board.columns.access`
+  ("Access"), `map.note` (the furthest-stage line), `map.panel.stageMixTitle`,
+  `product.procurement.globalFundOnly` and `disclaimer.notComplete`. They are
+  marked `uiOnly` in `i18n/ui.page-forms.json` with a `_why`, so the React
+  version keeps its current words and translations until the port. Checked
+  by regenerating `content.en.json` in a scratch run (as the bot will after
+  merge): `test-build-rbm-messages` 65 passed both before and after. Without
+  the markers it failed after regeneration (3 messages from §4–§5) — the map
+  and table commits alone would have turned CI red on the bot's next run.
+  Rejected: rewording `ui.en.json` now (the two caveats then have no
+  translation-memory entry, which fails CI on the pull request, and the table
+  and map words would describe a layout the port does not have yet).
+  **When the port is done, remove the five markers and reword the keys.**
