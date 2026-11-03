@@ -117,3 +117,62 @@ the registration date is.
   stage still counts from WHO PQ (2015), as decided on 15 Oct (row 49).
 - **React port.** `feat/react-port` has its own timeline code; the data change
   reaches it, the "since YYYY" placement does not until it is ported.
+
+### 4. Country access map: one stage at a time (items: shading and layer controls; DHA–PPQ map vs text)
+
+The owner's choice (3 Nov): **radio buttons**. Rejected: independent toggle
+layers (a country in two layers needs a combined look, busier on a phone),
+and keeping the furthest-stage shading with reworded text.
+
+- **What each view shows** (`countryStages()` in `index.html`):
+  - Registered: the entry is at `registered`, or cites a source whose
+    category is National register. ASPY 5 (NGA, RWA, VNM, TZA, ZMB), DHA–PPQ
+    6 (NGA, RWA, TZA, VNM, ZMB, ZWE): the numbers the text already gave.
+  - In national guidelines: the entry is at `guidelines`, or cites a source
+    whose category is Policy / guidelines. In practice that adds Nigeria and
+    Burkina Faso (at `mft`, both citing the WHO national drug policy table,
+    which lists both medicines for them; checked against
+    `data/treatment-policy.js`). ASPY 9, DHA–PPQ 11. Rwanda and Kenya cite
+    only MFT sources, so they are not added.
+  - In MFT plans: the entry is at `mft`. 4 each.
+  - The data keeps one `level` per country (the furthest stage), so nothing
+    in the data model changed; the views are read from `level` plus the
+    categories of the sources already cited. Category slugs are compared as
+    `countryAccessKv` already did, so they are not collected for translation.
+- **Text made to match.** `detail.country` is now these per-stage counts
+  (ASPY 5/9/4, was 2/7/4; DHA–PPQ 6/11/4, was 2/9/4) and
+  `scripts/validate-data.js` checks them the same way (the old rule counted
+  each country once at its level). The national-guideline stage note and
+  milestone read "9 countries; MFT plans in 4" and "11 countries; MFT plans
+  in 4", with Nigeria and Burkina Faso named as in both. The Country access
+  card lists Confirmed in national registers / In national guidelines / In MFT
+  plans with "A country can count at more than one stage."
+- **The page.** Filters: the stage rows are radio buttons (Registered is the
+  default and what Reset returns to); the No data row and the select-all box
+  are gone; the recommended-use groups are still checkboxes; the badge counts
+  only unticked groups. Legend: the stage in view and No data. The line under
+  the heading explains the view. Tooltip and country page: each stage ticked
+  on its own; the country page's pill and "Other countries at the same stage"
+  appear only when the country is at the stage in view. Detail overview: one
+  bar per stage ("Access stages", was the stacked "Access stage mix"). Find a
+  country lists every country (unticking a stage used to remove its
+  countries); its Stage column follows the view.
+- **Checked** in Chrome (Playwright, 1440 px): every view for ASPY and
+  DHA–PPQ (filters, legend, note), Ghana's and Nigeria's tooltips and pages,
+  Reset, the Country access cards. No page errors.
+  `i18n/reviewed-strings.json`: the overview heading's entry follows the new
+  text, and "since ${it.from}" is added; `assemble-content.js` collects every
+  new string. `content.en.json` is left to the translate bot, as usual.
+- **Not changed:** `option-b.html` (an old design option, still copied to the
+  site but unlinked) keeps "shaded by the furthest stage". The React port in
+  `launch-rbm-test` has its own map (`lib/map.ts`, `MapFilters.tsx`,
+  `MapLegend.tsx`, `CountryPanel.tsx`) and timeline code; it gets the data
+  (counts, text, dates) but not the radio views or the "since YYYY" placement
+  until they are ported.
+
+## Status
+
+Branch `feedback/dale-jan-tracker`, 4 commits on `main` `c34d72c`, not
+pushed. Verify block on 3 Nov: validator 0 errors / 1 warning (French
+Guiana), synthetic 0 / 0, build-dataset 58 passed (`--allow-stale`), country
+names cover all 252, rbm-messages 65, copy-rbm-messages 35, rbm-pages 36.
