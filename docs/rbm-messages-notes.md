@@ -408,6 +408,50 @@ translated title would not match the header's); a translated keyword list.
 Not copied from the sample: its `knowMore` and `components` keys, which look
 like another module's text shown as an example; asked of RBM.
 
+**15. The 3 Nov 2026 page changes, for the React port** (branch
+`feat/rbm-messages-tracker`, from `main` `b0f8675`; the page side is
+`docs/jackson/dale-jan-tracker.md` §4 to §6). The five keys marked `uiOnly`
+there now say what the page says, and the markers are gone: `board.columns.access`
+"Country Access"; `map.note`, the line under the map's heading in the
+Registered view (the page's `#mapnote`, and its `VIEW_NOTE.registered`);
+`map.panel.stageMixTitle` "Access stages · {medicine}" (a page form again);
+`product.procurement.globalFundOnly` and `disclaimer.notComplete`, the two
+caveats. New keys: `board.columns.marketAccess` "Market Access" (the Status
+column's new heading); `map.noteGuidelines` and `map.noteMft` (the two other
+views' lines); `product.timeline.sinceYear` "since {year}" (a started stage
+placed on the timeline, page form `since ${it.from}`);
+`product.cards.moreThanOneStage` and `map.panel.moreThanOneStage`, "A country
+can count at more than one stage." (the Country access card and the map's
+overview: two roles, decision 2). Removed: `board.columns.status` "Status",
+which no part of the page shows any more (the milestones table and the CSV
+keep their own "Status" keys). 318 keys (313 before), 59 with
+{placeholders}; 318 of 318 checked against the page, none `uiOnly`.
+- **Three view notes, two new keys.** `map.note` is the Registered view's
+  line word for word, and the view the map opens in; a third key would hold
+  the same English with nothing to tell the two apart. Rejected:
+  `map.viewNotes.{registered,guidelines,mft}` beside `map.note` (one of them
+  read by nothing).
+- **Reworded, not renamed.** `board.columns.access` and
+  `map.panel.stageMixTitle` keep their keys, as the page kept its `c-path`
+  column and its overview card. Rejected: rewording `board.columns.status` to
+  "Market Access" (a key named for a column that no longer shows a status).
+- **Translations.** Every new or reworded message but one is a page string
+  the translate bot already translated on `main` (`b0f8675`), so the build
+  finds it: fr and pt 317 of 318. `map.panel.stageMixTitle` has no memory
+  entry under "Access stages · {medicine}" (the page's
+  `Access stages · ${esc(p.name)}` is translated, decision 11 ended that
+  route), so `--allow-stale` ships it in English on /fr and /pt of the React
+  version until the bot runs after merge. Consequence:
+  `test-build-rbm-messages.js` fails one check, "every message has a memory
+  entry under its own English", here and in CI on the pull request (64 passed,
+  1 failed). Not seeded: the memory is the pipeline's, and the owner expects
+  English until the bot. Seeding one entry from the page's translation, as
+  decision 11 seeded 58, would turn CI green and keep the page's words
+  ("Étapes d’accès · {medicine}", "Etapas de acesso · {medicine}").
+- `i18n/content.en.json` rebuilt with `assemble-content.js` (the `ui` bucket
+  only: 294 → 296 strings, contentHash `e7a724ee4977`), so the check that
+  every message is in that bucket passes.
+
 ## Coverage, 28 Oct 2026, after PR #129
 
 | | found | missing |
@@ -443,6 +487,22 @@ label) and "data" (in `tooltip.dataStatus`). `node scripts/build-rbm-messages.js
 therefore fails today, and `--allow-stale` builds with those 7 in English.
 
 ## Found in passing, left alone
+
+- **Ten Portuguese messages with {placeholders} differ from the Brazilian
+  page** (found 3 Nov 2026 by the React port's tests, once they compared
+  the Brazilian pages; French has none). The page joins translated
+  fragments; each message has its own translation under its own English
+  (decision 11), and the Brazilian retranslation of 28 Oct gave different
+  words: `pathway.stageButtonLabel` ("… onde cada medicamento está" /
+  "… está localizado"), `stepPanel.label` ("Estágio {n}" / "Etapa {n}"),
+  `product.stagePanel.surveyStatus`, `yardstick.sinceNotRoutine`,
+  `yardstick.notePublished`, `yardstick.noteEstimate`, `map.preLaunch`
+  (the page has "{medicine} Está", a capital mid-sentence),
+  `map.noCountryData`, `disclaimer.countriesVerified`,
+  `disclaimer.countriesNotVerified`. Decision 12 checks the English only, so
+  the build cannot see this. For the Portuguese reviewer; the port shows the
+  message files' words (its `docs/react-port-notes.md`, decision 60). Also
+  there: the page and the files write the map's "Legend" as "Lenda".
 
 - **Fixed 28 Oct (PR #129, Coverage above).** Those 7 strings were English
   on `/fr` and `/pt`, and the locale
@@ -518,6 +578,19 @@ therefore fails today, and `--allow-stale` builds with those 7 in English.
    one paragraph in its RBM entry.
 
 ## Status
+
+- **3 Nov 2026, the page changes for the React port** (decision 15): branch
+  `feat/rbm-messages-tracker` from `main` `b0f8675`, local, not pushed.
+  `i18n/ui.en.json`, `i18n/ui.page-forms.json`, `i18n/content.en.json`
+  (rebuilt), this file, `docs/jackson/dale-jan-tracker.md` (§6's last line).
+  Verify block: normalize byte-identical (line endings aside); validator 0
+  errors, 1 warning (GUF); synthetic 0 / 0; `preview.html` 421 KB;
+  `test-build-dataset.js` 58 passed; country names cover all 252;
+  `test-build-rbm-messages.js` 64 passed, **1 failed** (decision 15,
+  "Translations"); `test-copy-rbm-messages.js` 35 passed;
+  `test-build-rbm-pages.js` 36 passed; `assemble-content.js --check` up to
+  date. Built with `--allow-stale` (fr and pt 317 of 318) and copied into
+  launch-rbm-test `feat/tracker-feedback`.
 
 - **28 Oct 2026, the wiring** (decisions 11 to 13): `main` merged in
   (`577489a`, no conflict). Files: `scripts/assemble-content.js` (the `ui`
