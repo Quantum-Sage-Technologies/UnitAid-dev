@@ -488,6 +488,22 @@ therefore fails today, and `--allow-stale` builds with those 7 in English.
 
 ## Found in passing, left alone
 
+- **Ten Portuguese messages with {placeholders} differ from the Brazilian
+  page** (found 3 Nov 2026 by the React port's tests, once they compared
+  the Brazilian pages; French has none). The page joins translated
+  fragments; each message has its own translation under its own English
+  (decision 11), and the Brazilian retranslation of 28 Oct gave different
+  words: `pathway.stageButtonLabel` ("… onde cada medicamento está" /
+  "… está localizado"), `stepPanel.label` ("Estágio {n}" / "Etapa {n}"),
+  `product.stagePanel.surveyStatus`, `yardstick.sinceNotRoutine`,
+  `yardstick.notePublished`, `yardstick.noteEstimate`, `map.preLaunch`
+  (the page has "{medicine} Está", a capital mid-sentence),
+  `map.noCountryData`, `disclaimer.countriesVerified`,
+  `disclaimer.countriesNotVerified`. Decision 12 checks the English only, so
+  the build cannot see this. For the Portuguese reviewer; the port shows the
+  message files' words (its `docs/react-port-notes.md`, decision 60). Also
+  there: the page and the files write the map's "Legend" as "Lenda".
+
 - **Fixed 28 Oct (PR #129, Coverage above).** Those 7 strings were English
   on `/fr` and `/pt`, and the locale
   build cannot tell. `build-locale-pages.js` reports "fr: 761 translated · 0
