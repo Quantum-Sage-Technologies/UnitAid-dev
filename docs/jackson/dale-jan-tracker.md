@@ -63,19 +63,42 @@ these two figures appear as words, each marked as the company's own.
   product page (`mmv-pyramax`, checked 19 Oct) says "at least 28 countries
   (tablets) and 19 countries (granules)"; the tracker's 29 is the press
   release's figure.
-- DHA–PPQ: Pierre Fabre's exclusive licence (2 Jul 2015) to register,
-  distribute and promote Eurartesim in 32 African countries. A licence is a
-  commercial right, not a registration, so the 32 are not counted and not
+- DHA–PPQ: "Since July 2015 Eurartesim has been entrusted exclusively to
+  Pierre Fabre in 32 African countries (Sigma-Tau, now Alfasigma). This is a
+  commercial licence, not a registration." The 32 are not counted and not
   mapped. Source `pierre-fabre-eurartesim-2015` (BioSpace; Business Wire
   copy in alsoSee). The access list also names the six register-confirmed
   countries, which only the stage note named before.
-- **To confirm before merge:** neither page could be opened from this
-  machine on 3 Nov (MMV's PDF and Business Wire answer 403 to a fetch,
-  BioSpace returned an empty page, and a direct download was refused). The
-  wording comes from search-result summaries: "29 countries in Africa and
-  Asia" (Nov 2022 release) and "register, distribute and promote ... in 32
-  African countries" (2 Jul 2015). Open both in a browser and check the
-  figures and the press release's title before this goes live.
+- ASPY, second figure (added 3 Nov at the owner's request, from Dale's
+  comment): the PYRAPREG trial protocol, peer-reviewed (BMJ Open 2023;
+  13(10): e065295), "The treatment (tablets) is currently registered in 19
+  African countries and five Asian countries. Pyramax (granules) is
+  registered in 15 African countries." In the registration stage and as an
+  access line; source `bmjopen-pyrapreg-2023`. No country list, so not mapped.
+- **Quotes.** Neither press release could be opened from this machine (403
+  and an empty page; a direct download was refused). The quotes in the two
+  sources' findings are Dale's, from the partners' comments the owner pasted
+  on 3 Nov: the Pyramax release ("Both formulations ... 29 countries in
+  Africa and Asia") and BioSpace ("entrusted exclusively to Pierre Fabre in
+  32 African countries"). The first draft said "register, distribute and
+  promote", from a search summary and not in Dale's quote; it now follows
+  the quote. The press release's title and its November 2022 date are still
+  from search results.
+- **DHA–PPQ beyond 6: the owner's choice is to leave it at 6** and get the
+  further countries from the CAG (Pierre or George). Dale's comment is that
+  DHA–PPQ "is quite old now" and should be registered in more countries;
+  only national registers on file are counted.
+
+### 2a. STOP-AMDR (both operational research rows): not added
+
+Dale: ASPY is in the MFT plans of all STOP-AMDR countries, and DHA–PPQ of all
+but DRC. Searched on 3 Nov: Unitaid's news release (19 Aug 2025) and project
+page, Jhpiego's project page and grant story, and the MESA Track record all
+name the six countries (Burkina Faso, DR Congo, Kenya, Nigeria, Rwanda,
+Uganda; Jun 2025 – Dec 2029, US$26.5m), but none names ASPY or DHA–PPQ, in
+general or per country, or says DP is not used in DRC. The medicine-by-country
+claim has no public source, so nothing was added; it needs Jhpiego's project
+documents.
 
 ### 3. Timeline: registration before recommendation, and interim milestones
 
@@ -172,7 +195,7 @@ and keeping the furthest-stage shading with reworded text.
 
 ## Status
 
-Branch `feedback/dale-jan-tracker`, 5 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03), not
+Branch `feedback/dale-jan-tracker`, 6 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up), not
 pushed. Verify block on 3 Nov: validator 0 errors / 1 warning (French
 Guiana), synthetic 0 / 0, build-dataset 58 passed (`--allow-stale`), country
 names cover all 252, rbm-messages 65, copy-rbm-messages 35, rbm-pages 36.

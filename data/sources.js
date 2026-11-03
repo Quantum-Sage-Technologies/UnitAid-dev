@@ -149,10 +149,10 @@ window.LAUNCH_SOURCES =
       ],
       "year": "2015",
       "products": ["dhappq"],
-      "plain": "The 2015 deal that gave Pierre Fabre the right to register, distribute and promote Eurartesim in 32 African countries.",
+      "plain": "The 2015 deal that gave Pierre Fabre the exclusive rights to Eurartesim in 32 African countries.",
       "collection": "static",
       "public": true,
-      "findings": "2 Jul 2015: exclusive licence for Pierre Fabre to register, distribute and promote Eurartesim (DHA–PPQ) in 32 African countries; the release says Eurartesim was then being registered in further countries. A licence is a commercial right, not a registration: it does not say in which of the 32 countries Eurartesim is registered today.",
+      "findings": "2 Jul 2015: \"Eurartesim® (dihydroartemisinin/piperaquine), a drug granted marketing authorization in Europe in 2012, is entrusted exclusively to Pierre Fabre in 32 African countries.\" A licence is a commercial right, not a registration: it does not say in which of the 32 countries Eurartesim is registered. (EMA records the EU authorisation as 27 Oct 2011, not 2012; see ema-eurartesim.)",
       "relevance": "Mentioned beside DHA–PPQ's six register-confirmed countries, and not counted as registrations (partner feedback, Dale's tracker, 3 Nov 2026).",
       "checked": "2026-11-03"
     },
@@ -394,8 +394,28 @@ window.LAUNCH_SOURCES =
       "plain": "The developers announcing Pyramax in WHO's malaria guidelines, with the number of countries where they say it is registered.",
       "collection": "static",
       "public": true,
-      "findings": "Pyramax tablets and granules registered for uncomplicated malaria in 29 countries in Africa and Asia (as reported by MMV and Shin Poong, November 2022). The countries are not listed one by one in the search summary used, and the count is the manufacturer's own, not register-confirmed.",
+      "findings": "\"Both formulations are currently registered for the treatment of uncomplicated malaria in 29 countries in Africa and Asia.\" The count is the manufacturer's own, not register-confirmed.",
       "relevance": "The manufacturer-reported registration count shown beside the five register-confirmed countries for ASPY (partner feedback, Dale's tracker, 3 Nov 2026).",
+      "checked": "2026-11-03"
+    },
+    {
+      "id": "bmjopen-pyrapreg-2023",
+      "label": "BMJ Open: PYRAPREG trial protocol, 2023",
+      "title": "Efficacy and safety of pyronaridine-artesunate (PYRAMAX) for the treatment of P. falciparum uncomplicated malaria in African pregnant women (PYRAPREG): study protocol for a phase 3, non-inferiority, randomised open-label clinical trial",
+      "org": "BMJ Open",
+      "category": "Clinical evidence",
+      "group": "document",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10565244/",
+      "alsoSee": [
+        { "label": "The article on BMJ Open", "url": "https://bmjopen.bmj.com/content/13/10/e065295" }
+      ],
+      "year": "2023",
+      "products": ["pyramax"],
+      "plain": "The published plan of a trial of Pyramax in pregnant women in five African countries, which says where the medicine was registered.",
+      "collection": "static",
+      "public": true,
+      "findings": "Peer-reviewed study protocol (BMJ Open 2023; 13(10): e065295; PMID 37813539; trial PACTR202011812241529; Burkina Faso, DR Congo, Mali, Mozambique and the Gambia). \"The treatment (tablets) is currently registered in 19 African countries and five Asian countries. Pyramax (granules) is registered in 15 African countries.\" No country list is given, so these are not on the map.",
+      "relevance": "A second published registration count for ASPY beside the five register-confirmed countries (partner feedback, Dale's tracker, 3 Nov 2026).",
       "checked": "2026-11-03"
     },
     {
