@@ -195,7 +195,7 @@ and keeping the furthest-stage shading with reworded text.
 
 ## Status
 
-Branch `feedback/dale-jan-tracker`, 8 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up; the seventh is §5; the eighth is §6), not
+Branch `feedback/dale-jan-tracker`, 9 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up; the seventh is §5; the eighth is §6; the ninth is §7), not
 pushed. Verify block on 3 Nov: validator 0 errors / 1 warning (French
 Guiana), synthetic 0 / 0, build-dataset 58 passed (`--allow-stale`), country
 names cover all 252, rbm-messages 65, copy-rbm-messages 35, rbm-pages 36.
@@ -266,3 +266,13 @@ The email asked for more than the tracker rows showed; §1 did only the name.
   translation-memory entry, which fails CI on the pull request, and the table
   and map words would describe a layout the port does not have yet).
   **When the port is done, remove the five markers and reword the keys.**
+
+### 7. Caveat wording reverted (3 Nov, the owner)
+
+The owner: the rows that belong to Unitaid (Data Transparency & Confidence
+Caveats, Steering Committee; Trade & Sector Data Triangulation, Dale) are left
+to them, so §6's two caveat sentences are taken out again: the disclaimer and
+the procurement note read as on `main`, and their two `uiOnly` markers are
+removed (three remain, for the map and table). `test-build-rbm-messages` 65
+passed with the committed and with a regenerated `content.en.json`. STOP-AMDR
+(§6) stays.
