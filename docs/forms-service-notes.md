@@ -46,9 +46,9 @@ Unitaid's organisation (step 6).
 2. **Test settings in Resend:** a new key with **Full access** (subscribing
    writes a contact), and a separate **test segment**, so test contacts never
    get the update email, which goes to the whole real segment
-   (`scripts/notify-subscribers.js`). For the test, point `ADDRESSES.segment`
-   in `_shared/mail.mjs` at the test segment, or leave it as is and add no
-   real-looking contacts.
+   (`scripts/notify-subscribers.js`). The test project's settings name it as
+   `RESEND_SEGMENT_ID`, which replaces `ADDRESSES.segment` (added 3 Nov,
+   before the first test deploy). Production leaves it unset.
 3. **Deploy and set the secrets** (never in the repo; both repos are public).
    With Supabase CLI 3.0.0 (released 2 Nov 2026), from the repo root:
    ```
@@ -58,8 +58,8 @@ Unitaid's organisation (step 6).
    supabase functions deploy api --use-api
    ```
    `supabase/.env.test` holds `RESEND_API_KEY=…`, `UNSUBSCRIBE_SECRET=…`,
-   `TEAM_INBOX=…`, `FORMS_BASE_URL=https://<ref>.supabase.co/functions/v1` and
-   `LOCAL_FORMS_TOKEN=…`, one per line. It is git-ignored (`supabase/.env*`),
+   `TEAM_INBOX=…`, `FORMS_BASE_URL=https://<ref>.supabase.co/functions/v1`,
+   `LOCAL_FORMS_TOKEN=…` and `RESEND_SEGMENT_ID=…`, one per line. It is git-ignored (`supabase/.env*`),
    and a file keeps the values out of the shell's history, where
    `secrets set NAME=value` would leave them. `--use-api` bundles on Supabase's
    side, so Docker is not needed. To target a project other than the linked
@@ -182,6 +182,12 @@ only matters once there is a rate limit (§4).
   from the request's Host header. On Supabase the function's path carries
   `/functions/v1`, so the address is set instead. It must be https (http
   only for `localhost`), with no query string.
+- **`RESEND_SEGMENT_ID`** (optional) replaces the segment in code. It is
+  for the test project only: test sign-ups go to a test segment, never the
+  real list the update email goes to. The alternatives were rejected: editing
+  `ADDRESSES.segment` for the test would deploy code that is not committed,
+  and adding no segment would still put test contacts beside real ones.
+  Tests: "configuration — a test segment" (5 checks; 320 in all).
 
 ### 2.5 The same links, one optional field added
 
@@ -344,8 +350,33 @@ anonymous form posts.
     change by up to 5 minutes (its cache), and Referer reaches the same
     server before the page's no-referrer tag takes effect.
   - Details: `launch-rbm-test` `docs/react-port-notes.md`, decision 60.
-- **Not verified:** anything on Supabase's servers (no project yet), and a
-  real email.
+- **On Supabase, the test project, 3 Nov** (`launch-forms-test`,
+  `tbllmexjrmjwopgrfmce`, Free plan, region eu-west-1, in Kyler's personal
+  organisation):
+  - Set up with CLI 3.0.0: `link --yes`; `secrets set --env-file
+    supabase/.env.test --yes` (6 secrets); `functions deploy api --use-api
+    --yes`, with no Docker.
+  - The deploy warned "Skipping import path outside source root:
+    /assets/email/unitaid-logo.png". The scanner took `LOGO_PATH`, an
+    address string in `mail.mjs`, for an import. Harmless: only the update
+    email loads the hosted logo, and it does not run here.
+  - With curl:
+    - unknown path 404;
+    - no token 401 with the service's own message (so the login check is
+      really off);
+    - wrong token 401;
+    - a preflight from `localhost:3000` 204, with its CORS headers; from
+      another site 405, with none;
+    - a junk unsubscribe link 303 to LAUNCH's page.
+  - Real emails:
+    - feedback 200 with `LAUNCH-6AC08726`;
+    - subscribing `delivered@resend.dev` (Resend's test inbox) 200
+      `subscribed`, then `already`. The team notes went to the test inbox.
+  - The answer came from the `ap-southeast-1` edge; the function runs where
+    the request lands.
+- **Not verified:** a real welcome email opened in a mail app, its unsubscribe
+  link through the React version's page, and a mail app's one-click
+  unsubscribe.
 
 ---
 

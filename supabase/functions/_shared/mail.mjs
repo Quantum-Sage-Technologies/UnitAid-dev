@@ -24,6 +24,8 @@
 //                       /api (https://<project>.supabase.co/functions/v1). The
 //                       one-click unsubscribe link in each welcome points here
 //   …_FORMS_TOKEN       one per server that passes forms on (SITES, below)
+//   RESEND_SEGMENT_ID   optional: replaces ADDRESSES.segment. For a test
+//                       project only, pointing at a test segment
 // The sender, the segment and the sites are not secret, so they live here,
 // where a change to them is reviewed like any other.
 //
@@ -140,7 +142,9 @@ export function config(env) {
     to,
     base,
     from: ADDRESSES.from.trim() || DEFAULT_FROM,
-    segment: ADDRESSES.segment.trim() || null
+    // A test project sets RESEND_SEGMENT_ID to a test segment, so its
+    // sign-ups never join the real list, which the update email goes to.
+    segment: str(env.RESEND_SEGMENT_ID) || ADDRESSES.segment.trim() || null
   };
 }
 

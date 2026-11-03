@@ -332,6 +332,21 @@ group("configuration", async () => {
   is("  and its button's POST gets 503", r.status, 503);
 });
 
+group("configuration — a test segment (RESEND_SEGMENT_ID)", async () => {
+  const TEST_SEG = env({ RESEND_SEGMENT_ID: "seg_test" });
+  let r = await sub({ body: SUB, addr: SEG, env: TEST_SEG, answer: [NO_CONTACT] });
+  is("set: a new subscriber joins the test segment, not the one in code", r.calls[1].body.segments, [{ id: "seg_test" }]);
+  r = await sub({ body: SUB, addr: SEG, env: TEST_SEG, answer: [SUBSCRIBED] });
+  is("set: an existing contact is added to the test segment", r.calls.map(pathOf),
+     ["GET /contacts/reader%40example.org", "POST /contacts/reader%40example.org/segments/seg_test"]);
+  r = await sub({ body: SUB, addr: ADDR, env: TEST_SEG, answer: [NO_CONTACT] });
+  is("set, with no segment in code: the test segment still", r.calls[1].body.segments, [{ id: "seg_test" }]);
+  r = await sub({ body: SUB, addr: SEG, env: env({ RESEND_SEGMENT_ID: "   " }), answer: [NO_CONTACT] });
+  is("blank: the segment in code", r.calls[1].body.segments, [{ id: "seg_123" }]);
+  r = await sub({ body: SUB, addr: SEG, answer: [NO_CONTACT] });
+  is("unset: the segment in code", r.calls[1].body.segments, [{ id: "seg_123" }]);
+});
+
 group("the addresses and sites as committed", async () => {
   const from = /^[^<>]+ <([^<>\s]+)>$/.exec(SHIPPED.from);
   ok("ADDRESSES.from is empty or \"Name <address>\"", SHIPPED.from === "" || !!from, SHIPPED.from);
