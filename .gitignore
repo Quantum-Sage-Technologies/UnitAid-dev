@@ -15,3 +15,10 @@ DEV-B-PLAN.md
 
 # translation-engine comparisons (DEV-28) — local only; last committed in 603b305
 poc/
+
+# Supabase CLI working files, and local secrets for `supabase functions serve`
+# (never commit these: both repos are public)
+supabase/.temp/
+supabase/.branches/
+supabase/.env*
+supabase/functions/.env*
