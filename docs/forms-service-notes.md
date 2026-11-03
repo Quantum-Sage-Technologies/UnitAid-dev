@@ -14,7 +14,7 @@ only until the owner says otherwise (§5).
 
 ```
 supabase/
-  config.toml                 Supabase's login check off for the function (§2.9)
+  config.toml                 Supabase's login check off for the function (§2.10)
   functions/
     api/index.js              the host wrapper: Deno.serve → handle()
     _shared/handle.mjs        the router: /api/subscribe | unsubscribe | feedback
@@ -231,7 +231,36 @@ and its 67 tests to modules for no change in behaviour.
 - **Errors inside a route answer 500** and log the error's name only: a
   message could quote the submission (email-backend-notes.md §2.10).
 
-### 2.9 Supabase's login check is off
+### 2.9 The "Unsubscribe?" page's words go through the translation pipeline
+
+Option A (owner, 3 Nov): the page lives on RBM's site, in the React version.
+Its words therefore follow the React version's interface-text pipeline
+(docs/rbm-messages-notes.md), not hand edits in `launch-rbm-test`. There
+are twelve keys, `unsubscribe.*` in `i18n/ui.en.json`, worded as
+`api/unsubscribe.js`'s pages were. One exception: the page no longer names
+the address, because RBM's server cannot decrypt the link (the secret stays
+on the service). They are the first messages marked `{ "uiOnly": true }` in
+`i18n/ui.page-forms.json`, because the old page has no such text.
+`content.en.json` was rebuilt (`assemble-content.js --check`: current). The
+dry run of `translate-strings.js` shows 12 strings to translate per language
+(534 characters in Portuguese). Built with `--allow-stale` and copied into
+`launch-rbm-test` with `copy-rbm-messages.js`; French and Portuguese stay
+English until the translate bot runs after the change reaches `main`.
+
+**A test was wrong, not the code.** `test-build-rbm-messages.js` required
+every message to have a translation-memory entry already. The bot runs only
+after a push to `main`, while `validate.yml` runs on pull requests and
+builds with `--allow-stale` for exactly this case ("on a pull request the bot
+has not translated new text yet"). So the check would have failed every pull
+request that adds text; this is the first since the check was added on
+28 Oct. It now allows a missing entry only for a `uiOnly` message, and only
+if the build reports it as English in both languages. Any other message is
+also on the page, which is translated already, so a missing entry there
+still fails, as before. Checked both ways on 3 Nov: with the twelve new keys,
+65 passed. With the memory entry for `subscribe.button` (a translated page
+string) removed for the test, the check failed, naming it.
+
+### 2.10 Supabase's login check is off
 
 By default Supabase refuses any call without a Supabase login token (JWT).
 The dashboard's readers have none, so every form would get a 401.
@@ -298,6 +327,23 @@ anonymous form posts.
   answers (the service sends only JSON and a bodiless 303, so it does not
   matter); and how long function logs are kept on Pro (the pricing page's
   "7 days" row is labelled for API and database logs).
+- **End to end with the React version, 3 Nov** (Stage 2, by an independent
+  tester agent). The service ran under Deno with Resend faked (every call
+  recorded); the React version ran with `next build && next start` from
+  `launch-rbm-test` `feat/forms-relay`, through its relays, driven by
+  headless Chrome over the DevTools protocol:
+  - The browser: 115 of 116 checks passed, in en, fr and pt. The browser
+    called only `/api/unitaid/*` on its own site, never the service.
+  - Each flow worked: Subscribe, already subscribed, feedback (the
+    reference matched the team note), and the unsubscribe page (no PATCH
+    before the click, a PATCH after it, bad-link and failed states).
+  - The welcome's link pointed at the local site's page, and
+    List-Unsubscribe at the service.
+  - Four small bugs in the relays and page were fixed and passed a re-test.
+    Two more are documented for RBM: the page's forms state lags a settings
+    change by up to 5 minutes (its cache), and Referer reaches the same
+    server before the page's no-referrer tag takes effect.
+  - Details: `launch-rbm-test` `docs/react-port-notes.md`, decision 60.
 - **Not verified:** anything on Supabase's servers (no project yet), and a
   real email.
 
@@ -307,7 +353,10 @@ anonymous form posts.
 
 - **The unsubscribe pages** (§2.2): LAUNCH's `unsubscribe.html` (static,
   posts `{ t }` to the service with CORS), and the RBM module's page plus its
-  pass-along route. Until they exist, the link in a new welcome email leads
+  pass-along route. A link that cannot be read (cut short, or tampered)
+  names no site, so its GET goes to LAUNCH's page; the tester confirmed this
+  on 3 Nov. Until LAUNCH's page exists, such a reader lands on a missing
+  page. Until they exist, the link in a new welcome email leads
   to a missing page; the mail app's one-click button works.
 - **RBM's module routes** (`/api/unitaid/subscribe`, `/api/unitaid/feedback`,
   `/api/unitaid/unsubscribe`) and the React version's switch away from
@@ -347,13 +396,18 @@ anonymous form posts.
 ## 5. Status
 
 - Branch `forms/supabase` from `main` at `11681f2` (`origin/main` is one bot
-  commit ahead). **Local only, not pushed, nothing committed**: both repos
-  are public, and the owner decides when RBM may see it.
-- Files: `supabase/` (new: `config.toml`, `functions/api/index.js`, six
-  files in `functions/_shared/`), `scripts/test-forms-service.mjs` (new),
-  `docs/forms-service-notes.md` (new), `.gitignore` (+7 lines: Supabase's
-  local files and secrets).
-- Stage 1 (the service, local) is done. Next: Stage 2 (the unsubscribe pages
-  and RBM's module routes, §4), and Stage 3 (a test project, §1 steps 1–4),
-  which needs a free project slot and a Resend test key.
+  commit ahead). **Local only, not pushed**: both repos are public, and the
+  owner decides when RBM may see it.
+- Commit 1, `7cb9779` (3 Nov), Stage 1: `supabase/` (new: `config.toml`,
+  `functions/api/index.js`, six files in `functions/_shared/`),
+  `scripts/test-forms-service.mjs` (new), this document (new), `.gitignore`
+  (+7 lines: Supabase's local files and secrets).
+- Commit 2 (Stage 2, the LAUNCH side, §2.9): `i18n/ui.en.json`,
+  `i18n/ui.page-forms.json`, `i18n/content.en.json` (rebuilt),
+  `scripts/test-build-rbm-messages.js` (the narrowed check), this document.
+  The React side (relays, the "Unsubscribe?" page, the forms switch) is on
+  `launch-rbm-test` branch `feat/forms-relay`, from `feat/data-route`
+  `d322190`, also local.
+- Next: Stage 3 (a test project, §1 steps 1–4), which needs a free project
+  slot and a Resend test key.
 - CI: not run (nothing pushed).

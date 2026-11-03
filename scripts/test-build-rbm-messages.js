@@ -79,8 +79,18 @@ ok(r.placeholderKeys.length === uiFlat.filter(([, v]) => placeholders(v).length)
 { const content = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "i18n", "content.en.json"), "utf8"));
   const ui = new Set(content.text.filter((e) => e.bucket === "ui").map((e) => e.en));
   ok(uiFlat.every(([, v]) => ui.has(v)), "every message is in content.en.json's ui bucket, so the translate bot sees it");
+  // A message only the React version has (uiOnly) is new text: the bot
+  // translates it after it reaches main, so until then it has no entry, and a
+  // pull request carrying it would fail here (validate.yml runs on pull
+  // requests; the first such message, unsubscribe.*, 3 Nov 2026). It must then
+  // be reported, so it ships as English and says so. Every other message is
+  // also on the page, which is translated already, so a missing entry there
+  // still means it is filed under some other English.
   const noMem = uiFlat.filter(([, v]) => !inputs.memory[key(v)]).map(([k]) => k);
-  ok(!noMem.length, "every message has a memory entry under its own English" + (noMem.length ? ": " + noMem.slice(0, 5).join(", ") : "")); }
+  const awaiting = noMem.filter((k) => r.uiOnly.includes(k) && LOCALES.slice(1).every((l) => r.missing[l].some((m) => m.key === k)));
+  const lost = noMem.filter((k) => !awaiting.includes(k));
+  ok(!lost.length, "every message has a memory entry under its own English, or is new React-only text the bot has not translated yet" + (lost.length ? ": " + lost.slice(0, 5).join(", ") : ""));
+  if (awaiting.length) console.log(`  (${awaiting.length} new React-only messages await the translate bot: ${awaiting.slice(0, 3).join(", ")}${awaiting.length > 3 ? ", …" : ""})`); }
 for (const l of LOCALES.slice(1)) {
   ok(r.missing[l].every((m) => flat[l][m.key] === m.en), `${l}: a missing string is the English, and is reported`);
 }
