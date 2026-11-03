@@ -64,7 +64,7 @@ disagree, this section is current.*
       in no public file), `FORMS_BASE_URL`, one `…_FORMS_TOKEN` per site,
       and `RESEND_SEGMENT_ID` (test projects only).
     - Tests: `node scripts/test-forms-service.mjs`, 320 passed.
-  - **The React version** (`launch-rbm-test` `feat/forms-relay`, `55c66c1`,
+  - **The React version** (`launch-rbm-test` `feat/forms-relay`, `c03823c`,
     on top of `feat/data-route`):
     - three relays, `POST /api/unitaid/{subscribe,feedback,unsubscribe}`,
       which add the token server-side;
@@ -104,9 +104,9 @@ disagree, this section is current.*
 
 | Repo | Branch | State |
 | --- | --- | --- |
-| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | #136 (Oakkar, 3 Nov), then the pull request of `forms/supabase` (3 Nov): the forms service, the unsubscribe texts, and this section |
+| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | #137 (`d007738`, 3 Nov): the forms service, the unsubscribe texts and this section; then the bot's translations (`1b5ae75`) |
 | same | `forms/supabase` | merged into `main` with that pull request; it carried `docs/handoff-nov-3` too |
-| `codebyjackson/launch-rbm-test` | `feat/forms-relay` | `55c66c1` (Kyler, 3 Nov), on `feat/data-route`: the relays and the "Unsubscribe?" page. Pushed, no PR. **Not mergeable into `main`**: that would bring the whole React port and delete the static pages GitHub Pages serves (§0.1, item 4) |
+| `codebyjackson/launch-rbm-test` | `feat/forms-relay` | `c03823c` (Kyler, 3 Nov), on `feat/data-route`: the relays and the "Unsubscribe?" page, in en/fr/pt. Pushed, no PR. **Not mergeable into `main`**: that would bring the whole React port and delete the static pages GitHub Pages serves (§0.1, item 4) |
 | Supabase | project `launch-forms-test` (`tbllmexjrmjwopgrfmce`) | the TEST forms service: Free plan, eu-west-1, Kyler's personal organisation. Pauses after 7 quiet days (Resume in the dashboard). Delete once production exists |
 | `codebyjackson/launch-rbm-test` | `main` | `546a6ef` (#33, 28 Oct): the static pages, still served on GitHub Pages |
 | same | `feat/react-port` | `408ed48` (Oakkar, 28 Oct), not merged, no PR. **Its default data address is dead** |
@@ -189,14 +189,14 @@ been updated yet:**
       - Open the welcome email and follow its Unsubscribe link (it works
         only while that local dashboard runs).
       - Try the mail app's own Unsubscribe button if it shows one.
-   2. **After this pull request reaches `main`, the translate bot
-      translates the 12 `unsubscribe.*` texts.** Then, in
-      `forms/supabase`'s folder (or any up-to-date checkout of `main`):
-      ```
-      node scripts/build-rbm-messages.js
-      node scripts/copy-rbm-messages.js --to ~/Downloads/launch-rbm-test-forms-relay
-      ```
-      Commit `messages/` there, so the page shows French and Portuguese.
+   2. ~~Translate the page's 12 texts.~~ **Done 3 Nov.** PR #137 merged
+      (`d007738`), the bot translated them (`1b5ae75`, checked: none left in
+      English), and they were copied into `feat/forms-relay` (`c03823c`). To
+      repeat after any wording change: in an up-to-date checkout of `main`,
+      run `node scripts/build-rbm-messages.js`, then `node
+      scripts/copy-rbm-messages.js --to ~/Downloads/launch-rbm-test-forms-relay`,
+      and commit `messages/` there. The Portuguese title reads stiffly; a
+      reviewer may want to reword it.
    3. **Unitaid:** written approval; an organisation on the Pro plan
       (requested 3 Nov; $25/month, one project); Kyler and Oakkar invited as
       Administrators. Then the **production project** in it, set up as in
