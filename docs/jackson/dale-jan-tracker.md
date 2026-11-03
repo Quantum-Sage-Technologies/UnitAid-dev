@@ -48,3 +48,31 @@ development, 2nd ed. (2014), p. 130, as Jan's row does.
 - Page 130 is Jan's citation; it was not re-read here.
 - The docs (`domain-primer.md`, `project-explainer.md`, `user-guide.md`)
   keep the old spelling; they are internal.
+
+### 2. Registration counts from manufacturers (items: ASPY 29; DHA–PPQ beyond 6)
+
+The owner's choice (3 Nov): **text only, attributed.** The map stays on the
+5 Oct rule (a national register, a WHO publication or a peer-reviewed paper);
+these two figures appear as words, each marked as the company's own.
+
+- ASPY: "MMV and Shin Poong reported in November 2022 that Pyramax was
+  registered in 29 countries in Africa and Asia; that count is the
+  manufacturer's own and has not been checked against national registers",
+  in the registration stage and as an access line. Source
+  `mmv-shinpoong-pyramax-2022`, the joint press release (MMV's PDF). MMV's
+  product page (`mmv-pyramax`, checked 19 Oct) says "at least 28 countries
+  (tablets) and 19 countries (granules)"; the tracker's 29 is the press
+  release's figure.
+- DHA–PPQ: Pierre Fabre's exclusive licence (2 Jul 2015) to register,
+  distribute and promote Eurartesim in 32 African countries. A licence is a
+  commercial right, not a registration, so the 32 are not counted and not
+  mapped. Source `pierre-fabre-eurartesim-2015` (BioSpace; Business Wire
+  copy in alsoSee). The access list also names the six register-confirmed
+  countries, which only the stage note named before.
+- **To confirm before merge:** neither page could be opened from this
+  machine on 3 Nov (MMV's PDF and Business Wire answer 403 to a fetch,
+  BioSpace returned an empty page, and a direct download was refused). The
+  wording comes from search-result summaries: "29 countries in Africa and
+  Asia" (Nov 2022 release) and "register, distribute and promote ... in 32
+  African countries" (2 Jul 2015). Open both in a browser and check the
+  figures and the press release's title before this goes live.

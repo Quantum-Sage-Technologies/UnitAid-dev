@@ -46,7 +46,7 @@
 window.LAUNCH_SOURCES =
 {
   "meta": {
-    "lastUpdated": "2026-10-06",
+    "lastUpdated": "2026-11-03",
     "note": "Verified against each publisher 21 September 2026; entries re-checked since carry their own later 'checked' date. 'findings' and 'relevance' are internal and are not rendered on the public page."
   },
   "sources": [
@@ -135,6 +135,26 @@ window.LAUNCH_SOURCES =
       "findings": "Checked via the API v2 on 2026-10-19: acronym KALUMA; sponsor Novartis Pharmaceuticals; Phase 3; status COMPLETED; enrollment 1,720 (actual); start 7 Mar 2024; primary completion 27 Jun 2025; study completion 25 Nov 2025; first posted 6 May 2023; last update posted 27 Jan 2026. 33 locations in 12 countries (Burkina Faso, Cote d'Ivoire, DR Congo, Gabon, Ghana, Kenya, Mali, Niger, Rwanda, Tanzania, Uganda, Zambia). The dashboard note's '34 sites' comes from the press releases; the registry lists 33.",
       "relevance": "Registry evidence for GanLum's enrolment and completion date; a specific record within the existing clinicaltrials feed.",
       "checked": "2026-10-19"
+    },
+    {
+      "id": "pierre-fabre-eurartesim-2015",
+      "label": "Sigma-Tau and Pierre Fabre: Eurartesim licence, Jul 2015",
+      "title": "Sigma-Tau of Alfasigma Group grants Pierre Fabre exclusive license in 32 African countries for its antimalarial Eurartesim",
+      "org": "Sigma-Tau (Alfasigma Group); Pierre Fabre",
+      "category": "Manufacturer",
+      "group": "document",
+      "url": "https://www.biospace.com/b-sigma-tau-b-of-alfasigma-group-grants-pierre-fabre-exclusive-license-in-32-african-countries-for-its-antimalarial-eurartesim",
+      "alsoSee": [
+        { "label": "The same release on Business Wire", "url": "https://www.businesswire.com/news/home/20150702005100/en/" }
+      ],
+      "year": "2015",
+      "products": ["dhappq"],
+      "plain": "The 2015 deal that gave Pierre Fabre the right to register, distribute and promote Eurartesim in 32 African countries.",
+      "collection": "static",
+      "public": true,
+      "findings": "2 Jul 2015: exclusive licence for Pierre Fabre to register, distribute and promote Eurartesim (DHA–PPQ) in 32 African countries; the release says Eurartesim was then being registered in further countries. A licence is a commercial right, not a registration: it does not say in which of the 32 countries Eurartesim is registered today.",
+      "relevance": "Mentioned beside DHA–PPQ's six register-confirmed countries, and not counted as registrations (partner feedback, Dale's tracker, 3 Nov 2026).",
+      "checked": "2026-11-03"
     },
     {
       "id": "ema-eurartesim",
@@ -360,6 +380,23 @@ window.LAUNCH_SOURCES =
       "findings": "Press release dated Geneva, 12 November 2025: \"Medicines for Malaria Venture (MMV) and Novartis today announced positive results from KALUMA, a Phase 3 study for new malaria treatment KLU156 (ganaplacide-lumefantrine, or GanLum)\". PCR-corrected efficacy 97.4% (conservative per-protocol estimand) vs 94.0% for Coartem; 99.2% under conventional per-protocol analysis. Headline says 1,688 adults and children at 34 sites in 12 African countries; the 'About the KALUMA study' section says 1,668 — the release is internally inconsistent, and ClinicalTrials.gov records 1,720 enrolled. States \"Novartis plans to seek regulatory approvals from health authorities for GanLum as soon as possible.\" Served normally to a plain request on 2026-10-19 (mmv.org later rate-limited repeated requests with a CloudFront 403).",
       "relevance": "The MMV half of the 'Novartis / MMV press releases, 12 Nov 2025' citation behind GanLum's R&D and regulatory notes.",
       "checked": "2026-10-19"
+    },
+    {
+      "id": "mmv-shinpoong-pyramax-2022",
+      "label": "MMV and Shin Poong: Pyramax registrations, Nov 2022",
+      "title": "MMV and Shin Poong press release on Pyramax in the revised WHO Guidelines for malaria (November 2022)",
+      "org": "Medicines for Malaria Venture; Shin Poong Pharmaceutical",
+      "category": "Manufacturer",
+      "group": "document",
+      "url": "https://www.mmv.org/sites/default/files/content/document/Pyramax%20Press%20release%20EN.pdf",
+      "year": "2022",
+      "products": ["pyramax"],
+      "plain": "The developers announcing Pyramax in WHO's malaria guidelines, with the number of countries where they say it is registered.",
+      "collection": "static",
+      "public": true,
+      "findings": "Pyramax tablets and granules registered for uncomplicated malaria in 29 countries in Africa and Asia (as reported by MMV and Shin Poong, November 2022). The countries are not listed one by one in the search summary used, and the count is the manufacturer's own, not register-confirmed.",
+      "relevance": "The manufacturer-reported registration count shown beside the five register-confirmed countries for ASPY (partner feedback, Dale's tracker, 3 Nov 2026).",
+      "checked": "2026-11-03"
     },
     {
       "id": "mmv-pyramax",
