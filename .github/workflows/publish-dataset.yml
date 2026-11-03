@@ -30,8 +30,16 @@ name: Publish to RBM data repo
 #
 # NEEDS (Settings → Secrets and variables → Actions of THIS repo):
 #   variable RBM_DATA_REPO          owner/name of the public data repo
-#   secret   DATA_REPO_DEPLOY_KEY   private half of a deploy key with write
-#                                   access on that repo
+#                                   (Quantum-Sage-Technologies/unitaid-launch-data
+#                                   since the repos moved on 29 Oct 2026)
+#   secret   DATA_REPO_TOKEN        a fine-grained personal access token with
+#                                   Contents: read and write on that repo only.
+#                                   It replaces DATA_REPO_DEPLOY_KEY (3 Nov
+#                                   2026): the Quantum-Sage-Technologies
+#                                   organisation disables deploy keys, so the
+#                                   key's push was refused. Tokens expire:
+#                                   renew it before its date, or the publish
+#                                   fails at the push.
 # With RBM_DATA_REPO unset the run builds and checks, then stops with a notice.
 #
 # Its own concurrency group: it pushes to another repo, never to main, so it
@@ -113,7 +121,7 @@ jobs:
         if: steps.target.outputs.set == 'true'
         with:
           repository: ${{ vars.RBM_DATA_REPO }}
-          ssh-key: ${{ secrets.DATA_REPO_DEPLOY_KEY }}
+          token: ${{ secrets.DATA_REPO_TOKEN }}
           path: data-repo
           fetch-depth: 0
 

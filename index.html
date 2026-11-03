@@ -376,6 +376,7 @@
   .acc b { font-weight: 700; color: var(--ink); }
   .acc b.ok { color: var(--good-text); }
   .acc .none { color: var(--ink-3); }
+  .srow .acc small { display: none; }
   .srow.hd .c-path { display: flex; flex-direction: row; align-items: center; gap: 5px; }
   .srow.hd .info { text-transform: none; }
   .ysp { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 650; line-height: 1.4; border-radius: 999px; padding: 2px 10px; white-space: nowrap; }
@@ -458,6 +459,7 @@
     .srow .c-mini { grid-column: 2 / -1; grid-row: 2; margin-block: 0; }
     .srow .c-bar { grid-column: 2 / -1; grid-row: 3; }
     .srow .c-stage { display: none; }
+    .srow .acc small { display: block; }
     .l1 { padding-inline: 10px; }
   }
   /* Narrow tablets (9 Oct 2026): the fixed minimums above add up to about
@@ -1109,6 +1111,10 @@
   .det-bar i { display: block; min-width: 0; }
   .det-lg { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 7px; font-size: 12px; color: var(--ink-2); }
   .det-lg span { display: inline-flex; align-items: center; gap: 5px; } .det-lg b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .det-srow { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 3px; font-size: 12px; color: var(--ink-2); }
+  .det-srow span { display: inline-flex; align-items: center; gap: 5px; } .det-srow b { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .det-bar.thin { height: 9px; }
+  .det-snote { margin-top: 8px; }
   .det-pill { font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
   .det-pill.registered { background: var(--map-registered); color: #0B2A30; }
   .det-pill.guidelines { background: var(--map-guidelines); color: #fff; }
@@ -1542,7 +1548,7 @@
 
   <section class="viz" id="mapsec" hidden>
     <h2>Country access map</h2>
-    <p class="viznote" id="mapnote">Each country is shaded by the furthest stage it has reached.</p>
+    <p class="viznote" id="mapnote">Countries where a national medicines register confirms the medicine is registered. Choose another access stage under Filters; a country can appear at more than one stage.</p>
     <div class="map-dock">
       <aside class="map-dock-rail map-dock-left">
         <div class="dock-section">
@@ -1601,7 +1607,7 @@
   <footer>
     <div class="disclaimer" id="disclaimer" tabindex="-1">
       <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg>Disclaimer</h3>
-      <p>Users should not consider the LAUNCH dashboard a complete and authoritative source of access information. It provides a snapshot at a point in time, based on publicly available information and on figures a manufacturer has confirmed in writing.</p>
+      <p>Users should not consider the LAUNCH dashboard a complete and authoritative source of access information. It provides a snapshot at a point in time, based on publicly available information and on figures a manufacturer has confirmed in writing. Each figure reflects the best available reporting on the date shown; some countries, years or purchasing channels may be missing.</p>
       <p>Unitaid does not accept legal responsibility for the accuracy of the data. Unitaid does not guarantee that it is complete, up to date or fit for a specific purpose. <span id="disc-countries"></span>Users should carry out their own country-level checks before making any decision based on this data.</p>
       <p>A full understanding of a medicine's access situation in any country may require information that is not in this dashboard.</p>
     </div>
@@ -1709,6 +1715,9 @@
   // partner asked what Delayed refers to (19 Oct 2026). It is the hand-set
   // `late` status (docs/data-analyst-guide.md), not a measured comparison.
   const LATE_DEF = "the medicine's current stage has stalled or is moving unusually slowly, in LAUNCH's judgement from public evidence. The main barrier gives the reason. It is not measured against a set deadline.";
+  // Not shown since 3 Nov 2026: the medicines table's Status column, which
+  // carried it, became Market Access (partner feedback). Kept for when the
+  // status words return.
   const lateInfo = () => `<button type="button" class="info" data-tip="${esc(LABEL.late + ": " + LATE_DEF)}" aria-label="${esc(LABEL.late + ": " + LATE_DEF)}">i</button>`;
   // The 10 Nov 2026 release (partner feedback sheet, 20 Oct 2026) shows where
   // each medicine is without calling any step delayed or in progress, and
@@ -1977,9 +1986,20 @@
   // What the two figures mean, from the i beside them.
   const ACCESS_DEF = "Market Access is reached when a medicine is both recommended by WHO and WHO-prequalified. Country Access runs from then until national registration, policy adoption, procurement in significant volumes and in-country delivery are all complete.";
   const accessInfo = () => `<button type="button" class="info" data-tip="${esc(ACCESS_DEF)}" aria-label="${esc(ACCESS_DEF)}">i</button>`;
-  // the medicines table: each phase name above its figure
-  const accessCell = p => `<span class="acc">` + accessParts(p).map(([name, t, tone]) => `<small>${esc(name)}</small>` +
-    (tone === "none" ? `<span class="none">${esc(t)}</span>` : `<b${tone ? ` class="${tone}"` : ""}>${esc(t)}</b>`)).join("") + `</span>`;
+  // The medicines table gives each phase its own column (partner feedback,
+  // 21 Oct 2026, tracker row "Market, Country & Population Access
+  // Headings"): the Status column became Market Access and the Access column
+  // Country Access, so the table shows at a glance that ASPY and DHA–PPQ
+  // reached market access. A stage's status still shows on each medicine's
+  // journey and timeline. The phase name above a figure shows only where the
+  // header row is hidden (phones).
+  const accessFig = (name, t, tone) => `<span class="acc"><small>${esc(name)}</small>` +
+    (tone === "none" ? `<span class="none">${esc(t)}</span>` : `<b${tone ? ` class="${tone}"` : ""}>${esc(t)}</b>`) + `</span>`;
+  const marketCell = p => accessFig(...accessParts(p)[0]);
+  const countryCell = p => {
+    const c = accessParts(p)[1];
+    return c ? accessFig(...c) : accessFig(PHASES[1].name, "Not yet reached", "none");
+  };
   // the open row, in one line: "Market Access: Reached in 2022 · Country Access: 4 years so far"
   const accessLine = p => accessParts(p).map(([name, t]) => `${esc(name)}: ${esc(t)}`).join(" · ");
   // The year the current gate has been waiting since. Uses the same journey
@@ -2154,13 +2174,37 @@
     if (e) return `<span class="pathexp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg><b>${yrsText(e.years)}</b> expected</span>`;
     return "";
   }
+  // Which access stages a country on a medicine's list has a source for. Each
+  // stage stands on its own (partner feedback, 3 Nov 2026):
+  // the map used to shade a country by the furthest stage only, so DHA–PPQ's
+  // map read 2 registered beside "confirmed in six national registers".
+  //   registered: the entry is at "registered", or cites a national register;
+  //   guidelines: the entry is at "guidelines", or cites a policy/guidelines
+  //               source (the WHO national drug policy table lists Nigeria and
+  //               Burkina Faso, which are at "mft");
+  //   mft:        the entry is at "mft".
+  // A category is compared in slug form so the literal is not collected for
+  // translation (the sources' categories stay English on every page).
+  // scripts/validate-data.js counts detail.country the same way.
+  function countryStages(list) {
+    const cat = {};
+    ((window.LAUNCH_SOURCES || {}).sources || []).forEach(s => { cat[s.id] = String(s.category || "").toLowerCase().replace(/\s+/g, "-"); });
+    const cites = (e, c) => (e.sources || []).some(id => cat[id] === c);
+    const out = {};
+    list.forEach(e => {
+      out[e.iso3] = {
+        registered: e.level === "registered" || cites(e, "national-register"),
+        guidelines: e.level === "guidelines" || cites(e, "policy-/-guidelines"),
+        mft: e.level === "mft"
+      };
+    });
+    return out;
+  }
   // The Country access card. Where a medicine has a country list (the one the
   // map is painted from), every count comes from it, so the card, the map
   // legend and the stage 4-5 cells cannot disagree (partner feedback, 15 Oct
-  // 2026): countries on the map, split by the furthest stage each has reached,
-  // and how many of them a national medicines register confirms. A category is
-  // compared in slug form so the literal is not collected for translation (the
-  // sources' categories stay English on every page).
+  // 2026): countries on the map, then how many have a source for each stage,
+  // the same numbers the map's three views show.
   function countryAccessKv(d) {
     const list = d.countries && Array.isArray(d.countries.list) ? d.countries.list : null;
     if (!list) return `
@@ -2168,17 +2212,13 @@
               <div class="kv"><span>In national guidelines</span><span>${esc(d.country.inGuidelines)}</span></div>
               <div class="kv"><span>In MFT plans</span><span>${esc(d.country.inMft)}</span></div>`;
     const c = { registered: 0, guidelines: 0, mft: 0 };
-    list.forEach(e => { if (e.level in c) c[e.level]++; });
-    const cat = {};
-    ((window.LAUNCH_SOURCES || {}).sources || []).forEach(s => { cat[s.id] = String(s.category || "").toLowerCase().replace(/\s+/g, "-"); });
-    const reg = list.filter(e => (e.sources || []).some(id => cat[id] === "national-register")).length;
+    Object.values(countryStages(list)).forEach(s => Object.keys(c).forEach(k => { if (s[k]) c[k]++; }));
     return `
               <div class="kv"><span>Countries on the map</span><span>${list.length}</span></div>
-              <div class="kv sub"><span>In MFT plans</span><span>${c.mft}</span></div>
+              <div class="kv sub"><span>Confirmed in national registers</span><span>${c.registered}</span></div>
               <div class="kv sub"><span>In national guidelines</span><span>${c.guidelines}</span></div>
-              <div class="kv sub"><span>Registered</span><span>${c.registered}</span></div>` +
-      (Object.keys(cat).length ? `
-              <div class="kv"><span>Confirmed in national registers</span><span>${reg}</span></div>` : "");
+              <div class="kv sub"><span>In MFT plans</span><span>${c.mft}</span></div>
+              <p style="margin:4px 0 2px 14px;font-size:13px;color:var(--ink-3)">A country can count at more than one stage.</p>`;
   }
   function miniJourney(p) {
     const done = p.stages.filter(st => st.status === "done").length;
@@ -2210,9 +2250,18 @@
   // that starts at the first milestone (no empty years); the current gate sits
   // at today, with a bar back to the year it has been waiting since. Gates with
   // no year are listed on the right instead of being given an invented date.
+  // A started gate (in progress or delayed, not the current one) whose date
+  // reads "Since YYYY" sits at that year with "since YYYY" under it, so the
+  // steps between WHO PQ and today show (partner feedback,
+  // 3 Nov 2026): ASPY's registration since 2013, before WHO recommended it in
+  // 2022, and its Global Fund procurement since 2018.
+  const startedYear = (p, i) => {
+    const st = p.stages[i];
+    return i !== p.currentStage && (st.status === "prog" || st.status === "late") ? sinceYearOf(st) : null;
+  };
   function journeyTime(p) {
     const from = sinceFrom(p), since = from ? from.year : null;
-    const ys = p.stages.map(stageYear).filter(y => y != null);
+    const ys = p.stages.map((st, i) => (stageYear(st) != null ? stageYear(st) : startedYear(p, i))).filter(y => y != null);
     if (since != null) ys.push(since);
     let lo = ys.length ? Math.min(...ys) : ASOF_YEAR - 1;
     const hi = ASOF_YEAR;
@@ -2226,7 +2275,11 @@
     const items = [];
     p.stages.forEach((st, i) => {
       if (i === p.currentStage) items.push({ i, x: x(hi), cur: true });
-      else { const y = stageYear(st); if (y != null) items.push({ i, x: x(y) }); }
+      else {
+        const y = stageYear(st), s = startedYear(p, i);
+        if (y != null) items.push({ i, x: x(y) });
+        else if (s != null) items.push({ i, x: x(s), from: s });
+      }
     });
     items.sort((a, b) => a.x - b.x || a.i - b.i);
     const last = [];
@@ -2248,6 +2301,7 @@
       const sub = it.cur
         ? (statusShown(p, st.status) ? `<div class="snow ${st.status}">${LABEL[st.status]}</div>` : "") +
           (since != null && since < hi ? `<div class="ssince">since ${esc(from.label)} (${since}) · ${yrsText(hi - since)}</div>` : "")
+        : it.from != null ? `<div class="syear">since ${it.from}</div>`
         : `<div class="syear">${stageYear(st)}</div>`;
       h += `<i class="stem" data-tier="${it.tier}" style="left:${it.x}%;height:${top - 32}px"></i>` +
         `<i class="pt${it.cur ? " " + st.status : ""}" style="left:${it.x}%"></i>` +
@@ -2270,7 +2324,7 @@
     p.stages.forEach((st, j) => {
       if (j === p.currentStage) return;
       if (st.status === "done" && stageYear(st) == null) noYear.push(j);
-      else if (st.status === "prog" || st.status === "late") ongoing.push(j);
+      else if ((st.status === "prog" || st.status === "late") && startedYear(p, j) == null) ongoing.push(j);
       else if (st.status === "idle") notStarted.push(j);
     });
     // Not-started gates are a row of dimmed icons, not a stack of labelled chips:
@@ -2359,7 +2413,7 @@
 
   board.insertAdjacentHTML("afterbegin",
     `<div class="srow hd" role="presentation"><span></span><span>Medicine</span><span class="c-mini">Journey</span>` +
-    `<span class="c-stage">Current stage</span><span class="c-stat">Status</span><span class="c-path">Access ${accessInfo()}</span>${SHOW_BARRIERS ? `<span class="c-bar">Main barrier</span>` : ""}</div>`);
+    `<span class="c-stage">Current stage</span><span class="c-stat">Market Access</span><span class="c-path">Country Access ${accessInfo()}</span>${SHOW_BARRIERS ? `<span class="c-bar">Main barrier</span>` : ""}</div>`);
   if (!SHOW_BARRIERS) board.classList.add("nobar");
 
   // "Delayed" carries an i with its definition: hover, focus or tap shows it.
@@ -2449,7 +2503,7 @@
         <h3>Procurement through public channels</h3>
         <div class="big">${esc(fmtFig(d.volume.total))}</div>
         <div class="sub">${esc(fmtFig(d.volume.period))}</div>
-        ${gfOnly ? `<p class="proc-scope">100% of transactions in the dataset shown are from Global Fund PQR; this is not the product's total global procurement.</p>` : `
+        ${gfOnly ? `<p class="proc-scope">All transactions shown are Global Fund-financed orders from its PQR database. Orders paid for by other donors, national governments or private buyers are not included, so this is not the product's total global procurement.</p>` : `
         <div class="split" aria-hidden="true">
           ${d.volume.split.map((s, i) => `<div style="width:${s.pct}%;background:${shades[i % shades.length]}" title="${esc(s.channel)} ${s.pct}%"></div>`).join("")}
         </div>
@@ -2473,8 +2527,8 @@
           <div class="nm"><b>${esc(p.name)}</b><small>${esc(p.inn)}</small></div>
           <div class="c-mini">${miniJourney(p)}</div>
           <span class="c-stage"><span class="stg">${esc(STAGES[p.currentStage])}</span>${SHOW_STAGE_NOTE && firstClause(p.stages[p.currentStage].date) ? `<span class="note">${esc(firstClause(p.stages[p.currentStage].date))}</span>` : ""}</span>
-          ${statusShown(p, p.stages[p.currentStage].status) ? `<span class="c-stat"><span class="light ${p.stages[p.currentStage].status}"><i></i>${LABEL[p.stages[p.currentStage].status]}${p.stages[p.currentStage].status === "late" ? lateInfo() : ""}</span></span>` : `<span class="c-stat none" aria-hidden="true">—</span>`}
-          <span class="cell c-path">${accessCell(p)}${yardBadge(p)}</span>
+          <span class="cell c-stat">${marketCell(p)}</span>
+          <span class="cell c-path">${countryCell(p)}${yardBadge(p)}</span>
           ${SHOW_BARRIERS ? `<div class="c-bar${p.barrier || p.flag ? "" : " none"}">${p.barrier || p.flag ? esc(p.barrier || p.flag) : "No publicly documented barrier identified"}</div>` : ""}
         </div>
         <div class="l1" id="${esc(p.id)}-l1">
@@ -3046,6 +3100,12 @@
   // ---- country access map ----
   const LEVEL_LABEL = { registered: "Registered", guidelines: "In national guidelines",
                         mft: "In MFT plans", none: "No data" };
+  // The line under the map's heading, one per access stage shown.
+  const VIEW_NOTE = {
+    registered: "Countries where a national medicines register confirms the medicine is registered. Choose another access stage under Filters; a country can appear at more than one stage.",
+    guidelines: "Countries whose national treatment guidelines or policy include the medicine, cited to a WHO publication or a peer-reviewed paper. A country can appear at more than one stage.",
+    mft: "Countries with a multiple first-line therapy (MFT) plan that uses the medicine: a pilot, a planned pilot or a national rollout. A country can appear at more than one stage."
+  };
   if (window.LAUNCH_MAP && window.LAUNCH_MAP_GEO && window.maplibregl) {
     const mapsec = document.getElementById("mapsec");
     mapsec.hidden = false;
@@ -3193,7 +3253,11 @@
     const TP = window.LAUNCH_TREATMENT_POLICY;
     let mftOn = false, mftSel = null, mftProductId = null, mftByIso = {};
     const mftTick = new Set(["tested", "vivax"]);
-    const stageOff = new Set();   // access stages unticked in Filters
+    // The access stage the map shows, one at a time (Filters, radio buttons),
+    // and the stages each country of the selected medicine has a source for
+    // (countryStages). A country is shaded in every view it qualifies for.
+    const VIEW_DEFAULT = "registered";
+    let mapView = VIEW_DEFAULT, stageSets = {};
 
     const map = new maplibregl.Map({
       container: "mapwrap-gl",
@@ -3304,16 +3368,19 @@
     // 94-country LAUNCH_MAP that only gates which ones carry data — D17);
     // selectMap() updates each button's level/label in place, exactly as it
     // used to update each <path>'s class/dataset.
+    // The tooltip ticks each stage the country has a source for, on its own:
+    // it no longer reads "registered" into a country only because it is
+    // further along (Ghana is in ASPY's guidelines; no register confirms it).
     const LEVEL_ORDER = ["registered", "guidelines", "mft"];
     const countryTip = el => {
-      const rank = LEVEL_ORDER.indexOf(el.dataset.lvl);
+      const has = (el.dataset.iso3 in M.countries) ? stageSets[el.dataset.iso3] : null;
       const foot = mapProduct
         ? `<div class="tprod">${esc(mapProduct)}${mapStatus ? " · " + esc(mapStatus) + " data" : ""}</div>`
         : "";
-      const rows = rank < 0
+      const rows = !has
         ? `<div class="tlvl"><span class="tmark">–</span><span class="mapsw none"></span>${LEVEL_LABEL.none}</div>`
-        : LEVEL_ORDER.map((k, i) => {
-            const on = i <= rank;
+        : LEVEL_ORDER.map((k) => {
+            const on = has[k];
             return `<div class="tlvl${on ? "" : " off"}"><span class="tmark">${on ? "✓" : "·"}</span>` +
               `<span class="mapsw ${k}"></span>${LEVEL_LABEL[k]}</div>`;
           }).join("");
@@ -3363,26 +3430,9 @@
       mapProduct = p.name;
       mapStatus = p.detail.countries ? p.detail.countries.status : "";
       tabs.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.id === id ? "true" : "false"));
-      const byIso = {};
-      (p.detail.countries ? p.detail.countries.list : []).forEach(e => byIso[e.iso3] = e.level);
-      // legend counts, derived from the same list the map is painted from so
-      // the two can never disagree
-      const counts = { registered: 0, guidelines: 0, mft: 0 };
-      Object.values(byIso).forEach(l => { if (l in counts) counts[l]++; });
-      const withData = counts.registered + counts.guidelines + counts.mft;
-      ["registered", "guidelines", "mft"].forEach(k => {
-        const el = document.getElementById("mapct-" + k);
-        if (el) { el.textContent = counts[k]; el.classList.toggle("zero", !counts[k]); }
-      });
-      const none = document.getElementById("mapct-none");
-      if (none) {
-        const tot = Object.keys(M.countries).length;
-        none.textContent = tot - withData;
-        none.classList.toggle("zero", withData === tot);
-      }
-      // Paints the MapLibre fill layer via feature-state — the direct
-      // replacement for the old per-<path> class/dataset loop (D19).
-      applyCountryLevels(byIso);
+      stageSets = countryStages(p.detail.countries ? p.detail.countries.list : []);
+      mftProductId = id;
+      paintView();
       const empty = document.getElementById("map-empty");
       if (!p.detail.countries) {
         empty.hidden = false;
@@ -3392,8 +3442,32 @@
       } else {
         empty.hidden = true;
       }
-      mftProductId = id; mftByIso = byIso;
       mftRender();
+    }
+    // The selected stage's countries, and the legend for that view: its own
+    // row and No data, counted from the same list the map is painted from so
+    // the two can never disagree.
+    function paintView() {
+      const byIso = {};
+      Object.keys(stageSets).forEach(iso3 => { if (stageSets[iso3][mapView]) byIso[iso3] = mapView; });
+      mftByIso = byIso;
+      const drawn = Object.keys(byIso).filter(iso3 => iso3 in M.countries).length;
+      ["registered", "guidelines", "mft"].forEach(k => {
+        const el = document.getElementById("mapct-" + k);
+        if (el) { el.textContent = k === mapView ? drawn : 0; el.classList.toggle("zero", k !== mapView || !drawn); }
+      });
+      const none = document.getElementById("mapct-none");
+      if (none) {
+        const tot = Object.keys(M.countries).length;
+        none.textContent = tot - drawn;
+        none.classList.toggle("zero", drawn === tot);
+      }
+      document.querySelectorAll(".map-legend tr[data-lvl]").forEach(r => { r.hidden = r.dataset.lvl !== mapView && r.dataset.lvl !== "none"; });
+      const note = document.getElementById("mapnote");
+      if (note) note.textContent = VIEW_NOTE[mapView];
+      // Paints the MapLibre fill layer via feature-state — the direct
+      // replacement for the old per-<path> class/dataset loop (D19).
+      applyCountryLevels(byIso);
     }
 
     const prettyDate = (iso) => {
@@ -3610,10 +3684,9 @@
     }
 
     // The legend is fixed: it always shows both groups, whatever is ticked. The
-    // access-stage rows stay too; an unticked row is dimmed, not hidden.
+    // access-stage table shows the stage in view and No data (paintView).
     function mftLegend(byCat) {
       const el = document.getElementById("mft-legend");
-      document.querySelectorAll(".map-legend tr[data-lvl]").forEach((k) => { k.classList.toggle("dim", stageOff.has(k.dataset.lvl)); });
       el.hidden = !TP;
       if (!TP) return;
       const av = mftAvail();
@@ -3663,11 +3736,13 @@
     const drawnIsos = () => Object.keys(M.countries).sort((a, b) => mftName(a).localeCompare(mftName(b)));
     const curProduct = () => tracked.find((p) => p.id === mftProductId);
     const hasCountries = () => { const p = curProduct(); return !!(p && p.detail.countries); };
+    // The stage in view and No data: the only two a view's counts hold.
+    const inView = () => STAGE_ROWS.filter(([k]) => k === mapView || k === "none");
     function stageBar(c, total) {
-      return `<div class="det-bar" role="img" aria-label="${STAGE_ROWS.map(([k, l]) => `${l} ${c[k]}`).join(", ")}">` +
-        STAGE_ROWS.map(([k]) => (c[k] ? `<i style="width:${c[k] / total * 100}%;background:${stageVar(k)}"></i>` : "")).join("") + `</div>`;
+      return `<div class="det-bar" role="img" aria-label="${inView().map(([k, l]) => `${l} ${c[k]}`).join(", ")}">` +
+        inView().map(([k]) => (c[k] ? `<i style="width:${c[k] / total * 100}%;background:${stageVar(k)}"></i>` : "")).join("") + `</div>`;
     }
-    const stageLegend = (c) => `<div class="det-lg">` + STAGE_ROWS.map(([k, l]) =>
+    const stageLegend = (c) => `<div class="det-lg">` + inView().map(([k, l]) =>
       `<span><i class="mapsw ${k}"></i>${esc(k === "guidelines" ? "In guidelines" : l)} <b>${c[k]}</b></span>`).join("") + `</div>`;
 
     function detFacts() {
@@ -3684,10 +3759,15 @@
       let h = `<div class="det-banner"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3 21 12l-6 1.5L12 21z"/></svg>` +
         `<span>Select any country on the map, or from the Countries tab, to open its page.</span></div>` + detFacts();
       if (!hasCountries()) return h + `<div class="det-card"><p class="det-empty">${esc(p.name)} is pre-launch, so there is no country-level status or policy yet.</p></div>`;
-      const c = stageCounts(), withStage = c.registered + c.guidelines + c.mft;
-      h += `<div class="det-card"><h4>Access stage mix · ${esc(p.name)}</h4>` +
+      // One bar per stage: a country counts in every stage it has a source
+      // for, so the stages are not parts of one whole.
+      const vc = viewCounts();
+      const withStage = Object.keys(M.countries).filter((i) => stageSets[i] && VIEW_ROWS.some(([k]) => stageSets[i][k])).length;
+      h += `<div class="det-card"><h4>Access stages · ${esc(p.name)}</h4>` +
         `<div class="det-big">${withStage}<span class="det-small"> of ${n} countries have an access stage</span></div>` +
-        stageBar(c, n) + `</div>`;
+        VIEW_ROWS.map(([k, l]) => `<div class="det-srow"><span><i class="mapsw ${k}"></i>${esc(k === "guidelines" ? "In guidelines" : l)}</span><b>${vc[k]}</b></div>` +
+          `<div class="det-bar thin" role="img" aria-label="${esc(l)} ${vc[k]}"><i style="width:${vc[k] / n * 100}%;background:${stageVar(k)}"></i></div>`).join("") +
+        `<p class="det-small det-snote">A country can count at more than one stage.</p></div>`;
       h += `<div class="det-card"><h4>${esc(MFT_TXT.use)} · ${esc(p.name)}</h4>`;
       if (!Object.keys(mftAvail()).length) h += `<p class="det-empty">No national treatment policy lists ${esc(p.name)} yet.</p>`;
       else if (!mftOn) h += `<p class="det-empty">${esc(MFT_TXT.tickLeft)}</p>`;
@@ -3700,10 +3780,10 @@
       return h + `</div>`;
     }
 
-    // The Find a country list follows the left Filters: a country is listed when its
-    // access stage is ticked OR it is in a ticked recommended-use group. Location and
-    // the search box narrow it further.
-    const mftMatches = (iso3) => !stageOff.has(mftStage(iso3).lvl) || MFT_GROUPS.some((g) => mftTick.has(g.id) && mftHas(iso3, g.id));
+    // The Find a country list shows every country; its Stage column follows the
+    // access stage in view. Location and the search box narrow it. (While the
+    // stages were checkboxes, unticking one also took its countries out.)
+    const mftMatches = () => true;
     const mftListed = () => mftScope().filter(mftMatches);
     const FIND_TXT = { country: "Country", stage: "Stage", use: "Use", none: "No countries match the filters on the left.", reset: "Reset filters", of: "of", guidelines: "In guidelines" };
     const countLabel = () => `${mftListed().length} ${FIND_TXT.of} ${mftScope().length}`;
@@ -3737,14 +3817,18 @@
         `<div class="det-nav"><button type="button" data-step="-1" aria-label="Previous country">‹</button>` +
         `<button type="button" data-step="1" aria-label="Next country">›</button></div></div>`;
       if (!hasCountries()) return h + `<div class="det-card"><h4>${esc(p.name)}</h4><p class="det-empty">${esc(p.name)} is pre-launch, so there is no country status or policy yet.</p></div>`;
-      const st = mftStage(iso3), lv = STAGE_KEYS.indexOf(st.lvl) + 1, g = mftGroups(iso3);
+      const st = mftStage(iso3), has = stageSets[iso3] || {}, g = mftGroups(iso3);
       const gl = mftCatsOf(iso3), tp = TP && TP.countries[iso3];
       const parts = tp && tp.parts ? Object.keys(tp.parts).map((k) => {
         const pg = (tp.parts[k].products || {})[mftProductId] || [];
         return `${esc(k)}: ${pg.length ? "lists " : "does not list "}${esc(p.name)}.`;
       }).join(" ") : "";
-      h += `<div class="det-card"><div class="det-top"><b>${esc(p.name)}</b>${stagePill(st.lvl)}</div>` +
-        `<div class="det-trk">${[1, 2, 3].map((n) => `<i${lv >= n ? ` style="background:${stageVar(STAGE_KEYS[lv - 1])}"` : ""}></i>`).join("")}</div>` +
+      // The pill and "Other countries at the same stage" name the stage on the
+      // map, so they show only when this country is at it; the track below
+      // shows all three stages either way.
+      h += `<div class="det-card"><div class="det-top"><b>${esc(p.name)}</b>${st.lvl !== "none" ? stagePill(st.lvl) : ""}</div>` +
+        // each stage lit on its own, in its own colour, where a source supports it
+        `<div class="det-trk">${STAGE_KEYS.map((k) => `<i${has[k] ? ` style="background:${stageVar(k)}"` : ""}></i>`).join("")}</div>` +
         `<div class="det-trkl"><span>Registered</span><span>In guidelines</span><span>In MFT plans</span></div>` +
         countrySources(iso3) +
         (gl.length ? gl.map((gm) => `<div class="det-gline">${mftLineSvg(gm.id)}<b>${esc(gm.short)}</b><span class="det-small">in WHO policy ${esc(String((TP && TP.meta && TP.meta.policyYear) || ""))}</span></div>`).join("")
@@ -3765,7 +3849,7 @@
       }
       // other countries at the same stage
       const peers = drawnIsos().filter((x) => x !== iso3 && mftStage(x).lvl === st.lvl);
-      if (peers.length) {
+      if (st.lvl !== "none" && peers.length) {
         h += `<div class="det-card"><h4>Other countries at the same stage · ${esc(st.label)}</h4><div class="det-chips">` +
           peers.slice(0, 24).map((x) => `<button type="button" class="det-chip" data-iso3="${esc(x)}">${esc(mftName(x))}</button>`).join("") +
           (peers.length > 24 ? `<span class="det-small">+${peers.length - 24} more in the Countries tab</span>` : "") + `</div></div>`;
@@ -3825,12 +3909,22 @@
 
     // ---- Filters: access stage + MFT policy groups --------------------------
     // MFT policy has no switch. It is ON whenever a policy group is ticked and
-    // OFF when none is. Unticking an access stage fades that stage's countries;
-    // a ticked group still draws its borders on them, and the Find a country list
-    // shows them too.
+    // OFF when none is. The access stage is a radio button: the map shows one
+    // stage at a time, with every country that has a source for it (partner
+    // feedback, 3 Nov 2026; they were checkboxes that faded the
+    // countries at a stage, each country shaded at its furthest stage only).
     const STAGE_ROWS = [["registered", "Registered"], ["guidelines", "In national guidelines"],
                         ["mft", "In MFT plans"], ["none", "No data"]];
-    // Stage counts, the way the access legend counts them: drawn countries only.
+    const VIEW_ROWS = STAGE_ROWS.filter(([k]) => k !== "none");
+    // How many drawn countries each view shades. A country counts in every
+    // stage it has a source for, so these add up to more than the countries.
+    function viewCounts() {
+      const c = { registered: 0, guidelines: 0, mft: 0 };
+      Object.keys(M.countries).forEach((iso3) => { const st = stageSets[iso3]; if (st) VIEW_ROWS.forEach(([k]) => { if (st[k]) c[k]++; }); });
+      return c;
+    }
+    // Stage counts for the view on the map, the way the access legend counts
+    // them: drawn countries only, at the stage in view or No data.
     function stageCounts() {
       const c = { registered: 0, guidelines: 0, mft: 0 };
       Object.keys(M.countries).forEach((iso3) => { const l = mftByIso[iso3]; if (l in c) c[l]++; });
@@ -3847,26 +3941,17 @@
       const av = mftAvail();
       mftOn = !!TP && MFT_GROUPS.some((g) => mftTick.has(g.id) && av[g.id]);
     }
-    function paintStageFilter() {
-      const o = (k) => (stageOff.has(k) ? 0.15 : 1);
-      map.setPaintProperty("country-fill", "fill-opacity", ["case",
-        ["==", ["feature-state", "level"], "registered"], o("registered"),
-        ["==", ["feature-state", "level"], "guidelines"], o("guidelines"),
-        ["==", ["feature-state", "level"], "mft"], o("mft"),
-        o("none")]);
-    }
-    // One table: a select-all box and the "number of countries" heading in the
-    // head, then the access stages and the two recommended-use groups as rows.
+    // One table: the "number of countries" heading in the head, then the
+    // access stages (radio buttons, one in view) and the two recommended-use
+    // groups (checkboxes) as rows.
     function renderFilters(byCat) {
-      const sc = stageCounts(), av = mftAvail();
+      const vc = viewCounts(), av = mftAvail();
       const mine = TP ? MFT_GROUPS.filter((g) => av[g.id]) : [];
-      const nOn = STAGE_ROWS.filter(([k]) => !stageOff.has(k)).length + mine.filter((g) => mftTick.has(g.id)).length;
-      const nAll = STAGE_ROWS.length + mine.length;
-      let h = `<table class="ftab"><thead><tr><th colspan="2"><label class="flt-all"><input type="checkbox" id="flt-all"${nOn === nAll ? " checked" : ""}> ${esc(MFT_TXT.show)}</label></th><th class="n">${esc(MFT_TXT.count)}</th></tr></thead><tbody>` +
+      let h = `<table class="ftab"><thead><tr><th colspan="2"><span class="flt-all">${esc(MFT_TXT.show)}</span></th><th class="n">${esc(MFT_TXT.count)}</th></tr></thead><tbody>` +
         `<tr class="gr"><th colspan="3">${esc(MFT_TXT.stage)}</th></tr>` +
-        STAGE_ROWS.map(([k, l]) =>
-          `<tr><td class="cbx"><input type="checkbox" id="flt-s-${k}" data-stage="${k}"${stageOff.has(k) ? "" : " checked"}></td>` +
-          `<td><label for="flt-s-${k}"><span class="mapsw ${k}"></span>${l}</label></td><td class="n${sc[k] ? "" : " zero"}">${sc[k]}</td></tr>`).join("");
+        VIEW_ROWS.map(([k, l]) =>
+          `<tr><td class="cbx"><input type="radio" name="flt-view" id="flt-s-${k}" data-view="${k}"${k === mapView ? " checked" : ""}></td>` +
+          `<td><label for="flt-s-${k}"><span class="mapsw ${k}"></span>${l}</label></td><td class="n${vc[k] ? "" : " zero"}">${vc[k]}</td></tr>`).join("");
       if (TP) {
         h += `<tr class="gr"><th colspan="3">${esc(MFT_TXT.use)}</th></tr>` + MFT_GROUPS.map((g) => {
           const off = !av[g.id];
@@ -3876,9 +3961,7 @@
         }).join("");
       }
       document.getElementById("flt-table").innerHTML = h + `</tbody></table>`;
-      const all = document.getElementById("flt-all");
-      if (all) all.indeterminate = nOn > 0 && nOn < nAll;
-      const nAct = stageOff.size + mine.filter((g) => !mftTick.has(g.id)).length;
+      const nAct = mine.filter((g) => !mftTick.has(g.id)).length;
       const badge = document.getElementById("flt-act");
       badge.hidden = !nAct;
       badge.textContent = nAct;
@@ -3888,23 +3971,19 @@
     }
     document.getElementById("filters").addEventListener("change", (e) => {
       const t = e.target;
-      if (t.dataset.stage) { if (t.checked) stageOff.delete(t.dataset.stage); else stageOff.add(t.dataset.stage); }
+      if (t.dataset.view) { if (t.checked) { mapView = t.dataset.view; paintView(); } }
       else if (t.dataset.group) { if (t.checked) mftTick.add(t.dataset.group); else mftTick.delete(t.dataset.group); }
-      else if (t.id === "flt-all") {
-        const av = mftAvail();
-        if (t.checked) { stageOff.clear(); MFT_GROUPS.forEach((g) => { if (av[g.id]) mftTick.add(g.id); }); }
-        else { STAGE_ROWS.forEach(([k]) => stageOff.add(k)); MFT_GROUPS.forEach((g) => mftTick.delete(g.id)); }
-      } else return;
+      else return;
       hideTip();
       mftRender();
-      const key = t.dataset.stage ? `[data-stage="${t.dataset.stage}"]`
-        : t.dataset.group ? `[data-group="${t.dataset.group}"]` : "#flt-all";
+      const key = t.dataset.view ? `[data-view="${t.dataset.view}"]` : `[data-group="${t.dataset.group}"]`;
       const again = document.querySelector("#filters " + key);
       if (again) again.focus();
     });
     document.getElementById("flt-reset").addEventListener("click", () => {
-      stageOff.clear(); MFT_GROUPS.forEach((g) => mftTick.add(g.id)); mftSel = null;
+      mapView = VIEW_DEFAULT; MFT_GROUPS.forEach((g) => mftTick.add(g.id)); mftSel = null;
       hideTip();
+      paintView();
       mftRender();
     });
 
@@ -3912,7 +3991,6 @@
       if (!mftProductId) return;
       mftSync();
       const byCat = TP ? mftCounts() : { tested: [], vivax: [] };
-      paintStageFilter();
       paintSelection();
       if (TP) mftPaint();
       mftLegend(byCat);

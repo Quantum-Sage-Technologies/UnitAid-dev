@@ -47,7 +47,7 @@ window.LAUNCH_DATA =
     "SRA": "Stringent Regulatory Authority — an advanced regulator (e.g. EMA, US FDA) whose review anchors WHO prequalification and country registrations.",
     "WLA": "WHO-Listed Authority — a regulator assessed by WHO as operating at an advanced level.",
     "Article 58": "EMA procedure giving a scientific opinion on high-priority medicines intended for markets outside the EU.",
-    "GDG": "Guidelines Development Group — the WHO expert group that reviews evidence and formulates treatment recommendations.",
+    "GDG": "Guideline Development Group — the group WHO convenes to make the recommendations in a WHO guideline, such as the WHO Guidelines for malaria. It reviews the graded evidence (GRADE) and agrees by consensus on the direction and strength of each recommendation (WHO handbook for guideline development, 2nd ed., 2014).",
     "PQ": "WHO prequalification — the quality, safety and efficacy assessment whose outcome, a listing on the WHO prequalified-products list, makes a product eligible for procurement by UN agencies and major donors.",
     "MFT": "Multiple first-line therapies — deploying several first-line treatments in parallel to reduce drug pressure and slow resistance.",
     "EOI": "Expression of Interest — the WHO prequalification invitation list; a product must be on it before a PQ dossier can be assessed.",
