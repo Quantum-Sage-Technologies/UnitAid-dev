@@ -86,15 +86,25 @@ if (!process.argv[2]) {
           else if (!s.public) errors.push(`product ${p.id}: ${at} cites "${sid}", which is not public in data/sources.js`);
         });
       });
-      // The hand-kept counts in detail.country must be the list's own counts
-      // (each country once, at its furthest stage), so no view can show a
-      // headline that the country records do not support (feedback, 15 Oct 2026).
+      // The hand-kept counts in detail.country must be the list's own counts,
+      // so no view can show a headline that the country records do not support
+      // (feedback, 15 Oct 2026). Since 3 Nov 2026 each stage is counted on its
+      // own, as the page's countryStages() does for the map's three views
+      // (Dale's tracker): registered = at "registered" or citing a national
+      // register; guidelines = at "guidelines" or citing a policy/guidelines
+      // source; mft = at "mft". A country can count in more than one.
       const country = (p.detail || {}).country;
       if (list.length && country) {
-        const n = (lvl) => list.filter((e) => e.level === lvl).length;
+        const cites = (e, cat) => (e.sources || []).some((sid) => (byId.get(sid) || {}).category === cat);
+        const has = {
+          registered: (e) => e.level === "registered" || cites(e, "National register"),
+          guidelines: (e) => e.level === "guidelines" || cites(e, "Policy / guidelines"),
+          mft: (e) => e.level === "mft"
+        };
         [["registered", "registered"], ["inGuidelines", "guidelines"], ["inMft", "mft"]].forEach(([k, lvl]) => {
-          if (country[k] !== n(lvl))
-            errors.push(`product ${p.id}: detail.country.${k} is ${JSON.stringify(country[k])}, but the countries list has ${n(lvl)} at level "${lvl}"`);
+          const n = list.filter(has[lvl]).length;
+          if (country[k] !== n)
+            errors.push(`product ${p.id}: detail.country.${k} is ${JSON.stringify(country[k])}, but the countries list has ${n} with a source for "${lvl}"`);
         });
       }
     });
