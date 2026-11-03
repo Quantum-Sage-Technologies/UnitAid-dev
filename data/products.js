@@ -44,7 +44,7 @@
 window.LAUNCH_DATA =
 {
   "meta": {
-    "lastUpdated": "2026-10-19",
+    "lastUpdated": "2026-11-03",
     "dataStatus": "draft",
     "host": "RBM Partnership to End Malaria"
   },

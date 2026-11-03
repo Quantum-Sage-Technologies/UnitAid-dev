@@ -172,7 +172,7 @@ and keeping the furthest-stage shading with reworded text.
 
 ## Status
 
-Branch `feedback/dale-jan-tracker`, 4 commits on `main` `c34d72c`, not
+Branch `feedback/dale-jan-tracker`, 5 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03), not
 pushed. Verify block on 3 Nov: validator 0 errors / 1 warning (French
 Guiana), synthetic 0 / 0, build-dataset 58 passed (`--allow-stale`), country
 names cover all 252, rbm-messages 65, copy-rbm-messages 35, rbm-pages 36.
