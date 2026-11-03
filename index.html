@@ -2210,9 +2210,18 @@
   // that starts at the first milestone (no empty years); the current gate sits
   // at today, with a bar back to the year it has been waiting since. Gates with
   // no year are listed on the right instead of being given an invented date.
+  // A started gate (in progress or delayed, not the current one) whose date
+  // reads "Since YYYY" sits at that year with "since YYYY" under it, so the
+  // steps between WHO PQ and today show (partner feedback, Dale's tracker,
+  // 3 Nov 2026): ASPY's registration since 2013, before WHO recommended it in
+  // 2022, and its Global Fund procurement since 2018.
+  const startedYear = (p, i) => {
+    const st = p.stages[i];
+    return i !== p.currentStage && (st.status === "prog" || st.status === "late") ? sinceYearOf(st) : null;
+  };
   function journeyTime(p) {
     const from = sinceFrom(p), since = from ? from.year : null;
-    const ys = p.stages.map(stageYear).filter(y => y != null);
+    const ys = p.stages.map((st, i) => (stageYear(st) != null ? stageYear(st) : startedYear(p, i))).filter(y => y != null);
     if (since != null) ys.push(since);
     let lo = ys.length ? Math.min(...ys) : ASOF_YEAR - 1;
     const hi = ASOF_YEAR;
@@ -2226,7 +2235,11 @@
     const items = [];
     p.stages.forEach((st, i) => {
       if (i === p.currentStage) items.push({ i, x: x(hi), cur: true });
-      else { const y = stageYear(st); if (y != null) items.push({ i, x: x(y) }); }
+      else {
+        const y = stageYear(st), s = startedYear(p, i);
+        if (y != null) items.push({ i, x: x(y) });
+        else if (s != null) items.push({ i, x: x(s), from: s });
+      }
     });
     items.sort((a, b) => a.x - b.x || a.i - b.i);
     const last = [];
@@ -2248,6 +2261,7 @@
       const sub = it.cur
         ? (statusShown(p, st.status) ? `<div class="snow ${st.status}">${LABEL[st.status]}</div>` : "") +
           (since != null && since < hi ? `<div class="ssince">since ${esc(from.label)} (${since}) · ${yrsText(hi - since)}</div>` : "")
+        : it.from != null ? `<div class="syear">since ${it.from}</div>`
         : `<div class="syear">${stageYear(st)}</div>`;
       h += `<i class="stem" data-tier="${it.tier}" style="left:${it.x}%;height:${top - 32}px"></i>` +
         `<i class="pt${it.cur ? " " + st.status : ""}" style="left:${it.x}%"></i>` +
@@ -2270,7 +2284,7 @@
     p.stages.forEach((st, j) => {
       if (j === p.currentStage) return;
       if (st.status === "done" && stageYear(st) == null) noYear.push(j);
-      else if (st.status === "prog" || st.status === "late") ongoing.push(j);
+      else if ((st.status === "prog" || st.status === "late") && startedYear(p, j) == null) ongoing.push(j);
       else if (st.status === "idle") notStarted.push(j);
     });
     // Not-started gates are a row of dimmed icons, not a stack of labelled chips:

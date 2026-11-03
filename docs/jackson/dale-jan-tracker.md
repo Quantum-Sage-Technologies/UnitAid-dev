@@ -76,3 +76,44 @@ these two figures appear as words, each marked as the company's own.
   Asia" (Nov 2022 release) and "register, distribute and promote ... in 32
   African countries" (2 Jul 2015). Open both in a browser and check the
   figures and the press release's title before this goes live.
+
+### 3. Timeline: registration before recommendation, and interim milestones
+
+The owner's choice (3 Nov): **date them**, from data on file, and say what
+the registration date is.
+
+- Registration is dated from the **earliest registration on the national
+  registers checked** (`sourcing/staging/*_registrations.csv`, the DAV
+  extract of 19 Oct 2026). A register shows the record it holds today, which
+  can be a renewal, so the wording does not say "first registered". Viet Nam's
+  numbers carry their year (VN2-210-13, VD-12944-10), which agrees with the
+  issue dates.
+  - ASPY stage 4 (in progress): "Since 2013 (Viet Nam, the earliest
+    registration on the national registers checked); rolling".
+  - DHA–PPQ stage 4 (complete): "2010 (Viet Nam, ...); rolling". DHA–PPQ
+    was registered in Viet Nam (Arterakine, a local product) before EMA
+    approval (2011) and WHO PQ (2015): the same precedence the ASPY row asked
+    about.
+- **Code (`journeyTime`).** The time-scaled journey placed only complete
+  stages on the axis; a started one went to "Ongoing · no date" even when its
+  date said "Since 2018". Now a started stage (in progress or delayed, not the
+  current one) with a "Since YYYY" date sits at that year with "since YYYY"
+  under it. The current stage is unchanged (it sits at today, with its bar).
+  The "Since" words are matched as `sinceYearOf` already does, in all three
+  languages. Effect: ASPY shows registration 2013 and procurement 2018
+  between WHO PQ (2012) and its 2022 recommendation. Rejected: marking ASPY's
+  registration "complete" so the old rule would place it; the status is a
+  judgement and stays.
+- **Milestone rows.** DHA–PPQ gets "Country registrations" (6 countries
+  register-confirmed; earliest on each register: Viet Nam 2010, Nigeria 2020,
+  Tanzania 2021, Rwanda 2023, Zambia 2024, Zimbabwe 2025). Both get "MFT
+  pilots and plans": Kenya 2020–22 (Homa Bay), Burkina Faso (Kaya), Rwanda
+  2024–25 (six districts), Nigeria planned, from the four sources the map
+  already cites. Burkina Faso's paper (2022) does not give the pilot's start
+  year, so none is shown.
+- **Left as is:** DHA–PPQ's national policy adoption has no start year in any
+  source on file (the WHO table is "policy as of 2024"), so it stays "Not yet
+  dated" rather than borrowing 2020 from the Kenya pilot. DHA–PPQ's current
+  stage still counts from WHO PQ (2015), as decided on 15 Oct (row 49).
+- **React port.** `feat/react-port` has its own timeline code; the data change
+  reaches it, the "since YYYY" placement does not until it is ported.
