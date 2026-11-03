@@ -105,7 +105,7 @@ const PRODUCT_ORGS = {
 const STAGE_OPERATORS = [
   { orgs: [], note: "Manufacturer and product development partnerships — product-specific; see each product's manufacturedBy / coDevelopedBy." },
   { orgs: ["ema", "fda"], note: "Stringent regulatory authorities — for malaria medicines usually the EMA via the Article 58 / EU-M4all procedure." },
-  { orgs: ["who-gmp"], note: "WHO Global Malaria Programme — its Guidelines Development Group weighs the evidence and decides whether WHO recommends." },
+  { orgs: ["who-gmp"], note: "WHO Global Malaria Programme — its Guideline Development Group (GDG) reviews the evidence and decides whether WHO recommends." },
   { orgs: ["who-pq"], note: "WHO Prequalification — quality and manufacturing assessment, separate from the guideline decision." },
   { orgs: ["ama"], note: "National regulatory authorities, country by country — accelerated by the African Medicines Agency and WHO collaborative registration." },
   { orgs: [], note: "Ministries of health and national malaria control programmes — they write the national treatment guidelines." },
