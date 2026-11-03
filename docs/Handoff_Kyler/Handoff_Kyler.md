@@ -1,16 +1,167 @@
 # Handoff — RBM staging dashboard
 
-> **Read §0 first.** It is the state of the project on 28 October 2026: the
-> React + Next.js port for RBM. §0.1 is the state on 8 October and still holds
-> for the pipeline, the forms and the data, except where §0 says otherwise.
-> Everything after that is the history of September's work, kept for its
-> decisions. Where they disagree, §0 is current.
+> **Read §0 first.** It is the state of the project on 3 November 2026: the
+> handover guide for RBM, the forms leaving Vercel, and what is left before
+> 10 November. §0.1 (28 October) still holds for the React port's internals,
+> and §0.2 (8 October) for the pipeline and the data, except where §0 says
+> otherwise. Everything after that is the history of September's work, kept
+> for its decisions. Where they disagree, §0 is current.
 
-## 0. Current state — 28 October 2026: RBM on React + Next.js
+## 0. Current state — 3 November 2026: the handover guide for RBM, and what is left
 
-*Start here in a new session. §0.1 below is the 8 October state; it still
-holds for the pipeline, the forms and the data except where this section says
-otherwise.*
+*Start here in a new session. §0.1 below (28 October) is still the reference
+for what `feat/react-port` holds, how to check it is stable and how interface
+text changes; §0.2 (8 October) for the pipeline and the data. Where they
+disagree, this section is current.*
+
+### What happened, 28 October – 3 November
+
+- **28 Oct (Oakkar).** #131 (one data file per language,
+  `dashboard.{en,fr,pt}.json`), #132 (`feat/rbm-messages`: `i18n/ui.en.json`
+  joins the translate bot and `assemble-content.js`) and #133 (messages under
+  RBM's `Unitaid` and `Sidebar` structure; Portuguese is Brazilian) merged into
+  `main`. `launch-rbm-test` `main` took the data (#32) and the pt-BR static
+  pages (#33, `546a6ef`). `feat/react-port` moved to `408ed48`.
+- **29 Oct: both repos moved.** This repo is now
+  `Quantum-Sage-Technologies/UnitAid-dev`, the data repo
+  `Quantum-Sage-Technologies/unitaid-launch-data`. Git remotes still work
+  through GitHub's redirect, but **GitHub Pages does not redirect**: the old
+  data address `codebyjackson.github.io/launch-data-test/…` answers 404
+  (checked 3 Nov). `codebyjackson/launch-rbm-test` did not move.
+- **29 Oct (Kyler): `feat/data-route` pushed** to `launch-rbm-test`
+  (`d322190`, from `408ed48`, no PR). It adds RBM's module spec 2a and 2b as
+  `GET /api/unitaid/data` and `POST /api/unitaid/notifications`, the new data
+  address and a 5-minute cache. 357 tests passed locally on 29 Oct (the repo
+  has no CI). Decisions 58–59 in its `docs/react-port-notes.md`.
+- **2 Nov: the forms leave Vercel** (owner's decision; it replaces "remove
+  Vercel completely" of 27 Oct). Vercel stays only for PR previews and the
+  LAUNCH copy Unitaid reviews. The forms backend (`api/subscribe`,
+  `api/unsubscribe`, `api/feedback`, `RESEND_API_KEY`, `UNSUBSCRIBE_SECRET`)
+  moves to Cloudflare Workers (recommended) or Supabase: **not chosen, nothing
+  built**. The worktree `~/Downloads/launch-development-supabase-forms`
+  (`forms/supabase` at `11681f2`) is empty and was never pushed.
+- **2–3 Nov: the handover guide for RBM** (below) replaces the 19 Oct hosting
+  guide, which described iframes, four languages and the now-dead data address.
+
+### UNOPS's requests of 27 October, and where they stand
+
+| Request | State on 3 Nov |
+| --- | --- |
+| React + Next.js instead of HTML and JavaScript | Built (`feat/react-port` + `feat/data-route`); **not merged, not delivered** |
+| Data through an API, no developer involved | Built on `feat/data-route` only. `feat/react-port` still defaults to the dead data address (`lib/data.ts:14`) and a 10-minute cache |
+| JSON files for `i18n.ts`, no iframes | Done: `messages/{en,fr,pt}.json` in RBM's sample structure |
+| MapLibre from npm | Done: `maplibre-gl` 6.14.0 |
+| "Why Vercel? What if that account closes?" | **Open**: the forms still post to `launch-development-test.vercel.app` |
+| Tamarind converts by 10 Nov; dates? | Code on track; the reply with dates is the owner's |
+
+### Where things are
+
+| Repo | Branch | State |
+| --- | --- | --- |
+| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | `c34d72c` (scheduled source fetch, 2 Nov); last change by hand #133 (28 Oct) |
+| same | `docs/handoff-nov-3` | this section |
+| `codebyjackson/launch-rbm-test` | `main` | `546a6ef` (#33, 28 Oct): the static pages, still served on GitHub Pages |
+| same | `feat/react-port` | `408ed48` (Oakkar, 28 Oct), not merged, no PR. **Its default data address is dead** |
+| same | `feat/data-route` | `d322190` (Kyler, 29 Oct), from `408ed48`, no PR |
+| `Quantum-Sage-Technologies/unitaid-launch-data` | GitHub Pages | `https://quantum-sage-technologies.github.io/unitaid-launch-data/v1/dashboard.{en,fr,pt}.json`: all 200 (3 Nov) |
+
+Local on Kyler's Mac: `~/Downloads/launch-rbm-test-data-route` (worktree of
+`feat/data-route`) and `~/Downloads/launch-development-handoff-nov3` (this
+branch). The other folders listed in §0.1 are unchanged.
+
+### The handover guide for RBM
+
+RBM's developers follow one document: **`~/Downloads/LAUNCH RBM Handover
+Guide.pdf`** (10 pages, A4, 2 Nov). Its source,
+`~/Downloads/LAUNCH-RBM-handover-guide-source/guide.html`, is on Kyler's Mac
+only. Edit the HTML and re-print; never edit the PDF:
+
+```bash
+cd ~/Downloads/LAUNCH-RBM-handover-guide-source
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --no-pdf-header-footer \
+  --virtual-time-budget=8000 --print-to-pdf="$HOME/Downloads/LAUNCH RBM Handover Guide.pdf" \
+  "file://$PWD/guide.html"
+```
+
+It is drawn from the README on `feat/data-route`, written for developers,
+with no Unitaid logo and "FOR INTERNAL USE ONLY" on every page (the owner's
+choices). Part A is ten integration steps, Part B is reference. **Three yellow
+TO CONFIRM gaps must be filled before it is sent:** how RBM gets the code,
+where the forms service runs and who owns that account, and the forms URL.
+
+**Update the guide whenever one of these changes:**
+- the data address or cache window;
+- the forms host, URL or allow-list;
+- environment variables;
+- the API routes or their status codes;
+- Next.js, React, Node or MapLibre versions;
+- locales;
+- the message-file structure;
+- the `Dashboard` props or the files RBM copies;
+- what the dashboard needs in a content security policy;
+- RBM's answers to its Step 10 questions.
+
+On Kyler's Mac a Claude Code hook flags edits to the files that feed it.
+
+### Still to do before 10 November
+
+1. **Bring `feat/data-route` into what RBM receives** (merge it into
+   `feat/react-port`, or deliver it as is). Until then the port cannot load
+   its data with default settings. The owner's and Oakkar's call.
+2. **Choose and build the forms host** (Cloudflare Workers or Supabase), then:
+   - keep the paths `/api/subscribe` and `/api/feedback`;
+   - keep the same `UNSUBSCRIBE_SECRET` and add a `vercel.json` redirect,
+     because old welcome emails link to Vercel;
+   - add LAUNCH's Vercel host to `PARTNERS`, because `sameOrigin()` means
+     nothing off-site.
+
+   Then fill the guide's forms gaps. RBM sets `NEXT_PUBLIC_LAUNCH_FORMS_URL`
+   at build time, so this comes first.
+3. **Build the notification sender:** a pipeline step after
+   `publish-dataset.yml` that POSTs once per locale to RBM's route with the
+   bearer token, only once the publish has finished. It needs RBM's URL and
+   token. Nothing in `.github/` or `scripts/` calls the route yet (checked
+   3 Nov). Until then, new data still reaches RBM within 5 minutes.
+4. **Fill the guide's three gaps and send it** with the code.
+5. **Test on a real iPhone and in Safari** (open since 28 Oct).
+6. After RBM tests on its staging server:
+   - remove the `http://localhost:3000` entry from `PARTNERS`
+     (`api/_mail.js:72`, PR #130) and add RBM's origins;
+   - then retire the static pages (§0.1, item 4).
+
+Done since §0.1: the README for RBM (Oakkar, 28 Oct) and wiring `ui.en.json`
+into `assemble-content.js` (#132).
+
+### Waiting on others
+
+- **RBM/UNOPS:**
+  - the answers to the guide's Step 10 questions: origins, the notifications
+    route URL and token, versions and the `i18n.ts` library, one server
+    process or several, and the four points their spec leaves open;
+  - what "10 Nov" means.
+- **RBM, for the evaluation:** which web analytics tool runs on
+  `dashboards.endmalaria.org` (first asked 21 Aug, never answered), and
+  whether they will send monthly figures for the LAUNCH page. Six measures:
+  - page views;
+  - unique visitors;
+  - visitors by country;
+  - views by language;
+  - traffic sources;
+  - average time on page.
+
+  Subscribers and feedback come from our side. **Clicks inside the dashboard
+  are not tracked** (owner, 3 Nov), because that would need code changes.
+- **Unitaid:**
+  - the owner of the forms host's account;
+  - the owner of the Resend account;
+  - the subdomains: `forms.`, `updates.`, and `data.` for a stable data
+    address.
+
+## 0.1 Earlier state — 28 October 2026: RBM on React + Next.js
+
+*The state on 28 October. §0 above supersedes it where they differ; it is
+still the reference for what `feat/react-port` holds, its stability check and
+changing interface text.*
 
 ### What happened, 27–28 October
 
@@ -45,7 +196,7 @@ Agreed with the owner on 27–28 Oct:
 | --- | --- | --- |
 | `codebyjackson/launch-rbm-test` | `feat/react-port` | Pushed 28 Oct, **not merged**, no PR. 21 commits on `main` `7c1bf11`, head `53f8c18`. **Do not merge `main` into it** while the static pages are in it: its golden tests read them (`react-port-notes.md`, Deferred, first item) |
 | `codebyjackson/launch-rbm-test` | `main` | `f39b88d` (PR #31, 28 Oct): the static pages rebuilt from this repo's `e9aff92`, the 7 words translated on `/fr` and `/pt`; checked live on GitHub Pages and `launch-rbm-test.vercel.app` |
-| `KylerXiv/launch-development-test` (this repo) | `feat/rbm-messages` | Pushed 28 Oct, **not merged**, no PR. From `main` `89b2011`, with `main` merged in at `e9aff92` (`65b969e`): the interface text, its build and copy scripts, this §0 |
+| `KylerXiv/launch-development-test` (this repo) | `feat/rbm-messages` | Pushed 28 Oct, **not merged**, no PR. From `main` `89b2011`, with `main` merged in at `e9aff92` (`65b969e`): the interface text, its build and copy scripts, this section (then §0) |
 | `KylerXiv/launch-development-test` (this repo) | `main` | PR #129 merged 28 Oct (`0902567`): the 7 words in `reviewed-strings.json`; the bot translated them (`e9aff92`) |
 
 Local folders on Kyler's Mac: `~/Downloads/launch-rbm-test` (clone, Kyler's
@@ -170,7 +321,7 @@ done yet: it changes the approval hash and needs one test proposal end to end.
 - At some widths MapLibre 6 greys out the zoom-out button where it could not
   zoom out anyway.
 
-## 0.1 Earlier state — 8 October 2026 (still current for the pipeline, the forms and the data)
+## 0.2 Earlier state — 8 October 2026 (still current for the pipeline and the data)
 
 *The state on 8 October. It replaced the 6 October version: everything
 still open from then is carried below.*
