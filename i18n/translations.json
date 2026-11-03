@@ -413,6 +413,13 @@
       "fr": "Examens des comités de lignes directrices nationales",
       "pt": "Revisões do comitê de diretrizes nacionais"
     },
+    "0f2d324e9b53e58c": {
+      "en": "It may have been copied incompletely. Use the unsubscribe link in your most recent email from us.",
+      "where": "i18n/ui.en.json:unsubscribe.badLinkText",
+      "bucket": "ui",
+      "fr": "Il se peut que le texte ait été copié incomplètement. Utilisez le lien de désabonnement figurant dans notre dernier courriel.",
+      "pt": "Pode ter sido copiado de forma incompleta. Utilize o link de cancelamento de inscrição presente no e-mail mais recente que recebemos de nós."
+    },
     "0f3864ee2da8aa0e": {
       "en": "Use Ctrl + scroll to zoom the map",
       "where": "line 2616",
@@ -749,6 +756,13 @@
       "fr": "Plus de détails",
       "pt": "Mais detalhes"
     },
+    "194bf1c8b0b31185": {
+      "en": "You will stop getting emails when the dashboard's data is updated.",
+      "where": "i18n/ui.en.json:unsubscribe.intro",
+      "bucket": "ui",
+      "fr": "Vous cesserez de recevoir des e-mails lorsque les données du tableau de bord seront mises à jour.",
+      "pt": "Você deixará de receber e-mails quando os dados do painel forem atualizados."
+    },
     "19766ed6ccb2f4a3": {
       "en": "Cancel",
       "where": "assets/report-issue.js",
@@ -803,6 +817,13 @@
       "bucket": "data",
       "fr": "Les recommandations de traitement de l'OMS de 2010, qui ont initialement recommandé le DHA-PPQ.",
       "pt": "As diretrizes de tratamento da OMS de 2010, que recomendaram pela primeira vez o DHA-PPQ."
+    },
+    "1ae0b7b9f616168c": {
+      "en": "You're unsubscribed",
+      "where": "i18n/ui.en.json:unsubscribe.doneTitle",
+      "bucket": "ui",
+      "fr": "Vous êtes désabonné",
+      "pt": "Você cancelou a sua inscrição."
     },
     "1b454b0a28d0323f": {
       "en": "Please describe the issue.",
@@ -1867,6 +1888,13 @@
       "fr": "Packs",
       "pt": "Pacotes"
     },
+    "3e92efb7664f0255": {
+      "en": "Unsubscribe",
+      "where": "i18n/ui.en.json:unsubscribe.button",
+      "bucket": "ui",
+      "fr": "Se désabonner",
+      "pt": "Cancelar inscrição"
+    },
     "3e9fd3995c3bb348": {
       "en": "Co-developed by Shin Poong and MMV.",
       "where": "products.products[2].detail.access[2]",
@@ -2593,6 +2621,13 @@
       "where": "products.products[0].detail.adoption[0]",
       "bucket": "data",
       "fr": "Nouvelle classe chimique — planification de la pharmacovigilance requise"
+    },
+    "542c5c2a0ca29ce0": {
+      "en": "Unsubscribing…",
+      "where": "i18n/ui.en.json:unsubscribe.sending",
+      "bucket": "ui",
+      "fr": "Se désabonner…",
+      "pt": "Cancelar inscrição…"
     },
     "54374b9d04cd4eb1": {
       "en": "Each country is shaded by the furthest stage it has reached.",
@@ -4183,6 +4218,13 @@
       "fr": "Toutes les régions",
       "pt": "Todas as regiões"
     },
+    "898d877022f97688": {
+      "en": "Back to the dashboard",
+      "where": "i18n/ui.en.json:unsubscribe.back",
+      "bucket": "ui",
+      "fr": "Retour au tableau de bord",
+      "pt": "Voltar ao painel de controle"
+    },
     "8994687843a38376": {
       "en": "Equatorial Guinea",
       "where": "resistance.dict.country[21]",
@@ -4522,6 +4564,13 @@
       "bucket": "reviewed",
       "fr": "Étapes d'accès · ${esc(p.name)}",
       "pt": "Etapas de acesso · ${esc(p.name)}"
+    },
+    "947afc829497fbe5": {
+      "en": "This link doesn't work",
+      "where": "i18n/ui.en.json:unsubscribe.badLinkTitle",
+      "bucket": "ui",
+      "fr": "Ce lien ne fonctionne pas",
+      "pt": "Este link não funciona."
     },
     "94e6bd574b6e3c55": {
       "en": "Nicaragua",
@@ -5938,6 +5987,13 @@
       "bucket": "data",
       "fr": "Burundi"
     },
+    "c866ca795783c3ad": {
+      "en": "You won't get any more update emails from the LAUNCH dashboard.",
+      "where": "i18n/ui.en.json:unsubscribe.doneText",
+      "bucket": "ui",
+      "fr": "Vous ne recevrez plus d'e-mails de mise à jour du tableau de bord LAUNCH.",
+      "pt": "Você não receberá mais e-mails de atualização do painel LAUNCH."
+    },
     "c8daeaa5678fffce": {
       "en": "How Rwanda uses several first-line malaria treatments, by region, to slow drug resistance.",
       "where": "sources.sources[25].plain",
@@ -6015,6 +6071,13 @@
       "bucket": "reviewed",
       "fr": "Attendu",
       "pt": "Esperado"
+    },
+    "cad962edf81328de": {
+      "en": "Sorry, that didn't work",
+      "where": "i18n/ui.en.json:unsubscribe.failedTitle",
+      "bucket": "ui",
+      "fr": "Désolé, ça n'a pas fonctionné",
+      "pt": "Desculpe, isso não funcionou."
     },
     "caf7d0d203ede067": {
       "en": "{medicine} is pre-launch, so there is no country status or policy yet.",
@@ -6634,6 +6697,13 @@
       "bucket": "js",
       "fr": "Ce formulaire n'est pas encore associé à une boîte de réception, donc rien n'a été envoyé ; votre message est resté en attente."
     },
+    "dbacf21681975da6": {
+      "en": "Changed your mind? You can subscribe again from the dashboard at any time.",
+      "where": "i18n/ui.en.json:unsubscribe.doneAgain",
+      "bucket": "ui",
+      "fr": "Vous avez changé d'avis ? Vous pouvez vous réabonner à tout moment depuis le tableau de bord.",
+      "pt": "Mudou de ideia? Você pode se inscrever novamente pelo painel de controle a qualquer momento."
+    },
     "dbc74a36d8e7439c": {
       "en": "Indonesia",
       "where": "resistance.dict.country[31]",
@@ -6894,6 +6964,13 @@
       "fr": "{n} années",
       "pt": "{n} anos"
     },
+    "e1491c5b1baa1fe3": {
+      "en": "Unsubscribe from LAUNCH dashboard updates?",
+      "where": "i18n/ui.en.json:unsubscribe.title",
+      "bucket": "ui",
+      "fr": "Se désabonner des mises à jour du tableau de bord LAUNCH ?",
+      "pt": "Cancelar inscrição para receber atualizações do painel de controle LAUNCH?"
+    },
     "e15a18aadcac09e6": {
       "en": "Nepal",
       "where": "resistance.dict.country[43]",
@@ -7061,6 +7138,13 @@
       "bucket": "reviewed",
       "fr": "Europe",
       "pt": "Europa"
+    },
+    "e5b6aee62551b310": {
+      "en": "We could not unsubscribe you just now. Please try the link again in a few minutes.",
+      "where": "i18n/ui.en.json:unsubscribe.failedText",
+      "bucket": "ui",
+      "fr": "Nous n'avons pas pu vous désinscrire pour le moment. Veuillez réessayer dans quelques minutes.",
+      "pt": "Não foi possível cancelar sua inscrição agora. Por favor, tente novamente em alguns minutos."
     },
     "e6551b8e7e902d25": {
       "en": "Rwanda, Uganda, Angola, Nigeria and Thailand (FD-TACT sites named by the GHIT Fund; the registry lists Rwanda so far)",
