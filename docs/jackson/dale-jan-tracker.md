@@ -195,7 +195,7 @@ and keeping the furthest-stage shading with reworded text.
 
 ## Status
 
-Branch `feedback/dale-jan-tracker`, 10 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up; the seventh is §5; the eighth is §6; the ninth and tenth are §7), not
+Branch `feedback/dale-jan-tracker`, 11 commits on `main` `c34d72c` (the fifth sets meta.lastUpdated to 2026-11-03; the sixth is §2's follow-up; the seventh is §5; the eighth is §6; the ninth and tenth are §7; the eleventh is §8), pushed as PR #135, not
 pushed. Verify block on 3 Nov: validator 0 errors / 1 warning (French
 Guiana), synthetic 0 / 0, build-dataset 58 passed (`--allow-stale`), country
 names cover all 252, rbm-messages 65, copy-rbm-messages 35, rbm-pages 36.
@@ -276,3 +276,34 @@ other donors, governments and private buyers. No Maisha Meds data used.
 Dale's review still to do." Data Transparency & Confidence Caveats,
 "Disclaimer now says figures reflect best available reporting. Steering
 Committee review still to do."
+
+### 8. Registers beyond six countries, and STOP-AMDR's Uganda and DR Congo (3 Nov)
+
+- **Registers.** 14 more national medicines registers were read by hand on
+  3 Nov (their regulators' own search pages, lists or PDFs; records quoted in
+  each source's `findings`): Kenya PPB, Ethiopia EFDA, Namibia NMRC (Aug 2024
+  PDF), Cameroon DPML, Senegal ARP (no dates), Burkina Faso Faso FDA,
+  Mozambique ANARME, The Gambia MCA (no dates), Benin ABMed, Côte d'Ivoire
+  AIRP, DR Congo ACOREP (undated PDF), Thailand FDA, Indonesia BPOM, Myanmar
+  FDA (2022 renewal list; the owner chose to include it, with a note).
+  DHA–PPQ: 6 → 20 register-confirmed; ASPY: 5 → 14. Not counted: ASPY in
+  Côte d'Ivoire (expired 2023) and Thailand (cancelled); Eurartesim's lapsed
+  entries in Benin and Côte d'Ivoire (other DHA–PPQ brands are in date there).
+  Could not check: Uganda (403), Ghana (expired certificate), Malawi (empty
+  page), Niger (scanned PDF), Angola (needs a token), Sudan, Liberia, Sierra
+  Leone, Madagascar, Mali, Togo, South Sudan, Cambodia, Papua New Guinea,
+  Philippines, China. Checked, not listed: South Africa, Botswana, Lao PDR
+  (incomplete list), India (no full register).
+- **STOP-AMDR.** The owner's decisions: the partners' tracker says ASPY is in
+  the MFT plans of all STOP-AMDR countries and DHA–PPQ in all but DR Congo;
+  "all" is read as the six project countries (Unitaid's page names only these;
+  the one exception given, DR Congo, is one of them; observers are only
+  "influenced"). Uganda (both) and DR Congo (ASPY) are added at level `mft`,
+  `planned`, citing the STOP-AMDR project pages (`unitaid-stop-amdr`); no
+  partner is named on the dashboard (owner). The lists' rule note says MFT
+  plans may cite the STOP-AMDR project. ASPY 14 / 9 / 6, DHA–PPQ 20 / 11 / 5.
+- **No partner names on the dashboard** (owner): changelog entries and source
+  `relevance` lines say "partner feedback"; code comments too.
+- Checked: validator 0 / 1; build-dataset 58; rbm-pages 36; rbm-messages 65
+  (also with a regenerated content.en.json); copy-rbm-messages 35; map
+  rendered (DHA–PPQ Registered 20; ASPY In MFT plans 6), no page errors.

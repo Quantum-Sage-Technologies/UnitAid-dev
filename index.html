@@ -1716,7 +1716,7 @@
   // `late` status (docs/data-analyst-guide.md), not a measured comparison.
   const LATE_DEF = "the medicine's current stage has stalled or is moving unusually slowly, in LAUNCH's judgement from public evidence. The main barrier gives the reason. It is not measured against a set deadline.";
   // Not shown since 3 Nov 2026: the medicines table's Status column, which
-  // carried it, became Market Access (Jan's feedback). Kept for when the
+  // carried it, became Market Access (partner feedback). Kept for when the
   // status words return.
   const lateInfo = () => `<button type="button" class="info" data-tip="${esc(LABEL.late + ": " + LATE_DEF)}" aria-label="${esc(LABEL.late + ": " + LATE_DEF)}">i</button>`;
   // The 10 Nov 2026 release (partner feedback sheet, 20 Oct 2026) shows where
@@ -1986,7 +1986,7 @@
   // What the two figures mean, from the i beside them.
   const ACCESS_DEF = "Market Access is reached when a medicine is both recommended by WHO and WHO-prequalified. Country Access runs from then until national registration, policy adoption, procurement in significant volumes and in-country delivery are all complete.";
   const accessInfo = () => `<button type="button" class="info" data-tip="${esc(ACCESS_DEF)}" aria-label="${esc(ACCESS_DEF)}">i</button>`;
-  // The medicines table gives each phase its own column (Jan's feedback,
+  // The medicines table gives each phase its own column (partner feedback,
   // 21 Oct 2026, tracker row "Market, Country & Population Access
   // Headings"): the Status column became Market Access and the Access column
   // Country Access, so the table shows at a glance that ASPY and DHA–PPQ
@@ -2175,7 +2175,7 @@
     return "";
   }
   // Which access stages a country on a medicine's list has a source for. Each
-  // stage stands on its own (partner feedback, Dale's tracker, 3 Nov 2026):
+  // stage stands on its own (partner feedback, 3 Nov 2026):
   // the map used to shade a country by the furthest stage only, so DHA–PPQ's
   // map read 2 registered beside "confirmed in six national registers".
   //   registered: the entry is at "registered", or cites a national register;
@@ -2252,7 +2252,7 @@
   // no year are listed on the right instead of being given an invented date.
   // A started gate (in progress or delayed, not the current one) whose date
   // reads "Since YYYY" sits at that year with "since YYYY" under it, so the
-  // steps between WHO PQ and today show (partner feedback, Dale's tracker,
+  // steps between WHO PQ and today show (partner feedback,
   // 3 Nov 2026): ASPY's registration since 2013, before WHO recommended it in
   // 2022, and its Global Fund procurement since 2018.
   const startedYear = (p, i) => {
@@ -3911,7 +3911,7 @@
     // MFT policy has no switch. It is ON whenever a policy group is ticked and
     // OFF when none is. The access stage is a radio button: the map shows one
     // stage at a time, with every country that has a source for it (partner
-    // feedback, Dale's tracker, 3 Nov 2026; they were checkboxes that faded the
+    // feedback, 3 Nov 2026; they were checkboxes that faded the
     // countries at a stage, each country shaded at its furthest stage only).
     const STAGE_ROWS = [["registered", "Registered"], ["guidelines", "In national guidelines"],
                         ["mft", "In MFT plans"], ["none", "No data"]];
