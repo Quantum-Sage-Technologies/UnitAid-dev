@@ -62,14 +62,16 @@ function sourceXml(text) {
   return out + escapeXml(text.slice(at));
 }
 
-// keys a translator delivered, per locale, from every record
+// keys a translator delivered, per locale, from every record: their own
+// strings, and the React messages that took a delivered page sentence's words
 function delivered(recordsDir) {
   const done = { fr: new Set(), pt: new Set() };
   if (!fs.existsSync(recordsDir)) return done;
   for (const d of fs.readdirSync(recordsDir)) {
     const f = path.join(recordsDir, d, "imported.json");
     if (!fs.existsSync(f)) continue;
-    for (const [k, v] of Object.entries(JSON.parse(fs.readFileSync(f, "utf8")).entries || {})) {
+    const record = JSON.parse(fs.readFileSync(f, "utf8"));
+    for (const [k, v] of [...Object.entries(record.entries || {}), ...Object.entries(record.derived || {})]) {
       for (const loc of Object.keys(done)) if (v[loc]) done[loc].add(k);
     }
   }

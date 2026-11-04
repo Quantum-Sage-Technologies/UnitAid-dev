@@ -12,7 +12,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const { key } = require("./i18n-hash");
-const { parseXliff, plan, serialiseMemory, main: importMain } = require("./import-xliff");
+const { parseXliff, plan, derive, serialiseMemory, main: importMain } = require("./import-xliff");
 const { holes, sourceXml, pending, xliff, main: exportMain } = require("./export-xliff");
 
 let passed = 0, failed = 0;
@@ -70,6 +70,20 @@ const refused = [
 for (const [xml, says, what] of refused) {
   const p = plan([{ name: "b.xlf", xml }], content, memory);
   ok(p.errors.some((e) => e.includes(says)), `refused: ${what}`);
+}
+
+// the page's sentences: a React message takes a delivered page sentence's words
+{
+  const ui = read("i18n/ui.en.json"), forms = read("i18n/ui.page-forms.json").forms;
+  const [message, form] = Object.entries(forms).find(([, f]) => typeof f.page === "string" && Object.keys(f.holes || {}).length >= 2);
+  const en = message.split(".").reduce((o, k) => o[k], ui);
+  const filled = (text) => Object.entries(form.holes).reduce((t, [hole, name]) => t.split(hole).join(name), text);
+  let d = derive(ui, forms, { [key(form.page)]: { fr: "[T] " + form.page } }, memory).filter((x) => x.message === message);
+  ok(d.length === 1 && d[0].key === key(en) && d[0].locale === "fr" && d[0].after === filled("[T] " + form.page),
+     `derive: ${message} takes the page sentence's words, each hole back to its {name}`);
+  const lost = Object.keys(form.holes)[0];
+  d = derive(ui, forms, { [key(form.page)]: { fr: "[T] " + form.page.split(lost).join("") } }, memory).filter((x) => x.message === message);
+  ok(d.length === 0, "derive: a page sentence that lost a hole gives the message nothing");
 }
 
 // ---------------------------------------------------------------------------
