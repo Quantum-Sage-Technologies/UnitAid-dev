@@ -130,7 +130,10 @@ const shrunk = csvWith("sourcing/staging/trials.csv", (rows) => rows.filter((r) 
 const g = watcher("propose-trials.js", ["--staging", "test-data/trials/alaq-primary-completion.csv", "--previous", "sourcing/staging/trials.csv", "--today", today]);
 ok("a list that kept its rows is not blocked", g.code === 0 && g.manifest.length === 1, g.stdout);
 const b = watcher("propose-trials.js", ["--staging", shrunk, "--previous", "sourcing/staging/trials.csv", "--today", today]);
-ok("a medicine whose staged trials fell by more than a fifth is blocked, and the run fails", b.code === 1 && /BLOCKED ClinicalTrials\.gov · ALAQ: staged trials fell from 58 to 1/.test(b.stdout), b.stdout);
+// the counts come from the staged files, which the scheduled fetch rewrites
+const stagedRows = (file, keep = () => true) => require("./fetch-regulatory.js").parseCsv(fs.readFileSync(path.join(ROOT, file), "utf8")).filter(keep).length;
+const alaqTrials = stagedRows("sourcing/staging/trials.csv", (r) => r.productId === "alaq");
+ok("a medicine whose staged trials fell by more than a fifth is blocked, and the run fails", b.code === 1 && b.stdout.includes(`BLOCKED ClinicalTrials.gov · ALAQ: staged trials fell from ${alaqTrials} to 1`), b.stdout);
 const gone = csvWith("sourcing/staging/trials.csv", (rows) => rows.filter((r) => r.nctId !== "NCT05951595"));
 const m = watcher("propose-trials.js", ["--staging", gone, "--today", today]);
 ok("a followed trial missing from the list is left for a person", m.code === 0 && m.manifest.length === 0 && /NCT05951595 is not in the staged list/.test(m.stdout), m.stdout);
@@ -201,7 +204,7 @@ ok("a registration still called active after its expiry is left for a person, no
 const cut = csvWith("sourcing/staging/nafdac_registrations.csv", (rows) => rows.slice(0, 10));
 const sh = watcher("propose-registers.js", ["--nafdac", cut, "--previous-nafdac", "sourcing/staging/nafdac_registrations.csv", "--tmda", "test-data/registers/tmda-ganlum-registered.csv"]);
 ok("a register whose rows fell by more than a fifth is blocked, the other still proposes, and the run fails",
-  sh.code === 1 && /BLOCKED NAFDAC: rows fell from 48 to 10/.test(sh.stdout) && sh.manifest.length === 1 && /Tanzania/.test(sh.manifest[0].title), sh.stdout);
+  sh.code === 1 && sh.stdout.includes(`BLOCKED NAFDAC: rows fell from ${stagedRows("sourcing/staging/nafdac_registrations.csv")} to 10`) && sh.manifest.length === 1 && /Tanzania/.test(sh.manifest[0].title), sh.stdout);
 const started = dataWith((d) => { const x = d.products.find((p) => p.id === "ganlum"); x.stages[4].status = "prog"; x.stages[4].note = "Filed in several countries"; x.stages[4].asOf = "2026-09-01"; });
 const sp = watcher("propose-registers.js", ["--only", "NAFDAC", "--nafdac", "test-data/registers/nafdac-ganlum-registered.csv", "--data", started]);
 ok("a stage already under way keeps its wording: the proposal only draws the country",
