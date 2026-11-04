@@ -52,6 +52,10 @@ jobs:
           node scripts/test-build-rbm-messages.js
           node scripts/test-copy-rbm-messages.js
           node scripts/build-rbm-messages.js --check --allow-stale
+      # The translators' XLIFF files in and out of the memory (import-xliff.js,
+      # export-xliff.js). Reads the repository's files, writes only to a temp folder.
+      - name: Translator files (XLIFF)
+        run: node scripts/test-xliff.js
       # The daily update email to subscribers: what counts as new, what the
       # email says, and that a re-run never sends twice. No network, no key.
       - name: Subscriber update email
