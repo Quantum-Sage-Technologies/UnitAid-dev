@@ -437,3 +437,46 @@ static pages and the React version's message files are rebuilt from it.
 Left as it was: a comment in `index.html` still gives "pt-PT" and "2/10/2026"
 as the Portuguese example. Editing it would change the page's script, which
 the content collector reads, for a comment.
+
+## Professional translations (4 Nov 2026)
+
+The translators delivered French and Brazilian Portuguese as two XLIFF 1.2
+files (`LAUNCH-Dashboard-English_261023-001_FRA.xlf`, `…_PT-BZ.xlf`), made
+from `i18n/content.en.json` as it was on 23 Oct: 640 units each, ids
+`key(English)`, the page's code as `<ph>` tags, every unit translated, no tag
+lost.
+
+`scripts/import-xliff.js` writes them into `i18n/translations.json`, where
+the translate bot never replaces a value (rule 1), and every output reads
+them from there: the French and Portuguese pages, the published dataset, the
+RBM pages and the RBM message files.
+
+| | French | Portuguese |
+|---|---|---|
+| Units | 640 | 640 |
+| Taken (English still on the page) | 614: 516 changed, 98 already the same | 614: 458 changed, 156 already the same |
+| Left out: the English was reworded on 3 Nov (partner feedback) | 26 | 26 |
+
+**The record.** `i18n/translator/2026-11-04/` keeps both files as delivered
+and `imported.json`: each file's sha256 and counts, and the text taken per key
+and language. It says which lines a person wrote; running the import on the
+copies there puts their text back.
+
+**What can still replace it.** Changing `TARGET` in `translate-strings.js`
+clears that language in every entry and translates again (the Brazilian
+switch above); so would deleting values by hand. After either, run
+`node scripts/import-xliff.js i18n/translator/*/*.xlf`, oldest first.
+
+**What is still Google's.** 170 strings per language (2,218 English words):
+the 3 Nov rewordings and the strings added since 23 Oct, about a third of
+them interface text only the React version shows. `scripts/export-xliff.js
+--out <folder>` writes them as `LAUNCH-Dashboard-followup_<date>_{FRA,PT-BZ}.xlf`
+for the translators, in the same format, each unit with where it appears and
+the machine translation shown today; their reply goes in with
+`import-xliff.js`. The list leaves out every key a record holds, per language.
+
+Checked: `test-xliff.js` 25 passed; `build-locale-pages.js` fr and pt 843 of
+843, self-check passed; `build-dataset.js` valid; `build-rbm-messages.js` fr
+and pt 330 of 330 (placeholders kept); `test-build-rbm-messages.js` 71,
+`test-build-dataset.js` 58, `test-build-rbm-pages.js` 36,
+`test-copy-rbm-pages.js` 34, `test-copy-rbm-messages.js` 35, all passed.

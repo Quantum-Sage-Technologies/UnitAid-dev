@@ -20,7 +20,10 @@
  *   1. EMPTY-LOCALE-ONLY. A locale that already holds text is never touched,
  *      whether the engine wrote it last month or a person corrected it five
  *      minutes ago. That is what makes "fix it in the source file" work with
- *      no lock flags and no state to maintain.
+ *      no lock flags and no state to maintain. Professional translators' text
+ *      comes in the same way (scripts/import-xliff.js, recorded in
+ *      i18n/translator/); a new TARGET below clears it with the rest, so
+ *      import the recorded files again after one.
  *
  *   2. CONTENT-ADDRESSED. Each entry is keyed by a fingerprint of the ENGLISH,
  *      key(text) in scripts/i18n-hash.js. Edit the English and its fingerprint changes,
