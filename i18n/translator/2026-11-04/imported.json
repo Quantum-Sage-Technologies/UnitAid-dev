@@ -7,20 +7,20 @@
       "language": "fr",
       "locale": "fr",
       "units": 640,
-      "imported": 516,
-      "unchanged": 98,
+      "imported": 0,
+      "unchanged": 614,
       "stale": 26,
-      "sha256": "82286c2b50d766a44c1707dcb1405f8610688ff612a24d55d0c94899e6fae942"
+      "sha256": "c6f500eff8ac5c24908259045ba5b758da71ba64dd84b681993fa44a94083acf"
     },
     {
       "name": "LAUNCH-Dashboard-English_261023-001_PT-BZ.xlf",
       "language": "pt-br",
       "locale": "pt",
       "units": 640,
-      "imported": 458,
-      "unchanged": 156,
+      "imported": 0,
+      "unchanged": 614,
       "stale": 26,
-      "sha256": "e9311b89dee16fe7aaf8f12dc7c14b65503f108a6561375820a396bdf00c8622"
+      "sha256": "9b32e36026c4db89aed2c48c5262e0db7ef0833b5451b81b8ae2f6683ca178d9"
     }
   ],
   "entries": {
@@ -2479,6 +2479,164 @@
     "ffd08b32396a2766": {
       "fr": "41,5 millions de dollars US depuis 2008",
       "pt": "US$ 41,5 milhões desde 2008"
+    }
+  },
+  "derived": {
+    "28d74ada92b5c6c7": {
+      "message": "yardstick.since",
+      "from": "425654236278a5ff",
+      "fr": "depuis {year}",
+      "pt": "desde {year}"
+    },
+    "318053114b9dfd1e": {
+      "message": "map.panel.stageMixCount",
+      "from": "da4c52efd4570830",
+      "fr": "pays sur {total} ont atteint une phase du parcours d’accès",
+      "pt": "de {total} países têm uma etapa de acesso"
+    },
+    "34ddb3355e7a4174": {
+      "message": "stepPanel.parallelMilestones",
+      "from": "6377426bf163c625",
+      "fr": "{first} et {second} sont des étapes parallèles au sein de la même phase {n}.",
+      "pt": "{first} e{second} são marcos paralelos dentro da etapa {n}."
+    },
+    "3e15b7e45612fdbd": {
+      "message": "map.panel.amongRegion",
+      "from": "15f7a1add6c40a33",
+      "fr": "{country} parmi {count} pays de la région {region} · {medicine}",
+      "pt": "{country} entre {count} {region} países · {medicine}"
+    },
+    "51aea78f6b44da67": {
+      "message": "stepPanel.statusSummaryLabel",
+      "from": "8155f785fe007bfd",
+      "fr": "Progression des {count} médicaments dans cette phase",
+      "pt": "Situação dos medicamentos {count} nesta etapa"
+    },
+    "56730d336ac54954": {
+      "message": "stepPanel.stepOfTotal",
+      "from": "ce2d08694f011fba",
+      "fr": "Phase {n} sur {total}",
+      "pt": "Etapa {n} de {total}"
+    },
+    "5a30cb4cf1864fe5": {
+      "message": "map.panel.notDrawn",
+      "from": "59107eb03736d9bf",
+      "fr": "Également dans les politiques, mais non représenté sur la carte : {countries}.",
+      "pt": "Também incluído na política, mas não representado neste mapa: {countries}."
+    },
+    "67bccab61db73c30": {
+      "message": "product.parallelGroupLabel",
+      "from": "8bcd9c87a696f559",
+      "fr": "{names} – approbations indépendantes, sans ordre particulier",
+      "pt": "{names} — aprovações independentes, sem ordem definida entre elas"
+    },
+    "707408ae821f2b37": {
+      "message": "map.panel.moreInCountriesTab",
+      "from": "514e67ee208e9322",
+      "fr": "et {count} autres pays de la liste de pays",
+      "pt": "+{count} mais na aba Países"
+    },
+    "7a7f1dd2c7a52478": {
+      "message": "map.panel.sameStage",
+      "from": "db5efdf1aa304522",
+      "fr": "Autres pays dans la même phase · {stage}",
+      "pt": "Outros países na mesma etapa · {stage}"
+    },
+    "7de30cf0a44b4781": {
+      "message": "map.panel.preLaunchOverview",
+      "from": "d73e57f401a43b55",
+      "fr": "{medicine} est en phase de prélancement, il n’existe donc pas encore de statut ni de politique au niveau national.",
+      "pt": "{medicine} está em fase de pré-lançamento, portanto, ainda não há status ou políticas no âmbito do país."
+    },
+    "920742acb7639843": {
+      "message": "pathway.parallelGroupLabel",
+      "from": "5833af764ba78c2a",
+      "fr": "{names} – approbations indépendantes, sans ordre particulier",
+      "pt": "{names} — aprovações independentes, sem ordem definida entre elas"
+    },
+    "9626c295017fd5e5": {
+      "message": "map.panel.factsTitle",
+      "from": "1bac3d7f1cfbbad7",
+      "fr": "{medicine} · Informations",
+      "pt": "{medicine} · informações sobre o medicamento"
+    },
+    "a264875d219421cb": {
+      "message": "map.noPolicy",
+      "from": "dec98f414bac4778",
+      "fr": "Aucune politique nationale de traitement ne mentionne encore {medicine}.",
+      "pt": "Nenhuma política nacional de tratamento inclui {medicine} até o momento."
+    },
+    "a29aeff85663ad3b": {
+      "message": "product.timeline.notStarted",
+      "from": "3b930257127f071a",
+      "fr": "Non démarré · {count}",
+      "pt": "Não iniciado · {count}"
+    },
+    "a3e61b0717c7f90c": {
+      "message": "yardstick.routineUseBy",
+      "from": "2559d945241893fb",
+      "fr": "utilisation courante d’ici {year}",
+      "pt": "uso de rotina em {year}"
+    },
+    "bdc9333d94f16e4b": {
+      "message": "board.showJourney",
+      "from": "69e6ab6478afef0c",
+      "fr": "Voir le parcours pour {medicine}",
+      "pt": "Mostrar o percurso de {medicine}"
+    },
+    "caf7d0d203ede067": {
+      "message": "map.panel.preLaunchCountry",
+      "from": "2b65638f98abb9bb",
+      "fr": "{medicine} est en phase de prélancement, il n’existe donc pas encore de statut ni de politique au niveau national.",
+      "pt": "{medicine} está em fase de pré-lançamento, portanto, ainda não há status ou políticas do país."
+    },
+    "d27659f251657fa2": {
+      "message": "map.policySource",
+      "from": "1d483722fb7b04ca",
+      "fr": "Source : {edition} de l’OMS, annexe 4B (politique de {year}).",
+      "pt": "Fonte: OMS {edition}, Anexo 4B (política {year})."
+    },
+    "d5d9fd84671a9f80": {
+      "message": "board.milestonesComplete",
+      "from": "db0887f036b7eae1",
+      "fr": "{done} étapes terminées sur {total}",
+      "pt": "{done} de {total} marcos concluídos"
+    },
+    "ddf28b5f6b93c7d5": {
+      "message": "yardstick.expectedRoutineUse",
+      "from": "662280707b2da207",
+      "fr": "Utilisation courante attendue d’ici {due}, {n} ans après avoir atteint la première étape en {start}.",
+      "pt": "Previsão de uso de rotina até {due}, {n} anos após primeiro marco em {start}."
+    },
+    "e7ad162e2ec7ef41": {
+      "message": "board.accessReachedIn",
+      "from": "47c924e75d89bd12",
+      "fr": "Atteint en {year}",
+      "pt": "Alcançado em {year}"
+    },
+    "e975120e463e3f58": {
+      "message": "board.accessSoFar",
+      "from": "add39e20825866fb",
+      "fr": "{duration} à ce jour",
+      "pt": "{duration} até o momento"
+    },
+    "eb2a22c523605027": {
+      "message": "product.timeline.since",
+      "from": "2a32a50c5e14e505",
+      "fr": "depuis {milestone} ({year}) · {duration}",
+      "pt": "desde {milestone} ({year}) · {duration}"
+    },
+    "eea1dde9e535052b": {
+      "message": "yardstick.stillNotRoutine",
+      "from": "d9658fce74348b45",
+      "fr": "Toujours pas couramment utilisé en {year}.",
+      "pt": "Ainda não em uso de rotina em {year}."
+    },
+    "f57b4d84292ca41c": {
+      "message": "product.stageMarkerLabel",
+      "from": "0e5444556eb195c1",
+      "fr": "{stage}. {status}. Affiche les détails complets.",
+      "pt": "{stage}. {status}. Abre a visualização completa do detalhe."
     }
   }
 }

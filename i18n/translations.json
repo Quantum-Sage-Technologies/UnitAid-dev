@@ -1467,8 +1467,8 @@
       "en": "of {total} countries have an access stage",
       "where": "i18n/ui.en.json:map.panel.stageMixCount",
       "bucket": "ui",
-      "fr": "{total} pays ont une étape d’accès",
-      "pt": "de {total} países têm uma fase de acesso"
+      "fr": "pays sur {total} ont atteint une phase du parcours d’accès",
+      "pt": "de {total} países têm uma etapa de acesso"
     },
     "31a004d8f81b13b8": {
       "en": "Subscribe for updates",
@@ -1554,8 +1554,8 @@
       "en": "{first} and {second} are parallel milestones within stage {n}.",
       "where": "i18n/ui.en.json:stepPanel.parallelMilestones",
       "bucket": "ui",
-      "fr": "{first} et {second} sont des étapes parallèles au sein de l’étape {n}.",
-      "pt": "{first} e {second} são marcos paralelos dentro do estágio {n}."
+      "fr": "{first} et {second} sont des étapes parallèles au sein de la même phase {n}.",
+      "pt": "{first} e{second} são marcos paralelos dentro da etapa {n}."
     },
     "350be3643ce78043": {
       "en": "Organisation",
@@ -1857,7 +1857,7 @@
       "en": "{country} among {count} {region} countries · {medicine}",
       "where": "i18n/ui.en.json:map.panel.amongRegion",
       "bucket": "ui",
-      "fr": "{country} parmi {count} {region} pays · {medicine}",
+      "fr": "{country} parmi {count} pays de la région {region} · {medicine}",
       "pt": "{country} entre {count} {region} países · {medicine}"
     },
     "3e3f75f3f884c081": {
@@ -2553,8 +2553,8 @@
       "en": "Status of the {count} medicines at this stage",
       "where": "i18n/ui.en.json:stepPanel.statusSummaryLabel",
       "bucket": "ui",
-      "fr": "État des médicaments {count} à ce stade",
-      "pt": "Situação dos medicamentos {count} nesta fase"
+      "fr": "Progression des {count} médicaments dans cette phase",
+      "pt": "Situação dos medicamentos {count} nesta etapa"
     },
     "5205d8c4889c0ac6": {
       "en": "countries by patient group",
@@ -2733,7 +2733,7 @@
       "en": "Stage {n} of {total}",
       "where": "i18n/ui.en.json:stepPanel.stepOfTotal",
       "bucket": "ui",
-      "fr": "Étape {n} sur {total}",
+      "fr": "Phase {n} sur {total}",
       "pt": "Etapa {n} de {total}"
     },
     "577de696670c4218": {
@@ -2861,8 +2861,8 @@
       "en": "Also in policy but not drawn on this map: {countries}.",
       "where": "i18n/ui.en.json:map.panel.notDrawn",
       "bucket": "ui",
-      "fr": "Également dans la politique mais non représenté sur cette carte : {countries}.",
-      "pt": "Também na política, mas não desenhado neste mapa: {countries}."
+      "fr": "Également dans les politiques, mais non représenté sur la carte : {countries}.",
+      "pt": "Também incluído na política, mas não representado neste mapa: {countries}."
     },
     "5a5a50f3f79f453b": {
       "en": "Turn on a study result to see sites",
@@ -3269,7 +3269,7 @@
       "en": "{names} — independent approvals, no defined order between them",
       "where": "i18n/ui.en.json:product.parallelGroupLabel",
       "bucket": "ui",
-      "fr": "{names} — approbations indépendantes, sans ordre défini entre elles",
+      "fr": "{names} – approbations indépendantes, sans ordre particulier",
       "pt": "{names} — aprovações independentes, sem ordem definida entre elas"
     },
     "680a998ee7995319": {
@@ -3529,7 +3529,7 @@
       "en": "+{count} more in the Countries tab",
       "where": "i18n/ui.en.json:map.panel.moreInCountriesTab",
       "bucket": "ui",
-      "fr": "+{count} Plus d’informations dans l’onglet Pays",
+      "fr": "et {count} autres pays de la liste de pays",
       "pt": "+{count} mais na aba Países"
     },
     "7084923218e9d421": {
@@ -3797,8 +3797,8 @@
       "en": "Other countries at the same stage · {stage}",
       "where": "i18n/ui.en.json:map.panel.sameStage",
       "bucket": "ui",
-      "fr": "Autres pays au même stade · {stage}",
-      "pt": "Outros países na mesma fase · {stage}"
+      "fr": "Autres pays dans la même phase · {stage}",
+      "pt": "Outros países na mesma etapa · {stage}"
     },
     "7abd2e8532b496a8": {
       "en": "Paediatric granules prequalified",
@@ -3916,8 +3916,8 @@
       "en": "{medicine} is pre-launch, so there is no country-level status or policy yet.",
       "where": "i18n/ui.en.json:map.panel.preLaunchOverview",
       "bucket": "ui",
-      "fr": "{medicine} est en phase de pré-lancement, il n’y a donc pas encore de statut ou de politique au niveau national.",
-      "pt": "{medicine} é uma versão pré-lançamento, portanto ainda não há status ou política em nível de país."
+      "fr": "{medicine} est en phase de prélancement, il n’existe donc pas encore de statut ni de politique au niveau national.",
+      "pt": "{medicine} está em fase de pré-lançamento, portanto, ainda não há status ou políticas no âmbito do país."
     },
     "7e222a78e771f1b9": {
       "en": "Gabon",
@@ -4493,8 +4493,8 @@
       "en": "{names} — independent approvals with no defined order between them",
       "where": "i18n/ui.en.json:pathway.parallelGroupLabel",
       "bucket": "ui",
-      "fr": "{names} — approbations indépendantes sans ordre défini entre elles",
-      "pt": "{names} — aprovações independentes sem ordem definida entre elas"
+      "fr": "{names} – approbations indépendantes, sans ordre particulier",
+      "pt": "{names} — aprovações independentes, sem ordem definida entre elas"
     },
     "920e413c7d411b61": {
       "en": "Status",
@@ -4627,8 +4627,8 @@
       "en": "{medicine} · medicine facts",
       "where": "i18n/ui.en.json:map.panel.factsTitle",
       "bucket": "ui",
-      "fr": "{medicine} · Informations médicales",
-      "pt": "{medicine} · fatos sobre medicamentos"
+      "fr": "{medicine} · Informations",
+      "pt": "{medicine} · informações sobre o medicamento"
     },
     "9647d67271053dcb": {
       "en": "Step ${stepNo(i)} of ${STAGE_COLUMNS.length}",
@@ -4926,8 +4926,8 @@
       "en": "No national treatment policy lists {medicine} yet.",
       "where": "i18n/ui.en.json:map.noPolicy",
       "bucket": "ui",
-      "fr": "Aucune liste de politique nationale de traitement {medicine} pour le moment.",
-      "pt": "Nenhuma política nacional de tratamento lista {medicine} ainda."
+      "fr": "Aucune politique nationale de traitement ne mentionne encore {medicine}.",
+      "pt": "Nenhuma política nacional de tratamento inclui {medicine} até o momento."
     },
     "a26baa18b2e928ad": {
       "en": "20 Jan 2025",
@@ -4940,7 +4940,7 @@
       "en": "Not started · {count}",
       "where": "i18n/ui.en.json:product.timeline.notStarted",
       "bucket": "ui",
-      "fr": "Pas encore démarré · {count}",
+      "fr": "Non démarré · {count}",
       "pt": "Não iniciado · {count}"
     },
     "a317b7572940e19a": {
@@ -4980,8 +4980,8 @@
       "en": "routine use by {year}",
       "where": "i18n/ui.en.json:yardstick.routineUseBy",
       "bucket": "ui",
-      "fr": "utilisation courante par {year}",
-      "pt": "uso rotineiro por {year}"
+      "fr": "utilisation courante d’ici {year}",
+      "pt": "uso de rotina em {year}"
     },
     "a4023b89022f326c": {
       "en": "Download CSV",
@@ -5645,8 +5645,8 @@
       "en": "Show journey for {medicine}",
       "where": "i18n/ui.en.json:board.showJourney",
       "bucket": "ui",
-      "fr": "Afficher le parcours pour {medicine}",
-      "pt": "Mostrar jornada para {medicine}"
+      "fr": "Voir le parcours pour {medicine}",
+      "pt": "Mostrar o percurso de {medicine}"
     },
     "bdd8490cd620d78e": {
       "en": "Procurement through public channels",
@@ -6083,8 +6083,8 @@
       "en": "{medicine} is pre-launch, so there is no country status or policy yet.",
       "where": "i18n/ui.en.json:map.panel.preLaunchCountry",
       "bucket": "ui",
-      "fr": "{medicine} est en phase de pré-lancement, il n’y a donc pas encore de statut ni de politique concernant certains pays.",
-      "pt": "{medicine} é uma versão pré-lançamento, portanto ainda não possui status ou política de país."
+      "fr": "{medicine} est en phase de prélancement, il n’existe donc pas encore de statut ni de politique au niveau national.",
+      "pt": "{medicine} está em fase de pré-lançamento, portanto, ainda não há status ou políticas do país."
     },
     "caf85b0888d78f1f": {
       "en": "Sources",
@@ -6355,8 +6355,8 @@
       "en": "Source: WHO {edition}, Annex 4B ({year} policy).",
       "where": "i18n/ui.en.json:map.policySource",
       "bucket": "ui",
-      "fr": "Source : OMS {edition}, Annexe 4B ({year} politique).",
-      "pt": "Fonte: OMS {edition}, Anexo 4B ({year} política)."
+      "fr": "Source : {edition} de l’OMS, annexe 4B (politique de {year}).",
+      "pt": "Fonte: OMS {edition}, Anexo 4B (política {year})."
     },
     "d27a59989051fa2a": {
       "en": "Clin Pharmacol Ther: ALAQ dosing, 2025",
@@ -6477,7 +6477,7 @@
       "en": "{done} of {total} milestones complete",
       "where": "i18n/ui.en.json:board.milestonesComplete",
       "bucket": "ui",
-      "fr": "{done} sur {total} étapes franchies",
+      "fr": "{done} étapes terminées sur {total}",
       "pt": "{done} de {total} marcos concluídos"
     },
     "d66844baa6548577": {
@@ -6828,8 +6828,8 @@
       "en": "Expected in routine use by {due}, {n} years after its first milestone in {start}.",
       "where": "i18n/ui.en.json:yardstick.expectedRoutineUse",
       "bucket": "ui",
-      "fr": "Son utilisation courante est prévue d’ici {due}, {n} ans après sa première étape importante en {start}.",
-      "pt": "Espera-se que entre em uso rotineiro em {due}, {n} anos após seu primeiro marco em {start}."
+      "fr": "Utilisation courante attendue d’ici {due}, {n} ans après avoir atteint la première étape en {start}.",
+      "pt": "Previsão de uso de rotina até {due}, {n} anos após primeiro marco em {start}."
     },
     "de1e0f4ea7beff01": {
       "en": "Access & supply commitments",
@@ -7244,8 +7244,8 @@
       "en": "{duration} so far",
       "where": "i18n/ui.en.json:board.accessSoFar",
       "bucket": "ui",
-      "fr": "{duration} jusqu’à présent",
-      "pt": "{duration} até agora"
+      "fr": "{duration} à ce jour",
+      "pt": "{duration} até o momento"
     },
     "e9b46ca775ed9ae7": {
       "en": "Ongoing; STOP-AMDR 2025–2029",
@@ -7420,8 +7420,8 @@
       "en": "Still not in routine use in {year}.",
       "where": "i18n/ui.en.json:yardstick.stillNotRoutine",
       "bucket": "ui",
-      "fr": "Toujours pas d’usage courant dans {year}.",
-      "pt": "Ainda não é de uso rotineiro em {year}."
+      "fr": "Toujours pas couramment utilisé en {year}.",
+      "pt": "Ainda não em uso de rotina em {year}."
     },
     "eebbf6457e46a7f6": {
       "en": "complete",
@@ -7604,8 +7604,8 @@
       "en": "{stage}. {status}. Opens the full detail.",
       "where": "i18n/ui.en.json:product.stageMarkerLabel",
       "bucket": "ui",
-      "fr": "{stage}. {status}. Ouvre les détails complets.",
-      "pt": "{stage}. {status}. Abre os detalhes completos."
+      "fr": "{stage}. {status}. Affiche les détails complets.",
+      "pt": "{stage}. {status}. Abre a visualização completa do detalhe."
     },
     "f5ce37ee7d826b21": {
       "en": "Time taken",

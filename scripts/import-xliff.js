@@ -43,6 +43,8 @@ const ROOT = path.resolve(__dirname, "..");
 const MEM = path.join(ROOT, "i18n", "translations.json");
 const CONTENT = path.join(ROOT, "i18n", "content.en.json");
 const RECORDS = path.join(ROOT, "i18n", "translator");
+const UI = path.join(ROOT, "i18n", "ui.en.json");
+const FORMS = path.join(ROOT, "i18n", "ui.page-forms.json");
 // XLIFF target-language → the memory's locale. Portuguese is Brazilian.
 const LANGUAGES = { fr: "fr", "fr-fr": "fr", pt: "pt", "pt-br": "pt" };
 
@@ -114,6 +116,37 @@ function plan(files, content, memory) {
   return { errors, changes, stale, perFile };
 }
 
+// THE PAGE'S SENTENCES. A React message with {placeholders} has its own
+// English ("Stage {n} of {total}") and so its own memory entry, but the page
+// says the same sentence with its code in it ("Stage ${stepNo(i)} of
+// ${STAGE_COLUMNS.length}", its page form in i18n/ui.page-forms.json). When a
+// translator delivered that page sentence, the message takes the same words:
+// each hole back to the message's {name}. Taken only when the result holds
+// exactly the message's placeholders. Messages the page joins from pieces
+// ("parts") are left to the translators.
+// translated: { [pageKey]: { fr?, pt? } } — every translator text known
+// (this import's and the records'). Returns [{ key, locale, after, from, message }].
+function derive(ui, forms, translated, memory) {
+  const out = [];
+  const walk = (o, p = "") => Object.entries(o).flatMap(([k, v]) => (k.startsWith("_") ? [] : typeof v === "object" ? walk(v, `${p}${k}.`) : [[p + k, v]]));
+  const names = (s) => (s.match(/\{\w+\}/g) || []).sort().join();
+  for (const [message, en] of walk(ui)) {
+    const form = forms[message];
+    if (!/\{\w+\}/.test(en) || !form || typeof form.page !== "string") continue;
+    const from = key(form.page), delivered = translated[from];
+    if (!delivered) continue;
+    for (const loc of ["fr", "pt"]) {
+      if (!delivered[loc]) continue;
+      let text = delivered[loc];
+      for (const [hole, name] of Object.entries(form.holes || {})) text = text.split(hole).join(name);
+      if (text.includes("${") || names(text) !== names(en)) continue;
+      const before = memory.entries[key(en)] && memory.entries[key(en)][loc];
+      out.push({ key: key(en), locale: loc, before, after: text, from, message });
+    }
+  }
+  return out;
+}
+
 // The memory with the changes applied; a missing entry is made from content.en.json.
 function apply(memory, changes, content) {
   const current = new Map(content.text.map((e) => [e.key, e]));
@@ -135,7 +168,8 @@ function serialiseMemory(mem) {
 
 const today = () => new Date().toISOString().slice(0, 10);
 
-function main(args = process.argv.slice(2), paths = { MEM, CONTENT, RECORDS }) {
+function main(args = process.argv.slice(2), given = {}) {
+  const paths = { MEM, CONTENT, RECORDS, UI, FORMS, ...given };
   const check = args.includes("--check");
   const dateAt = args.indexOf("--record-date");
   const date = dateAt >= 0 ? args[dateAt + 1] : today();
@@ -166,10 +200,23 @@ function main(args = process.argv.slice(2), paths = { MEM, CONTENT, RECORDS }) {
     const seen = new Set();
     for (const s of r.stale) if (!seen.has(s.id)) { seen.add(s.id); console.log(`    ${s.resname} [${s.group}] ${JSON.stringify(s.source.length > 70 ? s.source.slice(0, 70) + "…" : s.source)}`); }
   }
+  // the page's sentences: every translator text known, the records' and this import's
+  const dir = path.join(paths.RECORDS, date);
+  const translated = {};
+  const add = (k, loc, text) => { translated[k] = { ...(translated[k] || {}), [loc]: text }; };
+  if (fs.existsSync(paths.RECORDS)) {
+    for (const d of fs.readdirSync(paths.RECORDS).sort()) {
+      const f = path.join(paths.RECORDS, d, "imported.json");
+      if (fs.existsSync(f)) for (const [k, v] of Object.entries(JSON.parse(fs.readFileSync(f, "utf8")).entries || {})) for (const [loc, t] of Object.entries(v)) add(k, loc, t);
+    }
+  }
+  for (const c of r.changes) add(c.key, c.locale, c.after);
+  const derived = derive(JSON.parse(fs.readFileSync(paths.UI, "utf8")), JSON.parse(fs.readFileSync(paths.FORMS, "utf8")).forms, translated, apply(memory, r.changes, content));
+  const derivedChanged = derived.filter((d) => d.before !== d.after).length;
+  console.log(`\n  React messages that say a delivered page sentence: ${derived.length} values (${derivedChanged} new or changed)`);
   if (check) { console.log("\n  --check: nothing written.\n"); return 0; }
 
-  fs.writeFileSync(paths.MEM, serialiseMemory(apply(memory, r.changes, content)), "utf8");
-  const dir = path.join(paths.RECORDS, date);
+  fs.writeFileSync(paths.MEM, serialiseMemory(apply(memory, [...r.changes, ...derived], content)), "utf8");
   fs.mkdirSync(dir, { recursive: true });
   for (const f of files) {
     const to = path.join(dir, f.name);
@@ -188,11 +235,15 @@ function main(args = process.argv.slice(2), paths = { MEM, CONTENT, RECORDS }) {
   const sorted = {};
   for (const k of Object.keys(record.entries).sort()) sorted[k] = record.entries[k];
   record.entries = sorted;
+  // derived: the React messages that took a page sentence's words, and from which key
+  const deriv = { ...(before.derived || {}) };
+  for (const d of derived) deriv[d.key] = { ...(deriv[d.key] || {}), message: d.message, from: d.from, [d.locale]: d.after };
+  record.derived = Object.fromEntries(Object.keys(deriv).sort().map((k) => [k, deriv[k]]));
   fs.writeFileSync(recordFile, JSON.stringify(record, null, 2) + "\n", "utf8");
-  console.log(`\n  wrote ${rel(paths.MEM)} (${r.changes.length - r.perFile.reduce((n, c) => n + c.unchanged, 0)} values changed)`);
-  console.log(`  recorded in ${rel(dir)}/ (${Object.keys(record.entries).length} keys)\n`);
+  console.log(`\n  wrote ${rel(paths.MEM)} (${r.changes.length - r.perFile.reduce((n, c) => n + c.unchanged, 0) + derivedChanged} values changed)`);
+  console.log(`  recorded in ${rel(dir)}/ (${Object.keys(record.entries).length} keys, ${Object.keys(record.derived).length} derived)\n`);
   return 0;
 }
 
-module.exports = { parseXliff, plan, apply, serialiseMemory, main, LANGUAGES, RECORDS };
+module.exports = { parseXliff, plan, derive, apply, serialiseMemory, main, LANGUAGES, RECORDS };
 if (require.main === module) process.exitCode = main();

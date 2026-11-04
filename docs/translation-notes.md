@@ -480,3 +480,19 @@ Checked: `test-xliff.js` 25 passed; `build-locale-pages.js` fr and pt 843 of
 and pt 330 of 330 (placeholders kept); `test-build-rbm-messages.js` 71,
 `test-build-dataset.js` 58, `test-build-rbm-pages.js` 36,
 `test-copy-rbm-pages.js` 34, `test-copy-rbm-messages.js` 35, all passed.
+
+**The React messages that say a page sentence (5 Nov).** A message with
+{placeholders} has its own English ("Stage {n} of {total}") and its own memory
+entry, which the translators' 23 Oct file did not hold, so those messages
+kept Google's words while the page showed the translators' for the same
+sentence (the RBM module said "Étape {n} sur {total}", the page "Phase …").
+`import-xliff.js` now gives such a message the words of its page sentence
+(`ui.page-forms.json` `page` and `holes`) when a translator delivered it,
+each hole back to the message's {name}, and only when the result holds
+exactly the message's placeholders: 26 messages, 52 values, 40 changed.
+`imported.json` lists them under `derived`, with the page key they came
+from, and `export-xliff.js` leaves them out of the next file (144 strings per
+language now). The 30 messages the page joins from pieces ("parts", such as
+"{n} year") and 3 whose page sentence was not in the file wait for the
+translators. Rocio's Portuguese has "e{second}" (no space) in
+`stepPanel.parallelMilestones`, as on the page: for the proofreading.
