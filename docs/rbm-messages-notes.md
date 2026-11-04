@@ -469,7 +469,10 @@ on `/en|fr|pt/unitaid`. Two things failed, both fixed here:
   the header's title and description.
 - **Tab indent.** Its `biome format` wants tabs; two spaces failed the check
   on all three files (no word different). `serialise()` writes tabs.
-`test-build-rbm-messages.js` checks both (71 passed, 6 new).
+`test-build-rbm-messages.js` checks both (71 passed, 6 new). The files this
+builds are byte-identical to the ones delivered in `rbm-module-unitaid`
+`v1.0.0` (`9d44794`, 4 Nov), where they had been renamed and re-indented by
+hand: the next copy into RBM's repository changes nothing.
 
 ## Coverage, 28 Oct 2026, after PR #129
 
