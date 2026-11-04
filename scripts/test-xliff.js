@@ -67,6 +67,12 @@ const refused = [
   [file("fr", [unit(e2.key, sourceXml(e2.en), "<g id=\"1\">x</g>")]), "markup other than <ph>", "markup other than <ph>"],
   ["<xliff version=\"2.0\"></xliff>", "not an XLIFF 1.2 file", "XLIFF 2.0"],
 ];
+{
+  const joined = content.text.find((e) => /^·\s/.test(e.en));
+  const p = plan([{ name: "s.xlf", xml: file("pt-BR", [unit(joined.key, sourceXml(joined.en), "palavras")]) }], content, memory);
+  ok(!p.errors.length && p.changes[0].after === joined.en.match(/^·\s+/)[0] + "palavras" && p.perFile[0].separators === 1,
+     `a translation that drops the leading "· " of ${JSON.stringify(joined.en)} keeps the English's (the page joins it to the words before)`);
+}
 for (const [xml, says, what] of refused) {
   const p = plan([{ name: "b.xlf", xml }], content, memory);
   ok(p.errors.some((e) => e.includes(says)), `refused: ${what}`);

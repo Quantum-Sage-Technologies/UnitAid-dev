@@ -10,6 +10,7 @@
       "imported": 0,
       "unchanged": 614,
       "stale": 26,
+      "separators": 0,
       "sha256": "c6f500eff8ac5c24908259045ba5b758da71ba64dd84b681993fa44a94083acf"
     },
     {
@@ -17,9 +18,10 @@
       "language": "pt-br",
       "locale": "pt",
       "units": 640,
-      "imported": 0,
-      "unchanged": 614,
+      "imported": 2,
+      "unchanged": 612,
       "stale": 26,
+      "separators": 2,
       "sha256": "9b32e36026c4db89aed2c48c5262e0db7ef0833b5451b81b8ae2f6683ca178d9"
     }
   ],
@@ -90,7 +92,7 @@
     },
     "09a9a228394cfed9": {
       "fr": "· à ce jour",
-      "pt": "até o momento"
+      "pt": "· até o momento"
     },
     "09c1aebb40c884b9": {
       "fr": "ClinicalTrials.gov : essai FD-TACT",
@@ -1450,7 +1452,7 @@
     },
     "8f925f1f1e7682ca": {
       "fr": "· attendu",
-      "pt": "esperado"
+      "pt": "· esperado"
     },
     "8faf7ec7ab20ca1c": {
       "fr": "Pays",
