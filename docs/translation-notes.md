@@ -496,3 +496,12 @@ language now). The 30 messages the page joins from pieces ("parts", such as
 "{n} year") and 3 whose page sentence was not in the file wait for the
 translators. Rocio's Portuguese has "e{second}" (no space) in
 `stepPanel.parallelMilestones`, as on the page: for the proofreading.
+
+**The page's "· " separator (5 Nov).** The page joins "· expected" and
+"· so far" to the words before them ("In progress · expected Q4 2026"). The
+Portuguese delivery dropped the leading "· " in both ("esperado", "até o
+momento"), so /pt ran the words together ("Em andamento esperado Q4 2026").
+`import-xliff.js` keeps the English's leading "· " when a translation drops
+it, and says so; French had kept it. The files in the record stay as
+delivered; `imported.json` holds the text as imported. Seen by the React
+port's golden tests, which compare it with the pages.

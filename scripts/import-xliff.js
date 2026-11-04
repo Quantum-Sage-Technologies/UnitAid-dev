@@ -97,7 +97,7 @@ function plan(files, content, memory) {
     const { language, units } = parseXliff(f.xml, f.name, errors);
     const loc = LANGUAGES[language];
     if (!loc) { errors.push(`${f.name}: target-language "${language}" is not French or Portuguese`); continue; }
-    const counts = { name: f.name, language, locale: loc, units: units.length, imported: 0, unchanged: 0, stale: 0 };
+    const counts = { name: f.name, language, locale: loc, units: units.length, imported: 0, unchanged: 0, stale: 0, separators: 0 };
     for (const u of units) {
       const where = `${f.name} ${u.resname}`;
       if (key(u.source) !== u.id) { errors.push(`${where}: its id is not key(its English); the file was edited or made from other text`); continue; }
@@ -107,6 +107,11 @@ function plan(files, content, memory) {
         continue;
       }
       if (!current.has(u.id)) { counts.stale++; stale.push({ ...u, locale: loc, file: f.name }); continue; }
+      // The page joins a string that starts with "· " to the words before it
+      // ("In progress" + "· expected Q4 2026"); a translation that drops the
+      // separator runs the two together, so it keeps the English's.
+      const sep = u.source.match(/^·\s+/);
+      if (sep && !u.target.startsWith("·")) { u.target = sep[0] + u.target.trimStart(); counts.separators = (counts.separators || 0) + 1; }
       const before = memory.entries[u.id] && memory.entries[u.id][loc];
       if (before === u.target) counts.unchanged++; else counts.imported++;
       changes.push({ key: u.id, locale: loc, before, after: u.target, resname: u.resname });
@@ -193,7 +198,7 @@ function main(args = process.argv.slice(2), given = {}) {
   }
   console.log("");
   for (const c of r.perFile) {
-    console.log(`  ${c.name} (${c.language} → ${c.locale}): ${c.units} units · ${c.imported} new or changed · ${c.unchanged} already the same · ${c.stale} no longer in the English`);
+    console.log(`  ${c.name} (${c.language} → ${c.locale}): ${c.units} units · ${c.imported} new or changed · ${c.unchanged} already the same · ${c.stale} no longer in the English${c.separators ? ` · ${c.separators} kept the English's leading "· "` : ""}`);
   }
   if (r.stale.length) {
     console.log("\n  Left out, the English was reworded since the export (export-xliff.js offers the new wording):");
