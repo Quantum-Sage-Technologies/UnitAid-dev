@@ -56,22 +56,25 @@ const OUT = path.join(ROOT, "dist", "rbm-messages");
 // 2026). Renaming it is this line (and the React version's lib/messages.ts).
 const NAMESPACE = "Unitaid";
 
-// What RBM's site reads for the module besides our messages, from its sample
-// files (28 Oct 2026): Sidebar.unitaid and Sidebar.unitaid_tooltip (its menu
-// entry, outside the namespace, with RBM's key names), and inside it the
+// What RBM's site reads for the module besides our messages: its menu entry,
+// outside the namespace, with RBM's key names, Sidebar.<group>_subitem_unitaid
+// and its _tooltip (rbm-module-unitaid's contract check and sidebar, 4 Nov
+// 2026; the sample files of 28 Oct had Sidebar.unitaid), and inside it the
 // page's title and metadata. They are made from messages we already have, so
 // they never need a translation of their own: the header's title and
 // description, RBM's own name kept in English in the title, and the keywords
 // in English in every language, as RBM's sample keeps its own.
 const RBM_SITE = "RBM Partnership to End Malaria";
 const KEYWORDS = "LAUNCH, Unitaid, Malaria, Antimalarial medicines, Market access, Product launch, Dashboard, RBM Partnership to End Malaria";
+// The menu entry's key: RBM's sidebar group "partners", as its sandbox reads it.
+const SIDEBAR_KEY = "partners_subitem_unitaid";
 // m: one language's messages, { "header.title": "…" }. A key whose source is
 // missing is left out (small test inputs have no header).
 function shellKeys(m) {
   const title = m["header.title"], description = m["header.description"];
   const keep = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => typeof v === "string"));
   return {
-    sidebar: keep({ unitaid: title, unitaid_tooltip: description }),
+    sidebar: keep({ [SIDEBAR_KEY]: title, [`${SIDEBAR_KEY}_tooltip`]: description }),
     page: {
       ...keep({ title }),
       ...(title ? { metadata: keep({ title: `${title} | ${RBM_SITE}`, description, keywords: KEYWORDS }) } : {}),
@@ -263,12 +266,12 @@ function load() {
 
 // The file each language gets: RBM's Sidebar keys, then everything under
 // NAMESPACE (the page's title and metadata first, as in RBM's sample), nested,
-// two-space indent, LF, newline at the end.
+// tab indent (RBM's Biome format check), LF, newline at the end.
 const serialise = (pairs) => {
   const shell = shellKeys(Object.fromEntries(pairs));
   const file = { Sidebar: shell.sidebar, [NAMESPACE]: { ...shell.page, ...nest(pairs) } };
   if (!Object.keys(file.Sidebar).length) delete file.Sidebar;
-  return JSON.stringify(file, null, 2) + "\n";
+  return JSON.stringify(file, null, "\t") + "\n";
 };
 
 // ---------------------------------------------------------------------------
@@ -326,5 +329,5 @@ function main(args = [], inputs = load(), outDir = OUT) {
   return 0;
 }
 
-module.exports = { build, load, main, flatten, nest, placeholders, icuProblems, typeset, serialise, shellKeys, LOCALES, OUT, UI, FORMS, NAMESPACE, RBM_SITE, KEYWORDS };
+module.exports = { build, load, main, flatten, nest, placeholders, icuProblems, typeset, serialise, shellKeys, LOCALES, OUT, UI, FORMS, NAMESPACE, RBM_SITE, KEYWORDS, SIDEBAR_KEY };
 if (require.main === module) process.exitCode = main(process.argv.slice(2));
