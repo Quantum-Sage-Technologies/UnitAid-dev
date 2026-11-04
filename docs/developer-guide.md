@@ -255,6 +255,16 @@ No test framework by design; two layers instead:
   `node scripts/copy-rbm-messages.js --to ../launch-rbm-test` and commit
   there. Its data is the one-language files `publish-dataset.yml` publishes.
   See [rbm-messages-notes.md](rbm-messages-notes.md).
+  **Since 5 Nov 2026** the hand-over is the `unitaid` module in
+  `rbm-data-initiative/rbm-module-unitaid` (release `v1.1.1`): after a message
+  or data change, copy `dist/rbm-messages/{en,fr,pt}.json` into its
+  `src/app/[locale]/unitaid/i18n/` and the published `v1/dashboard.{en,fr,pt}.json`
+  into its `public/unitaid/data/`, run its five checks, and open a pull
+  request there. The RBM test site is retired: `launch-rbm-test` `main` is
+  now the React version (`copy-rbm-messages.js --to ../launch-rbm-test`
+  still works), its static pages are kept at the tag `static-pages-final`,
+  and GitHub Pages is off, so `copy-rbm-pages.js` has nothing left to copy
+  into there.
 - No secrets exist anywhere in the repo or its history; the confirmation
   register lives outside the repo by policy.
 - **The two forms (Subscribe, and Send feedback on the illustrated journey)
