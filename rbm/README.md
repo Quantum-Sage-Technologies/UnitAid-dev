@@ -160,3 +160,9 @@ approval), pull `launch-data-test`, then
 `node scripts/copy-rbm-pages.js --to <checkout of launch-rbm-test> --data-only`
 replaces only `data/dashboard.json` there. That same file is the one to send
 RBM.
+
+**Retired, 5 Nov 2026.** The test copy is gone: `launch-rbm-test` `main` is
+now the React version, its last static pages are kept at the tag
+`static-pages-final`, and its GitHub Pages site is off. RBM receives the
+dashboard as the `unitaid` module in `rbm-data-initiative/rbm-module-unitaid`
+(release `v1.1.1`); see `docs/developer-guide.md`.
