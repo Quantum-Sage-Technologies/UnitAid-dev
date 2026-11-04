@@ -452,6 +452,28 @@ keep their own "Status" keys). 318 keys (313 before), 59 with
   only: 294 → 296 strings, contentHash `e7a724ee4977`), so the check that
   every message is in that bucket passes.
 
+**16. RBM's sandbox: `Sidebar.partners_subitem_unitaid`, and tabs** (4 Nov,
+branch `fix/rbm-sidebar-keys`). RBM's module repository
+(`rbm-data-initiative/rbm-module-unitaid`, `6ca0e99`) loads these files from
+`src/app/[locale]/unitaid/i18n/` with next-intl 3.26.5. A trial there, on a
+local branch, with launch-rbm-test `feat/rbm-versions`'s files: every message
+read and formatted as written in en, fr and pt, and `next build` served them
+on `/en|fr|pt/unitaid`. Two things failed, both fixed here:
+- **The sidebar keys.** Its `check-contract.mjs` requires
+  `Sidebar.<group>_subitem_unitaid[_tooltip]`, and its sidebar reads
+  `Sidebar.partners_subitem_unitaid` and `partners_subitem_unitaid_tooltip`:
+  with ours (`Sidebar.unitaid`, decision 14, from the 28 Oct sample) the check
+  fails 6 times and the menu shows the raw key. Now `SIDEBAR_KEY`,
+  `partners_subitem_unitaid` (the owner's choice: the group the sandbox
+  reads; its `INTEGRATION.md` leaves the group to RBM's team). The words stay
+  the header's title and description.
+- **Tab indent.** Its `biome format` wants tabs; two spaces failed the check
+  on all three files (no word different). `serialise()` writes tabs.
+`test-build-rbm-messages.js` checks both (71 passed, 6 new). The files this
+builds are byte-identical to the ones delivered in `rbm-module-unitaid`
+`v1.0.0` (`9d44794`, 4 Nov), where they had been renamed and re-indented by
+hand: the next copy into RBM's repository changes nothing.
+
 ## Coverage, 28 Oct 2026, after PR #129
 
 | | found | missing |
@@ -578,6 +600,13 @@ therefore fails today, and `--allow-stale` builds with those 7 in English.
    one paragraph in its RBM entry.
 
 ## Status
+
+- **4 Nov 2026, RBM's sandbox** (decision 16): branch `fix/rbm-sidebar-keys`
+  from `main` `9993855`, local, not pushed. `scripts/build-rbm-messages.js`,
+  `scripts/test-build-rbm-messages.js` (71 passed, 0 failed),
+  `test-copy-rbm-messages.js` 35 passed, this file. Built (fr and pt 330 of
+  330) and copied into launch-rbm-test `fix/rbm-sidebar-keys`, on
+  `feat/rbm-versions`.
 
 - **3 Nov 2026, the page changes for the React port** (decision 15): branch
   `feat/rbm-messages-tracker` from `main` `b0f8675`, local, not pushed.

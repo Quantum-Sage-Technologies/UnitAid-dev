@@ -14,7 +14,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const { key } = require("./i18n-hash");
-const { build, load, main, flatten, placeholders, serialise, LOCALES, OUT, NAMESPACE, RBM_SITE, KEYWORDS } = require("./build-rbm-messages");
+const { build, load, main, flatten, placeholders, serialise, LOCALES, OUT, NAMESPACE, RBM_SITE, KEYWORDS, SIDEBAR_KEY } = require("./build-rbm-messages");
 
 let passed = 0, failed = 0;
 const ok = (c, name) => { if (c) passed++; else { failed++; console.log("  FAIL " + name); } };
@@ -36,8 +36,15 @@ ok(NAMESPACE === "Unitaid" && LOCALES.every((l) => Object.keys(written[l]).join(
 // RBM's own keys for the module (its sample files): made from the header, never translated on their own
 for (const l of LOCALES) {
   const w = written[l], h = w[NAMESPACE].header;
-  ok(Object.keys(w.Sidebar).join() === "unitaid,unitaid_tooltip" && w.Sidebar.unitaid === h.title && w.Sidebar.unitaid_tooltip === h.description,
-     `${l}: Sidebar.unitaid and unitaid_tooltip are the header's title and description`);
+  ok(Object.keys(w.Sidebar).join() === "partners_subitem_unitaid,partners_subitem_unitaid_tooltip" && SIDEBAR_KEY === "partners_subitem_unitaid"
+     && w.Sidebar.partners_subitem_unitaid === h.title && w.Sidebar.partners_subitem_unitaid_tooltip === h.description,
+     `${l}: Sidebar.partners_subitem_unitaid and its _tooltip are the header's title and description`);
+  // rbm-module-unitaid's scripts/check-contract.mjs, SIDEBAR_KEY_PATTERN
+  ok(Object.keys(w.Sidebar).every((k) => /^[A-Za-z0-9]+_subitem_unitaid(_tooltip)?$/.test(k)),
+     `${l}: the Sidebar keys match RBM's contract, <group>_subitem_unitaid[_tooltip]`);
+  const text = serialise(r.messages[l]);
+  ok(/^\{\n\t"Sidebar": \{\n\t\t"/.test(text) && !/^ /m.test(text) && text.endsWith("}\n") && !text.includes("\r"),
+     `${l}: indented with tabs, LF, newline at the end (RBM's Biome format check)`);
   ok(Object.keys(w[NAMESPACE]).slice(0, 2).join() === "title,metadata" && w[NAMESPACE].title === h.title,
      `${l}: Unitaid.title and metadata come first, the title is the header's`);
   ok(JSON.stringify(w[NAMESPACE].metadata) === JSON.stringify({ title: `${h.title} | ${RBM_SITE}`, description: h.description, keywords: KEYWORDS }),
