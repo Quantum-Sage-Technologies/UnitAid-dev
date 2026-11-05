@@ -146,7 +146,9 @@
       "transactions": "Transactions",
       "packs": "Packs",
       "courses": "Treatment courses (est.)",
-      "notEstimated": "not estimated"
+      "notEstimated": "not estimated",
+      "boughtHeading": "Presentations bought through Global Fund-financed orders",
+      "boughtScope": "Orders paid for by other donors, national governments or private buyers are not included."
     },
     "milestones": {
       "milestone": "Milestone",
@@ -365,7 +367,7 @@
   "about": {
     "launchTitle": "About LAUNCH",
     "launchPurpose": "LAUNCH, funded by Unitaid, is a proof of concept for making the access pathway of new antimalarial medicines transparent. It brings public information on each medicine together in one place, from development and regulatory approval through WHO recommendation and prequalification to registration, policy, procurement and delivery in countries, so that partners can see where access is held up and act on it.",
-    "launchScope": "It starts with four medicines relevant to multiple first-line therapy (MFT) strategies, which use more than one first-line treatment in a population to reduce the risk of drug resistance. Two are already recommended by WHO but underused: artesunate–pyronaridine (ASPY) and dihydroartemisinin–piperaquine (DHA–PPQ). Two are in late-stage development: ganaplacide–lumefantrine (GanLum) and artemether–lumefantrine–amodiaquine (ALAQ). Together they cover both halves of the pathway: approval for the medicines in development, and adoption and procurement for those already recommended.",
+    "launchScope": "It starts with four medicines relevant to multiple first-line therapy (MFT) strategies, which use more than one first-line treatment in a population to reduce the risk of drug resistance. Two are already recommended by WHO: artesunate–pyronaridine (ASPY) and dihydroartemisinin–piperaquine (DHA–PPQ). Two are in late-stage development: ganaplacide–lumefantrine (GanLum) and artemether–lumefantrine–amodiaquine (ALAQ). Together they cover both halves of the pathway: approval for the medicines in development, and adoption and procurement for those already recommended.",
     "launchNoEndorsement": "Tracking a medicine here does not mean that LAUNCH or Unitaid endorses it or recommends it for any use. The dashboard reports where each medicine stands on the access pathway, not whether it should be used. For this proof of concept the scope is these four medicines; it may later expand to other medicines and malaria tools.",
     "dataTitle": "About the data",
     "dataBody": "The LAUNCH dashboard displays publicly available information only. Product-specific details appear solely where the manufacturer has confirmed in writing that they may be shared. Health authority reviews may take place at any stage of development, and their status is generally not public, so regulatory steps change only when a regulator or the manufacturer announces an outcome. Procurement figures cover public channels only. Hover any stage for status detail; select a medicine to open its full profile.",

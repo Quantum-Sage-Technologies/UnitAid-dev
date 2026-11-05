@@ -124,6 +124,35 @@ three 3 Nov entries were left alone for that reason; none quotes a figure.
 - **Layout, already so on `main`**: "Operational research" sits alone on its
   row whenever the procurement card is full width.
 
+## After the merge (PR #148, `36e8d81`, 5 Nov 2026 11:15 UTC)
+
+The translate bot (`bb14a5c`) translated all 17 new strings into French and
+Portuguese; none was left in English. Two follow-ups, on the branch
+`fix/translator-wording-nov5`:
+
+- **The translators' wording, put back.** A changed English sentence is a new
+  translation key, so the bot machine-translated the whole of About LAUNCH's
+  second paragraph and replaced the professional translators' text (French
+  now opened "Ce document présente…" where theirs reads "LAUNCH suit pour
+  l'instant…"). Its French and Portuguese are now the translators' own,
+  minus "mais restent sous-utilisés" / "mas são subutilizados". The 8 Sep
+  changelog line likewise keeps theirs with one word changed ("recommandés",
+  "recomendados"). The 15 Oct line keeps the bot's version: its English
+  clause was rewritten, so there is no translator wording to keep, and
+  changelog lines are not shown on the page.
+- **The React message missed in #148.** `i18n/ui.en.json` `about.launchScope`
+  still said "but underused", so `test-build-rbm-messages.js` failed 2 on
+  `main` after the bot rebuilt `content.en.json`. On the pull request it had
+  passed, because the stale `content.en.json` still held the old sentence; the
+  merge's CI ran before the bot's commit and nothing ran after it. Fixed, with
+  `content.en.json` rebuilt so CI sees the new message. Lesson: on a branch
+  that changes page text, run `node scripts/assemble-content.js` before the
+  message and dataset tests, then decide whether to commit it.
+- **Two React messages for the module's card**: `product.procurement.boughtHeading`
+  and `boughtScope`, worded exactly as the page, so the bot's translations
+  apply (`build-rbm-messages.js`: French and Portuguese 100%, 71 passed). The
+  Portuguese heading lost the full stop the bot gave it.
+
 ## Restoring the figures
 
 Put each value in the parked file back at its path, delete
@@ -133,8 +162,13 @@ if the figures were confirmed as they were.
 
 ## Status
 
-- Branch `feedback/unitaid-nov-5`, 1 commit on `6cdab21`, pushed with this
-  commit for a pull request to `main`; its CI result is on the pull request.
+- Branch `feedback/unitaid-nov-5`, 1 commit on `6cdab21`: PR #148, CI green,
+  merged 5 Nov 2026 as `36e8d81`; bots ran (history snapshot `81e26b1`,
+  translations `bb14a5c`).
+- Branch `fix/translator-wording-nov5`, 1 commit on `bb14a5c`: translators'
+  wording and `about.launchScope` (above), pushed with this commit for a pull
+  request. `test-build-rbm-messages.js` 68 passed, 0 failed; every other
+  check as below.
 - Verify block: treatment policy byte-identical; validator 0 errors, 1 warning
   (French Guiana); synthetic 0 and 0; preview builds; `test-build-dataset`
   58 passed, 0 failed (after a temporary `assemble-content.js`; with the stale
