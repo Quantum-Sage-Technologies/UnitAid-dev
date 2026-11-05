@@ -143,6 +143,7 @@
       "globalFundOnly": "All transactions shown are Global Fund-financed orders from its PQR database. Orders paid for by other donors, national governments or private buyers are not included, so this is not the product's total global procurement.",
       "notAvailable": "Data not yet available",
       "presentation": "Presentation",
+      "pack": "Pack",
       "transactions": "Transactions",
       "packs": "Packs",
       "courses": "Treatment courses (est.)",
