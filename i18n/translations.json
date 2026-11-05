@@ -59,6 +59,13 @@
       "fr": "Financé par Unitaid, LAUNCH constitue une démonstration de faisabilité visant à apporter plus de transparence au parcours d’accès des nouveaux médicaments antipaludiques. Il rassemble en un seul et même endroit des informations publiques sur chaque médicament – développement, approbation réglementaire via les recommandations et la préqualification de l’OMS, enregistrement, politiques nationales et mise en œuvre dans les pays – afin que les partenaires puissent identifier les obstacles à l’accès et prendre les mesures qui s’imposent.",
       "pt": "Financiado pela Unitaid, o LAUNCH é uma prova de conceito destinada a tornar transparente o processo de acesso a novos medicamentos antimaláricos. Ele reúne em um só lugar informações públicas sobre cada medicamento, desde o desenvolvimento e a aprovação regulatória, passando pela recomendação e pré-qualificação da OMS, até o registro, as políticas, aquisições e a distribuição nos países, para que os parceiros possam identificar onde o acesso está sendo dificultado e tomar medidas para solucionar esses obstáculos."
     },
+    "027e0db17b2bfc31": {
+      "en": "Figures under review",
+      "where": "products.products[2].detail.milestones[7].label",
+      "bucket": "data",
+      "fr": "Chiffres en cours d'examen",
+      "pt": "Dados em análise"
+    },
     "02ae78fc2bb62522": {
       "en": "EMA, or another stringent regulator such as the US FDA.",
       "where": "products.stageInfo[1].who",
@@ -505,6 +512,13 @@
       "fr": "Clause de non-responsabilité",
       "pt": "Isenção de responsabilidade"
     },
+    "12b7e79d6721d432": {
+      "en": "We updated the name of WHO's malaria department to the Department of Malaria and Neglected Tropical Diseases (MNT). The country counts for ASPY and DHA–PPQ now match the country access map, and we show how many countries a national medicines register confirms. We removed the years-late figures until the way they are worked out is agreed; the expected time for each stage stays. ALAQ's description now says it is still in clinical development and that its future role depends on trial results, regulators, WHO and countries. ASPY's description now says that registration and adoption vary by country and that LAUNCH is checking them country by country. For DHA–PPQ we explain what its share of Global Fund orders is measured against, describe its uses more carefully, and corrected Nigeria's count of active registrations from 26 to 25. No dates or statuses changed.",
+      "where": "products.changelog[13].plain",
+      "bucket": "data",
+      "fr": "Nous avons mis à jour le nom du département du paludisme de l'OMS, qui s'appelle désormais Département du paludisme et des maladies tropicales négligées (MNT). Le nombre de pays où ASPY et DHA-PPQ sont disponibles correspond maintenant à la carte d'accès aux médicaments, et nous indiquons le nombre de pays pour lesquels un registre national des médicaments est confirmé. Nous avons supprimé les chiffres relatifs aux années de retard en attendant de définir leur mode de calcul ; la durée prévue pour chaque étape est maintenue. La description du médicament ALAQ indique désormais qu'il est toujours en développement clinique et que son rôle futur dépend des résultats des essais, des autorités réglementaires, de l'OMS et des pays. La description d'ASPY précise que l'enregistrement et l'adoption varient selon les pays et que LAUNCH les vérifie pays par pays. Concernant DHA-PPQ, nous expliquons comment sa part des commandes du Fonds mondial est mesurée, décrivons plus précisément ses utilisations et corrigé le nombre d'enregistrements actifs au Nigéria, qui est passé de 26 à 25. Aucune date ni aucun statut n'ont été modifiés.",
+      "pt": "Atualizamos o nome do departamento de malária da OMS para Departamento de Malária e Doenças Tropicais Negligenciadas (MNT). A contagem de países para ASPY e DHA-PPQ agora corresponde ao mapa de acesso por país, e mostramos quantos países um registro nacional de medicamentos confirma. Removemos os dados com anos de atraso até que a forma de cálculo seja definida; o tempo previsto para cada etapa permanece o mesmo. A descrição do ALAQ agora indica que ele ainda está em desenvolvimento clínico e que seu papel futuro depende dos resultados dos ensaios, das agências reguladoras, da OMS e dos países. A descrição do ASPY agora indica que o registro e a adoção variam de acordo com o país e que o LAUNCH está verificando-os país por país. Para o DHA-PPQ, explicamos em relação a qual sua participação nos pedidos do Fundo Global é medida, descrevemos seus usos com mais detalhes e corrigimos a contagem de registros ativos da Nigéria de 26 para 25. Nenhuma data ou status foi alterado."
+    },
     "12c8f8f4912cbdb3": {
       "en": "Rwanda",
       "where": "resistance.dict.country[50]",
@@ -907,6 +921,13 @@
       "bucket": "js",
       "fr": "Non testé P. falciparum"
     },
+    "1d00d6d05acc1b9c": {
+      "en": "Figures to be added after review",
+      "where": "products.products[2].detail.milestones[7].next",
+      "bucket": "data",
+      "fr": "Les chiffres seront ajoutés après examen.",
+      "pt": "Os números serão adicionados após revisão."
+    },
     "1d396adab2b7621b": {
       "en": "Senegal's list of medicines with a marketing authorisation.",
       "where": "sources.sources[40].plain",
@@ -961,6 +982,13 @@
       "bucket": "js",
       "fr": "[LAUNCH] échec de l’inscription :",
       "pt": "[LAUNCH] falha na inscrição:"
+    },
+    "1f9367600b3526e2": {
+      "en": "Bought through Global Fund-financed procurement since 2018. The procurement figures are being reviewed and will be added later.",
+      "where": "products.products[2].stages[6].note",
+      "bucket": "data",
+      "fr": "Acquisitions réalisées grâce à des achats financés par le Fonds mondial depuis 2018. Les chiffres relatifs à ces acquisitions sont en cours de révision et seront ajoutés ultérieurement.",
+      "pt": "Adquirido através de compras financiadas pelo Fundo Global desde 2018. Os valores das compras estão sendo revisados e serão adicionados posteriormente."
     },
     "1fa6522f0a6cb1d2": {
       "en": "Country stages have not been verified yet for: {medicines}.",
@@ -1329,6 +1357,13 @@
       "bucket": "data",
       "fr": "Manuel de l'OMS pour l'élaboration de lignes directrices, 2014",
       "pt": "Manual da OMS para o desenvolvimento de diretrizes, 2014"
+    },
+    "2d1700e8eec302ff": {
+      "en": "We found a real example of a country acting on the World Health Organization's advice: Ghana added this medicine as a backup first-choice treatment in 2022. It's still the only country confirmed to have done so. We also recorded the years Global Fund purchasing began for both recommended medicines (2018 and 2008).",
+      "where": "products.changelog[20].plain",
+      "bucket": "data",
+      "fr": "Nous avons trouvé un exemple concret de pays ayant suivi les recommandations de l'Organisation mondiale de la Santé : le Ghana a ajouté ce médicament à sa liste de traitements de première intention en 2022. Il reste à ce jour le seul pays à l'avoir fait. Nous avons également relevé les années de début des achats du Fonds mondial pour les deux médicaments recommandés (2018 et 2008).",
+      "pt": "Encontramos um exemplo concreto de um país que agiu de acordo com as recomendações da Organização Mundial da Saúde: Gana adicionou esse medicamento como tratamento de primeira escolha em 2022. Até o momento, é o único país que confirmou ter feito isso. Também registramos os anos em que o Fundo Global começou a comprar ambos os medicamentos recomendados (2018 e 2008)."
     },
     "2d1b84c3b2d1353b": {
       "en": "Americas",
@@ -2508,6 +2543,13 @@
       "bucket": "js",
       "fr": "Testé P. falciparum"
     },
+    "50da7987e352c45d": {
+      "en": "Global Fund purchasing figures were added (orders since 2018). The European medicines decision date is now recorded.",
+      "where": "products.changelog[30].plain",
+      "bucket": "data",
+      "fr": "Les chiffres des achats du Fonds mondial ont été ajoutés (commandes depuis 2018). La date de décision de la Commission européenne sur les médicaments est désormais enregistrée.",
+      "pt": "Foram adicionados os dados de compras do Fundo Global (encomendas desde 2018). A data da decisão europeia sobre medicamentos foi agora registada."
+    },
     "50f0cbe12bbd0a33": {
       "en": "${siteCount} ${siteCount === 1 ? \"site\" : \"sites\"}, ${lo === hi ? lo : lo + \"–\" + hi}",
       "where": "line 3107",
@@ -3518,6 +3560,13 @@
       "fr": "Premier patient en sept. 2025",
       "pt": "Primeiro paciente em setembro de 2025"
     },
+    "704e644b27e2f01d": {
+      "en": "WHO-recommended",
+      "where": "products.products[2].classLabel",
+      "bucket": "data",
+      "fr": "recommandé par l'OMS",
+      "pt": "Recomendado pela OMS"
+    },
     "705b84d97cf2b31e": {
       "en": "Routine delivery limited; concentrated in pilot and study settings",
       "where": "products.products[2].stages[7].note",
@@ -3692,6 +3741,13 @@
       "bucket": "js",
       "fr": "Les pays dont les recommandations ou politiques nationales de traitement incluent ce médicament, en se référant à une publication de l'OMS ou à un article évalué par des pairs. Un pays peut figurer à plusieurs étapes.",
       "pt": "Países cujas diretrizes ou políticas nacionais de tratamento incluem o medicamento, conforme citado em uma publicação da OMS ou em um artigo revisado por pares. Um país pode aparecer em mais de uma etapa."
+    },
+    "77b4985a487cdc1d": {
+      "en": "Orders paid for by other donors, national governments or private buyers are not included.",
+      "where": "line 2523 (in markup)",
+      "bucket": "js",
+      "fr": "Les commandes payées par d'autres donateurs, des gouvernements nationaux ou des acheteurs privés ne sont pas incluses.",
+      "pt": "Encomendas pagas por outros doadores, governos nacionais ou compradores privados não estão incluídas."
     },
     "77cb90cac2fab8f0": {
       "en": "Policy group",
@@ -4217,6 +4273,13 @@
       "bucket": "js",
       "fr": "Toutes les régions",
       "pt": "Todas as regiões"
+    },
+    "897323bde104db7f": {
+      "en": "Procurement figures are being reviewed and will be added later.",
+      "where": "products.products[2].detail.volumeNote",
+      "bucket": "data",
+      "fr": "Les chiffres relatifs aux achats sont en cours de vérification et seront ajoutés ultérieurement.",
+      "pt": "Os dados sobre as aquisições estão sendo analisados e serão adicionados posteriormente."
     },
     "898d877022f97688": {
       "en": "Back to the dashboard",
@@ -4922,6 +4985,13 @@
       "fr": "attendu {date}",
       "pt": "esperado {date}"
     },
+    "a20fa51134c6d684": {
+      "en": "Presentations bought through Global Fund-financed orders",
+      "where": "line 2521 (in markup)",
+      "bucket": "js",
+      "fr": "Présentations achetées grâce à des commandes financées par le Fonds mondial",
+      "pt": "Apresentações adquiridas por meio de encomendas financiadas pelo Fundo Global."
+    },
     "a264875d219421cb": {
       "en": "No national treatment policy lists {medicine} yet.",
       "where": "i18n/ui.en.json:map.noPolicy",
@@ -5184,6 +5254,13 @@
       "bucket": "markup",
       "fr": "partenaires, qui seront accueillis par les"
     },
+    "a9d3ed35946f1afa": {
+      "en": "Procurement; figures under review",
+      "where": "products.products[3].barrier",
+      "bucket": "data",
+      "fr": "Achats; chiffres en cours d'examen",
+      "pt": "Aquisições; números em revisão"
+    },
     "aaaff786e9b803c9": {
       "en": "234 transactions · US$41.5m (2008–2026)",
       "where": "products.products[3].detail.volume.total",
@@ -5337,6 +5414,13 @@
       "where": "line 3848",
       "bucket": "js",
       "fr": "${esc(k)}: ${pg.length ? \"lists \" + pname : \"does not list \" + pname}."
+    },
+    "b29076ddaeeb1d37": {
+      "en": "Procurement figures to be added after review",
+      "where": "products.products[2].stages[6].next",
+      "bucket": "data",
+      "fr": "Les chiffres relatifs aux achats seront ajoutés après examen.",
+      "pt": "Os valores relativos às aquisições serão adicionados após revisão."
     },
     "b2b0d5b035c2d499": {
       "en": "The Gambia: MCA list of registered products",
@@ -6351,6 +6435,13 @@
       "fr": "En phase III : granulés en sachet, une fois par jour pendant 3 jours avec un repas léger, pour les adultes et les enfants de 10 kg et plus. La présentation finale du produit est soumise à approbation.",
       "pt": "Na fase III: grânulos em sachê, uma vez ao dia durante 3 dias, com uma refeição leve, para adultos e crianças com peso ≥10 kg. Apresentação final do produto sujeita à aprovação."
     },
+    "d257545f486ef1b4": {
+      "en": "It starts with four medicines relevant to multiple first-line therapy (MFT) strategies, which use more than one first-line treatment in a population to reduce the risk of drug resistance. Two are already recommended by WHO: artesunate–pyronaridine (ASPY) and dihydroartemisinin–piperaquine (DHA–PPQ). Two are in late-stage development: ganaplacide–lumefantrine (GanLum) and artemether–lumefantrine–amodiaquine (ALAQ). Together they cover both halves of the pathway: approval for the medicines in development, and adoption and procurement for those already recommended.",
+      "where": "static text",
+      "bucket": "markup",
+      "fr": "Ce document présente quatre médicaments pertinents pour les stratégies de traitement de première ligne multiple (MFT), qui associent plusieurs traitements de première ligne au sein d'une même population afin de réduire le risque de résistance aux médicaments. Deux sont déjà recommandés par l'OMS : l'artésunate-pyronaridine (ASPY) et la dihydroartémisinine-pipéraquine (DHA-PPQ). Deux autres sont en phase finale de développement : le ganaplacide-luméfantrine (GanLum) et l'artéméther-luméfantrine-amodiaquine (ALAQ). Ensemble, ils couvrent les deux étapes du processus : l'autorisation de mise sur le marché des médicaments en développement, ainsi que leur adoption et leur approvisionnement.",
+      "pt": "Começa com quatro medicamentos relevantes para estratégias de terapia de primeira linha múltipla (MFT), que utilizam mais de um tratamento de primeira linha em uma população para reduzir o risco de resistência a medicamentos. Dois já são recomendados pela OMS: artesunato-pironaridina (ASPY) e di-hidroartemisinina-piperaquina (DHA-PPQ). Dois estão em fase final de desenvolvimento: ganaplacida-lumefantrina (GanLum) e arteméter-lumefantrina-amodiaquina (ALAQ). Juntos, eles abrangem ambas as metades do processo: aprovação para os medicamentos em desenvolvimento e adoção e aquisição para aqueles já recomendados."
+    },
     "d27659f251657fa2": {
       "en": "Source: WHO {edition}, Annex 4B ({year} policy).",
       "where": "i18n/ui.en.json:map.policySource",
@@ -6710,6 +6801,13 @@
       "bucket": "data",
       "fr": "Indonésie"
     },
+    "dbfb6f7d465ee928": {
+      "en": "Bought through Global Fund-financed procurement since 2008; the timeline counts from WHO prequalification in 2015. The procurement figures are being reviewed and will be added later.",
+      "where": "products.products[3].stages[6].note",
+      "bucket": "data",
+      "fr": "Acquis grâce à des achats financés par le Fonds mondial depuis 2008 ; la période court à partir de la préqualification par l’OMS en 2015. Les chiffres relatifs aux achats sont en cours de révision et seront ajoutés ultérieurement.",
+      "pt": "Adquiridos por meio de compras financiadas pelo Fundo Global desde 2008; o período começa a contar a partir da pré-qualificação da OMS em 2015. Os valores das compras estão sendo revisados e serão adicionados posteriormente."
+    },
     "dc001b4161f9af56": {
       "en": "First-line, tested P. falciparum",
       "where": "line 3693",
@@ -7064,6 +7162,13 @@
       "fr": "Première série de mises à jour issues de bases de données publiques : registres des achats du Fonds mondial, listes des autorisations de l’OMS, registres européens des médicaments et registres des essais cliniques.",
       "pt": "Primeiro conjunto de atualizações obtidas a partir de bancos de dados públicos — registros de aquisições do Global Fund, listas de aprovação da Organização Mundial da Saúde, registros de ensaios clínicos e registros de medicamentos europeus."
     },
+    "e369972845493818": {
+      "en": "Procurement figures are withdrawn while they are reviewed. Each medicine's procurement section lists the presentations bought through Global Fund-financed orders, and the figures will be added again once they are confirmed.",
+      "where": "products.changelog[0].plain",
+      "bucket": "data",
+      "fr": "Les chiffres relatifs aux achats sont retirés le temps de leur vérification. La section consacrée aux achats pour chaque médicament répertorie les présentations acquises grâce aux commandes financées par le Fonds mondial ; les chiffres seront réintégrés une fois confirmés.",
+      "pt": "Os dados de aquisição são suspensos enquanto estão sendo analisados. A seção de aquisição de cada medicamento lista as apresentações compradas por meio de pedidos financiados pelo Fundo Global, e os dados serão adicionados novamente assim que forem confirmados."
+    },
     "e3743b2d468f4a0f": {
       "en": "What is your feedback about?",
       "where": "line 3665",
@@ -7265,6 +7370,13 @@
       "where": "line 3899",
       "bucket": "js",
       "fr": "Sur : les frontières indiquent les pays où la politique nationale autorise le médicament sélectionné. Cliquez sur un pays pour plus de détails."
+    },
+    "ea1e8934bc26235f": {
+      "en": "Procurement is the current access barrier, despite a WHO recommendation dating to 2010. The procurement figures behind this are being reviewed.",
+      "where": "products.products[3].flag",
+      "bucket": "data",
+      "fr": "L’approvisionnement constitue actuellement le principal obstacle à l’accès, malgré une recommandation de l’OMS datant de 2010. Les chiffres relatifs à l’approvisionnement qui sous-tendent cette situation sont en cours de révision.",
+      "pt": "O processo de aquisição é a atual barreira de acesso, apesar de uma recomendação da OMS datada de 2010. Os dados relativos às aquisições que comprovam essa situação estão sendo analisados."
     },
     "ea3bfc26fa5ca39f": {
       "en": "Guyana",
@@ -7746,6 +7858,13 @@
       "bucket": "data",
       "fr": "Registre des médicaments de la RDC ayant une autorisation de mise sur le marché.",
       "pt": "Registro de medicamentos com autorização de comercialização na República Democrática do Congo."
+    },
+    "f9c84a78ba0a2b44": {
+      "en": "Global Fund purchasing figures were added (orders since 2008). Nine versions of the medicine have passed World Health Organization quality checks.",
+      "where": "products.changelog[29].plain",
+      "bucket": "data",
+      "fr": "Les chiffres d'achat du Fonds mondial ont été ajoutés (commandes depuis 2008). Neuf versions du médicament ont passé avec succès les contrôles de qualité de l'Organisation mondiale de la santé.",
+      "pt": "Foram adicionados os dados de compras do Fundo Global (encomendas desde 2008). Nove versões do medicamento passaram pelos controles de qualidade da Organização Mundial da Saúde."
     },
     "fa7955814e32aed3": {
       "en": "Site",
