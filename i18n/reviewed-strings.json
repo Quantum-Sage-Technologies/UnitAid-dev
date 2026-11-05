@@ -162,6 +162,7 @@
     { "file": "index.html", "src": "<span class=\"pk\">Transactions</span>", "en": "Transactions" },
     { "file": "index.html", "src": "<th scope=\"col\">Packs</th>", "en": "Packs" },
     { "file": "index.html", "src": "<span class=\"pk\">Packs</span>", "en": "Packs" },
+    { "file": "index.html", "src": "<th scope=\"col\">Pack</th>", "en": "Pack" },
     { "file": "index.html", "src": "\"<i>not estimated</i>\"", "en": "not estimated" },
     { "file": "index.html", "src": "n === 1 ? \"country\" :", "en": "country" },
     { "file": "index.html", "src": ": \"countries\"}</text>", "en": "countries" },

@@ -4008,6 +4008,13 @@
       "fr": "pays par groupe de patients",
       "pt": "país por grupo de pacientes"
     },
+    "80dc21673e554c7b": {
+      "en": "Pack",
+      "where": "index.html",
+      "bucket": "reviewed",
+      "fr": "Conditionnement",
+      "pt": "Embalagem"
+    },
     "8155f785fe007bfd": {
       "en": "Status of the ${tracked.length} medicines at this stage",
       "where": "line 2806",

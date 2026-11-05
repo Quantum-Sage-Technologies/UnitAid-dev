@@ -76,7 +76,8 @@ than three presentations make the card full width, as the old table was
 the tiles stack. Each name splits at its first " · ", " - " or run of spaces:
 the Portuguese translations of 13 of the 14 names drop the " · " (three spaces
 or " - " instead), and a " · "-only split left them without a pack line. All
-14 split correctly in French and Portuguese.
+14 split correctly in French and Portuguese. (The tiles became a table the
+same day; see "A table instead of tiles" below.)
 
 **The label: removed (owner's choice 1b, over 1a "WHO-recommended").** The
 page no longer draws the chip for the two market medicines. `classLabel` must
@@ -153,6 +154,46 @@ Portuguese; none was left in English. Two follow-ups, on the branch
   apply (`build-rbm-messages.js`: French and Portuguese 100%, 71 passed). The
   Portuguese heading lost the full stop the bot gave it.
 
+## A table instead of tiles (5 Nov 2026, later)
+
+The owner, comparing the tiles with a screenshot of the old figures table:
+"make a table format but not including numbers. Current dashboard data is
+fine". Branch `feedback/procurement-table`, page code and text only; the data
+and `dashboard.json` are unchanged, so nothing needs publishing.
+
+- **Two columns, Presentation and Pack**, from the same split as the tiles
+  (first " · ", " - " or run of spaces). Rejected: one column of whole names
+  (the old table minus its figures, but 12 rows of "40/320 mg tablets ·
+  blister of 9" read worse than the split the tiles already made); one
+  "Presentation" heading over both columns (no new word to translate, but an
+  unlabelled column).
+- **Always full width**, as the old table was whenever it had rows. The tiles'
+  rule (full width above three) left ASPY's two rows in a normal card of
+  about 260 px at 1280 px, and the French heading CONDITIONNEMENT, one word in
+  capitals, ran past the card's edge. Now measured in every case (en/fr/pt ×
+  both medicines × 1280, 390, 360 and 320 px): the table ends inside the card
+  and no heading overflows its cell. On a phone the cells lose 4 px of side
+  padding and the 50/50 split; at 360 px Chrome hyphenates
+  CONDITION-NEMENT; a heading may break anywhere only if nothing else fits.
+- **.ystable hides columns 2 and 3 on a phone** (the yardstick's Expected and
+  Actual); this table puts its column 2 back.
+- **"Pack" is a new word, translated by hand** (fr "Conditionnement", pt
+  "Embalagem", the term the Portuguese pack names already use). Single words
+  are not found by pattern, so it is listed in `i18n/reviewed-strings.json`
+  (as "Presentation" already was); without that entry the French and
+  Portuguese pages would have shown "Pack" in English. It is also the module's
+  `product.procurement.pack`, and a message that is on the page must already
+  have a translation, or `test-build-rbm-messages.js` fails on the pull
+  request. Rejected: page first and the module's message after the bot (this
+  morning's two-PR route, a second merge and wait). Like the bot's sentences,
+  the two words are for the translators to review. ("bucket": "reviewed" in
+  `translations.json` means "from the reviewed-strings list", not that a
+  translator checked it.)
+- **Found in passing, left alone**: at 320 px the whole dashboard is 6 px
+  wider than the screen, on `main` too: `.cards` has `minmax(250px, 1fr)`.
+- **RBM module**: same table in `detail.tsx` and its CSS, with the `pack`
+  message; a module release after this merges.
+
 ## Restoring the figures
 
 Put each value in the parked file back at its path, delete
@@ -173,6 +214,12 @@ if the figures were confirmed as they were.
   5 Nov 11:27 UTC; checked live in en, fr and pt.
 - RBM module: PR #7 (`1f754b3`), tag `v1.2.0`. Open items are in the
   handoff, §0 "Still to do" 9–11.
+- Branch `feedback/procurement-table`, 1 commit on `9ce2e70` (the table):
+  verify block as below, every other CI step run locally passes
+  (`test-build-rbm-messages.js` 71 passed, French and Portuguese 100%;
+  locale pages build without `--allow-stale`); SHACL not run, no data
+  changed. Files: `index.html`, `i18n/{ui.en,reviewed-strings,translations,
+  content.en}.json`, this file.
 - Verify block: treatment policy byte-identical; validator 0 errors, 1 warning
   (French Guiana); synthetic 0 and 0; preview builds; `test-build-dataset`
   58 passed, 0 failed (after a temporary `assemble-content.js`; with the stale
