@@ -1,18 +1,229 @@
 # Handoff — RBM staging dashboard
 
-> **Read §0 first.** It is the state of the project on 3 November 2026: the
-> handover guide for RBM, the forms service moved to Supabase (built, and
-> tested on a test project), and what is left before 10 November. §0.1 (28 October) still holds for the React port's internals,
-> and §0.2 (8 October) for the pipeline and the data, except where §0 says
-> otherwise. Everything after that is the history of September's work, kept
-> for its decisions. Where they disagree, §0 is current.
+> **Read §0 first.** It is the state of the project on 5 November 2026: the
+> dashboard delivered to RBM as the `unitaid` module (release `v1.1.1`),
+> RBM's test key on the forms service, and the decision to make that service
+> production. §0.1 (3 November) still holds for how the forms service was
+> built and tested and for the handover guide, §0.2 (28 October) for the
+> React port's internals, and §0.3 (8 October) for the pipeline and the data,
+> except where §0 says otherwise. Everything after that is the history of
+> September's work, kept for its decisions. Where they disagree, §0 is
+> current.
 
-## 0. Current state — 3 November 2026: the handover guide for RBM, the forms on Supabase, and what is left
+## 0. Current state — 5 November 2026: the module delivered to RBM, and the forms service becomes production
 
-*Start here in a new session. §0.1 below (28 October) is still the reference
-for what `feat/react-port` holds, how to check it is stable and how interface
-text changes; §0.2 (8 October) for the pipeline and the data. Where they
-disagree, this section is current.*
+*Start here in a new session. §0.1 below (3 November) is still the reference
+for how the forms service was built and tested and for the handover guide;
+§0.2 (28 October) for the React port's internals; §0.3 (8 October) for the
+pipeline and the data. Where they disagree, this section is current.*
+
+### What happened, 4–5 November
+
+- **4 Nov: the dashboard went into RBM's repository** (Kyler with Claude
+  Code), `rbm-data-initiative/rbm-module-unitaid`, as the module `unitaid`:
+  `src/app/[locale]/unitaid/`, `src/app/api/unitaid/` and `public/unitaid/`,
+  the only folders RBM lets us change.
+  - PR #3 (`5f8a44d`, merged 4 Nov 11:33 UTC by admin bypass, no review):
+    the React version with its data route and form relays, moved into those
+    folders with every setting renamed `UNITAID_…`, Oakkar's later changes
+    to 24 files merged in, and the bundled data refreshed. Its
+    `INTEGRATION.md`, `README.md` and `.env.example` are written for RBM's
+    developers.
+  - Checked on Kyler's Mac before the PR: RBM's `lint`, `format:check`,
+    `check:contract` and `build` (also with no network); our 394 React tests
+    run against the module, 386 passed, and the other 8 test the intended
+    changes (setting names, paths); the smoke test 87 of 87.
+  - PR #4 (`9d44794`): the "Delivered version" row, approved and merged by
+    Antonio. Tag `v1.0.0`.
+- **4–5 Nov (Oakkar).** In this repo: #143 (the sidebar keys under RBM's
+  names), #144 (the professional translators' French and Brazilian
+  Portuguese), #145, #146, and #147 (the developer guide now sends message
+  and data changes to the module; the static RBM test copy is retired). In
+  the module: #5 (`v1.1.0`) and #6 (`v1.1.1`), merged without review, CI
+  green on both. **The delivered version is `v1.1.1`** (`1799880`).
+- **Checked 5 Nov:** `node scripts/build-rbm-messages.js` on `main`
+  (`6cdab21`) gives exactly the module's `i18n/{en,fr,pt}.json` at `v1.1.1`:
+  336 keys each, none added, missing or different. The developer guide's
+  copy step is safe as written, and no key needs renaming by hand any more.
+- **4–5 Nov: RBM's test key on the forms service.** `RBM_TEST_FORMS_TOKEN`
+  (64 hex characters) was made on 4 Nov and added on Supabase as
+  `RBM_TEST_FORM_TOKEN`, without the S, so RBM's test server would have got
+  401 "Wrong token.". Renamed 5 Nov 01:23 UTC. Checked: its digest matches
+  the copy in `supabase/.env.test`, it gets 415 (recognised), and a made-up
+  key still gets 401. The check is below.
+- **5 Nov: the notification tokens** for RBM (`UNITAID_NOTIFICATIONS_TOKEN`,
+  one for test, one for production) were made into
+  `~/Downloads/rbm-notification-tokens.env` on Kyler's Mac (lines `TEST=` and
+  `PROD=`). The sender (item 5 below) will need the same values.
+- **5 Nov: two emails to Antonio drafted** for Kyler to send: the delivery,
+  naming `v1.1.1`, and separately the setting values. The test forms values
+  are the current project's; the email warns that the test forms address may
+  change (decision 3). Production forms values "to follow".
+
+### Decisions of 5 November
+
+The full record, with what was rejected, is in
+[forms-service-notes.md](../forms-service-notes.md) §2.11.
+
+1. **The forms service's current project becomes production.**
+   `launch-forms-test` is renamed and its secrets swapped (item 3 below). It
+   stays in the Oqtiva AI organisation, where it has been since 3 Nov
+   16:06 UTC. The owner's answers: Unitaid has approved Supabase; production
+   may stay in Oqtiva AI for now ("no worries" about its cost, about $10 a
+   month); the WHO team mailbox accepts mail from outside WHO. Rejected: a
+   new project in a Unitaid-owned organisation (§0.1). That organisation does
+   not exist yet, and RBM would have to be sent a second address later.
+2. **A new `UNSUBSCRIBE_SECRET` for production, not Vercel's.** No link
+   already emailed reaches Supabase. The welcome email's link points at
+   Vercel (`api/subscribe.js:107`) and Vercel checks it with its own secret;
+   the update email carries Resend's own link
+   (`scripts/notify-subscribers.js:41`). This holds **as long as
+   `/api/unsubscribe` keeps running on Vercel**. The day `api/` on Vercel is
+   switched off (§0.1, item 2.6), either Vercel's value is found and copied,
+   or `/api/unsubscribe` stays there.
+3. **RBM's test site gets its own free test project** (proposed; not built,
+   not yet agreed). A project has one `RESEND_SEGMENT_ID`, so sharing the
+   production project would put RBM's testers in the real subscriber list:
+   they would get the update email, and count in the subscriber figure for
+   the evaluation. Kyler's personal organisation has room (its one project,
+   `KYO`, is paused), and Kyler would own the new project, so its secrets
+   need no admin. Downside: free projects pause after 7 quiet days. Until it
+   exists, RBM's test site uses `launch-forms-test`.
+4. **The secret was renamed, not the code.** Matching the code to the typo
+   meant a line in `mail.mjs`, two doc lines, a pull request and a redeploy,
+   and it would leave the one name without the S beside `RBM_FORMS_TOKEN`,
+   `LOCAL_FORMS_TOKEN` and `UNITAID_FORMS_TOKEN`, inviting `RBM_FORM_TOKEN`
+   on the production day.
+
+### Where things are
+
+| Repo or service | Where | State |
+| --- | --- | --- |
+| `rbm-data-initiative/rbm-module-unitaid` | `main` | `1799880` (#6, 5 Nov), tag **`v1.1.1`**, the delivered version; also `v1.0.0` (`9d44794`) and `v1.1.0` (`bd2d8c0`). CI green, no open pull requests |
+| RBM's test site | `rbm-testdashboards.ecritportfolio.org/en/unitaid` | 404 (5 Nov): RBM has not imported the module yet. Its home page answers |
+| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | `6cdab21` (#147, Oakkar, 5 Nov) |
+| Supabase | `launch-forms-test` (`tbllmexjrmjwopgrfmce`) | In the Oqtiva AI organisation (§0.1's table still says Kyler's personal one), Nano, function `api` version 3. Test secrets plus `RBM_TEST_FORMS_TOKEN`. To become production (decision 1) |
+| `codebyjackson/launch-rbm-test` | `main` | `4232610` (#38, 4 Nov): the React version. The static pages are kept at the tag `static-pages-final`; GitHub Pages is off (404, 5 Nov) |
+| `Quantum-Sage-Technologies/unitaid-launch-data` | GitHub Pages | `v1/dashboard.en.json` 200 (5 Nov) |
+
+Local on Kyler's Mac:
+- `~/Downloads/rbm-module-unitaid`: the clone of RBM's repo, on `main`.
+- `~/Downloads/rbm-notification-tokens.env`: the two notification tokens,
+  readable by Kyler's user only, outside every repo. Keep it.
+- `~/Downloads/launch-development-supabase-forms/supabase/.env.test`: the
+  test project's secrets, now with `RBM_TEST_FORMS_TOKEN`. Git-ignored.
+- `~/Downloads/launch-development-handoff-nov5` (`docs/handoff-nov-5`): this
+  update.
+
+### Still to do before 10 November
+
+1. **Send Antonio the two emails** (drafted 5 Nov): the delivery, and, to
+   him only, the values. He said email is fine for them. Copy each secret
+   value from its file with `grep '^NAME=' <file> | cut -d= -f2- | pbcopy`,
+   so it is never shown on screen, in a chat or in a pull request.
+2. **The test project for RBM's test site** (decision 3, once agreed): a
+   Free project in Kyler's personal organisation. Then, from
+   `~/Downloads/launch-development-supabase-forms`, run
+   `supabase functions deploy api --use-api --remote=<new ref>` and
+   `supabase secrets set --env-file supabase/.env.test --remote=<new ref>`.
+   **Trap:** first change `FORMS_BASE_URL` in `.env.test` to the new
+   project's address; it still names `tbllmexjrmjwopgrfmce`. Check with the
+   test below (415), then send Antonio the new `UNITAID_FORMS_URL`; the token
+   stays the same.
+3. **The production swap on `launch-forms-test`** (decision 1), after item 2,
+   so RBM's testers never reach the real list. It needs an Owner or
+   Administrator of Oqtiva AI. Asking for Kyler to be made Administrator
+   saves waiting each time.
+
+   | Secret | Change |
+   | --- | --- |
+   | `RESEND_API_KEY` | the production key, Full access |
+   | `UNSUBSCRIBE_SECRET` | a new value (`openssl rand -hex 32`; decision 2) |
+   | `TEAM_INBOX` | the WHO team mailbox |
+   | `RBM_FORMS_TOKEN` | new (`openssl rand -hex 32`), for `dashboards.endmalaria.org`. Spelled with the S |
+   | `RESEND_SEGMENT_ID`, `LOCAL_FORMS_TOKEN`, `RBM_TEST_FORMS_TOKEN` | delete |
+   | `FORMS_BASE_URL` | unchanged |
+
+   Rename the project (its address does not change). Then check: the test
+   below with the new `RBM_FORMS_TOKEN` (415), and one real subscribe,
+   feedback and unsubscribe with a team address, which also proves the WHO
+   mailbox receives the service's mail.
+4. **Send Antonio the production forms values**: `UNITAID_FORMS_URL` is the
+   same address, `UNITAID_FORMS_TOKEN` is `RBM_FORMS_TOKEN`.
+5. **Build the notification sender** (§0.1, item 3, unchanged). The two
+   tokens now exist; they go into GitHub secrets when it is built. It also
+   needs RBM's production URL.
+6. **The handover guide** (§0.1). RBM now follows the module's own
+   `INTEGRATION.md`, `README.md` and `.env.example`, made from RBM's
+   template. The guide's three gaps can now be filled (code: the module
+   repo, tag `v1.1.1`; forms: Supabase, in the Oqtiva AI organisation for
+   now; address: `https://tbllmexjrmjwopgrfmce.supabase.co/functions/v1`),
+   but much of it describes the 28 Oct React port. The owner's call: update
+   it, or retire it in favour of `INTEGRATION.md`.
+7. **Test on a real iPhone and in Safari** (open since 28 Oct). The module
+   was checked in Chrome only.
+8. After RBM tests: remove `localhost:3000` from `PARTNERS` and `SITES`
+   (§0.1, item 6).
+
+**Checking a site's key without sending email:**
+
+```bash
+cd ~/Downloads/launch-development-supabase-forms
+T=$(grep '^RBM_TEST_FORMS_TOKEN=' supabase/.env.test | cut -d= -f2-)
+curl -s -w ' %{http_code}\n' -X POST "https://<ref>.supabase.co/functions/v1/api/feedback" \
+  -H "Authorization: Bearer $T" -H "Content-Type: text/plain" --data x; unset T
+```
+
+415 "Send JSON." means the key is recognised: the service checks the key
+before the format, so no form runs and no email goes. 401 "Wrong token."
+means it is not. `supabase secrets list` shows each secret's SHA-256 digest,
+never its value. Compare it with
+`grep '^NAME=' <file> | cut -d= -f2- | tr -d '\n' | shasum -a 256`.
+
+### Waiting on others
+
+- **RBM (Antonio):**
+  - import `v1.1.1` to the test site (it starts with item 1);
+  - the sidebar group for the page (`INTEGRATION.md` §2);
+  - whether the collapsed 60 px sidebar strip stays on phones (below).
+  - §0.1's open questions still stand unless answered.
+- **The Oqtiva AI organisation's Owner:** the production swap, or making
+  Kyler Administrator.
+- **Unitaid:** approved Supabase (Kyler, 5 Nov). Still open: who owns the
+  Resend account, for the production key.
+- **The WHO mailbox:** accepts outside mail (Kyler, 5 Nov). Not yet proven by
+  an email from the service (item 3's check).
+- **The team:** the header photo RBM asked us to replace (which photo, its
+  original file, the layout). Paused on 4 Nov.
+
+### Found on the way, left alone
+
+- **Merges without review in the module repo:** #3 (Kyler), #5 and #6
+  (Oakkar) went in by admin bypass. RBM's ruleset asks for one code-owner
+  approval (#4 had Antonio's). Agree with Oakkar to review each other's pull
+  requests there.
+- **Phones:** the dashboard needs about 330 px (340 px in French), and RBM's
+  collapsed sidebar keeps a 60 px strip. So phones narrower than about
+  400 px scroll sideways (Chrome: English fits at 390 px, French does not;
+  all three languages overflow at 360 px). Recorded in `INTEGRATION.md` §9
+  and asked in the email.
+- **RBM's import fails on any key that already exists with a different
+  value** when it merges our `i18n` into its `messages/*.json`
+  (`docs/main-repo/README.md`, step 3, in RBM's repo). A later version that
+  changes the text of one of our own keys may trip it. Ask Antonio how a
+  re-import handles that before the next wording change.
+- `copy-rbm-messages.js` still copies only to `launch-rbm-test`. The module
+  copy is by hand, as the developer guide says (#147).
+
+This update: branch `docs/handoff-nov-5`, from `main` at `6cdab21`, docs
+only (this file and `docs/forms-service-notes.md`).
+
+## 0.1 Earlier state — 3 November 2026: the handover guide for RBM, the forms on Supabase
+
+*The state on 3 November. §0 above supersedes it where they differ; it is
+still the reference for how the forms service was built and tested, and for
+the handover guide. §0.2 (28 October) holds for what `feat/react-port` held,
+and §0.3 (8 October) for the pipeline and the data.*
 
 ### What happened, 28 October – 3 November
 
@@ -106,7 +317,7 @@ disagree, this section is current.*
 | --- | --- | --- |
 | `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | #137 (`d007738`, 3 Nov): the forms service, the unsubscribe texts and this section; then the bot's translations (`1b5ae75`) |
 | same | `forms/supabase` | merged into `main` with that pull request; it carried `docs/handoff-nov-3` too |
-| `codebyjackson/launch-rbm-test` | `feat/forms-relay` | `c03823c` (Kyler, 3 Nov), on `feat/data-route`: the relays and the "Unsubscribe?" page, in en/fr/pt. Pushed, no PR. **Not mergeable into `main`**: that would bring the whole React port and delete the static pages GitHub Pages serves (§0.1, item 4) |
+| `codebyjackson/launch-rbm-test` | `feat/forms-relay` | `c03823c` (Kyler, 3 Nov), on `feat/data-route`: the relays and the "Unsubscribe?" page, in en/fr/pt. Pushed, no PR. **Not mergeable into `main`**: that would bring the whole React port and delete the static pages GitHub Pages serves (§0.2, item 4) |
 | Supabase | project `launch-forms-test` (`tbllmexjrmjwopgrfmce`) | the TEST forms service: Free plan, eu-west-1, Kyler's personal organisation. Pauses after 7 quiet days (Resume in the dashboard). Delete once production exists |
 | `codebyjackson/launch-rbm-test` | `main` | `546a6ef` (#33, 28 Oct): the static pages, still served on GitHub Pages |
 | same | `feat/react-port` | `408ed48` (Oakkar, 28 Oct), not merged, no PR. **Its default data address is dead** |
@@ -124,7 +335,7 @@ on its own branch; `git worktree list` shows them):
 - `~/Downloads/launch-rbm-test-forms-relay` (`feat/forms-relay`). It holds
   `.env.local`, the test service's address and token, git-ignored.
 
-The other folders listed in §0.1 are unchanged; most are merged work and
+The other folders listed in §0.2 are unchanged; most are merged work and
 can be removed.
 
 ### The handover guide for RBM
@@ -227,9 +438,9 @@ been updated yet:**
      (`api/_mail.js:72`, PR #130) and from `SITES`
      (`supabase/functions/_shared/mail.mjs`), and confirm RBM's page
      addresses there;
-   - then retire the static pages (§0.1, item 4).
+   - then retire the static pages (§0.2, item 4).
 
-Done since §0.1: the README for RBM (Oakkar, 28 Oct) and wiring `ui.en.json`
+Done since §0.2: the README for RBM (Oakkar, 28 Oct) and wiring `ui.en.json`
 into `assemble-content.js` (#132).
 
 ### Waiting on others
@@ -271,7 +482,7 @@ into `assemble-content.js` (#132).
     `forms.` is no longer needed, because the unsubscribe page lives on
     RBM's site.
 
-## 0.1 Earlier state — 28 October 2026: RBM on React + Next.js
+## 0.2 Earlier state — 28 October 2026: RBM on React + Next.js
 
 *The state on 28 October. §0 above supersedes it where they differ; it is
 still the reference for what `feat/react-port` holds, its stability check and
@@ -435,7 +646,7 @@ done yet: it changes the approval hash and needs one test proposal end to end.
 - At some widths MapLibre 6 greys out the zoom-out button where it could not
   zoom out anyway.
 
-## 0.2 Earlier state — 8 October 2026 (still current for the pipeline and the data)
+## 0.3 Earlier state — 8 October 2026 (still current for the pipeline and the data)
 
 *The state on 8 October. It replaced the 6 October version: everything
 still open from then is carried below.*
