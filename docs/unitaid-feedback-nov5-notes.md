@@ -165,10 +165,14 @@ if the figures were confirmed as they were.
 - Branch `feedback/unitaid-nov-5`, 1 commit on `6cdab21`: PR #148, CI green,
   merged 5 Nov 2026 as `36e8d81`; bots ran (history snapshot `81e26b1`,
   translations `bb14a5c`).
-- Branch `fix/translator-wording-nov5`, 1 commit on `bb14a5c`: translators'
-  wording and `about.launchScope` (above), pushed with this commit for a pull
-  request. `test-build-rbm-messages.js` 68 passed, 0 failed; every other
-  check as below.
+- Branch `fix/translator-wording-nov5`, 2 commits on `bb14a5c` (the
+  translators' wording and `about.launchScope`; the two React messages):
+  PR #149, CI green, merged 5 Nov 2026 as `6054af6`.
+  `test-build-rbm-messages.js` 71 passed, 0 failed.
+- Published by hand (dry run, then for real) as data repo `17dfa3c`,
+  5 Nov 11:27 UTC; checked live in en, fr and pt.
+- RBM module: PR #7 (`1f754b3`), tag `v1.2.0`. Open items are in the
+  handoff, §0 "Still to do" 9–11.
 - Verify block: treatment policy byte-identical; validator 0 errors, 1 warning
   (French Guiana); synthetic 0 and 0; preview builds; `test-build-dataset`
   58 passed, 0 failed (after a temporary `assemble-content.js`; with the stale

@@ -84,6 +84,10 @@ Unitaid's organisation (step 6).
    link already emailed stops working), `TEAM_INBOX` = the WHO team mailbox
    once step 5 confirms it receives outside mail (its address is kept out of
    the repo, §2.4), and `RBM_FORMS_TOKEN` / `RBM_TEST_FORMS_TOKEN`.
+   **Changed 5 Nov (§2.11):** production is the test project itself,
+   `launch-forms-test`, with its secrets swapped; RBM's test site moves to a
+   new free test project; and `UNSUBSCRIBE_SECRET` is a new value, not
+   Vercel's.
 7. **RBM's settings,** sent to RBM privately: the service's address and each
    site's token, under `UNITAID_`-prefixed names (RBM's contract check).
 8. **Check on RBM's test site,** then production.
@@ -283,6 +287,51 @@ the function: its 3.0.0 template wraps the handler in
 `withSupabase({ auth: ["publishable", "secret"] })`, which would refuse
 anonymous form posts.
 
+### 2.11 Production is the test project, promoted (5 Nov 2026)
+
+The owner's answers of 5 Nov: Unitaid has approved Supabase; production may
+stay in the Oqtiva AI organisation for now (the project has been there since
+3 Nov 16:06 UTC; about $10 a month, paid by that organisation); the WHO team
+mailbox accepts mail from outside WHO.
+
+- **One project, made production,** instead of a new one in a Unitaid-owned
+  organisation (§1, step 6). That organisation does not exist yet, and RBM
+  would have to be sent a second address later. The address comes from the
+  project's ref, which the 3 Nov move between organisations kept, so a later
+  move to Unitaid should keep it too (seen once; Supabase's docs do not say).
+  The swap: a production `RESEND_API_KEY`, a new `UNSUBSCRIBE_SECRET`,
+  `TEAM_INBOX` = the WHO mailbox, and a new `RBM_FORMS_TOKEN`;
+  `RESEND_SEGMENT_ID`, `LOCAL_FORMS_TOKEN` and, after the move below,
+  `RBM_TEST_FORMS_TOKEN` deleted. Not done yet: it needs an Owner or
+  Administrator of that organisation (Kyler is a Developer there).
+- **A new `UNSUBSCRIBE_SECRET`,** not Vercel's. Of the links already
+  emailed, only the welcome email's is ours, and it points at Vercel
+  (`${site}/api/unsubscribe?t=…`, `api/subscribe.js:107`), which checks it
+  with Vercel's secret. The update email carries Resend's own link
+  (`{{{RESEND_UNSUBSCRIBE_URL}}}`, `scripts/notify-subscribers.js:41`). So no
+  old link reaches this service while `/api/unsubscribe` runs on Vercel. The
+  same-secret rule returns only with §1, step 9: copy Vercel's value then, if
+  it can be found, or keep `/api/unsubscribe` on Vercel. Rejected: hunting for
+  Vercel's value now; Vercel may not show it again, and nothing needs it yet.
+- **RBM's test site on its own free test project** (proposed; not built, not
+  yet agreed). A project has one `RESEND_SEGMENT_ID`, so a test site on the
+  production project would put RBM's testers in the real segment: they would
+  get the update email and count in the subscriber figure reported for the
+  evaluation. Kyler's personal organisation has room (its one project, `KYO`,
+  is paused), and Kyler would own the new project, so its secrets need no
+  admin. Downside: it pauses after 7 quiet days (§2.1). Until it exists, RBM's
+  test site uses `launch-forms-test`. Its `FORMS_BASE_URL` must name the new
+  project's address; `supabase/.env.test` still names this one.
+- **The secret was renamed, not the code.** On 4 Nov RBM's test key was added
+  as `RBM_TEST_FORM_TOKEN`, without the S, so the service would have answered
+  401. Matching the code meant a line in `mail.mjs`, two doc lines, a pull
+  request and a redeploy, and would leave the one name without the S beside
+  `RBM_FORMS_TOKEN`, `LOCAL_FORMS_TOKEN` and `UNITAID_FORMS_TOKEN`. Renamed
+  5 Nov 01:23 UTC. Checked: a POST with the key and
+  `Content-Type: text/plain` gets 415 "Send JSON." (the key is checked before
+  the format, so no form runs), a made-up key gets 401, and the digest
+  `supabase secrets list` shows matches `shasum -a 256` of the local value.
+
 ---
 
 ## 3. How it was verified
@@ -415,10 +464,10 @@ anonymous form posts.
   team inbox becomes the WHO mailbox, for the same reason as §2.4.
 - **`localhost:3000` in `SITES`** is for testing; remove it once the React
   version has been tested on RBM's host.
-- **The production `UNSUBSCRIBE_SECRET`:** it must be copied from wherever
-  it was saved when it was set on Vercel (made with `openssl rand -hex 32`);
-  Vercel may not show it again. Without it, links already emailed break. That
-  matters only if real people have subscribed.
+- **Vercel's `UNSUBSCRIBE_SECRET`** (changed 5 Nov, §2.11): production
+  takes a new value. Vercel's must be copied from wherever it was saved when
+  it was set (made with `openssl rand -hex 32`; Vercel may not show it again)
+  only if, at §1 step 9, old links are to be redirected to this service.
 - **Mail tests in CI:** `test-mail-api.js` never ran in CI; whether
   `test-forms-service.mjs` should is open.
 
@@ -444,8 +493,10 @@ anonymous form posts.
 - The React side is on `launch-rbm-test` branch `feat/forms-relay`
   (`55c66c1`; the page in French and Portuguese since `c03823c`), on
   `feat/data-route`. It is pushed, with no pull request, and
-  is not mergeable into that repo's `main` (handoff §0).
+  is not mergeable into that repo's `main` (handoff §0.1).
 - The test project `launch-forms-test` (`tbllmexjrmjwopgrfmce`) is live with
   this code. Its secrets are in `supabase/.env.test` on Kyler's Mac only.
 - CI: `validate.yml` passed on `cc3c69a` (3 Nov), and on the pull request.
-- Next: handoff §0, "Still to do", item 2.
+- 5 Nov: RBM's test key renamed on the test project and checked (415);
+  §2.11 recorded on branch `docs/handoff-nov-5`, docs only, no code.
+- Next: handoff §0, "Still to do", items 2–4.
