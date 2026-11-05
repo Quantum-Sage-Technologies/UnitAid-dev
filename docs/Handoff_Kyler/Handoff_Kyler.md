@@ -1,16 +1,16 @@
 # Handoff — RBM staging dashboard
 
 > **Read §0 first.** It is the state of the project on 5 November 2026: the
-> dashboard delivered to RBM as the `unitaid` module (release `v1.1.1`),
-> RBM's test key on the forms service, and the decision to make that service
-> production. §0.1 (3 November) still holds for how the forms service was
+> dashboard delivered to RBM as the `unitaid` module (release `v1.2.0`, after
+> Unitaid's feedback of that day), RBM's test key on the forms service, and
+> the decision to make that service production. §0.1 (3 November) still holds for how the forms service was
 > built and tested and for the handover guide, §0.2 (28 October) for the
 > React port's internals, and §0.3 (8 October) for the pipeline and the data,
 > except where §0 says otherwise. Everything after that is the history of
 > September's work, kept for its decisions. Where they disagree, §0 is
 > current.
 
-## 0. Current state — 5 November 2026: the module delivered to RBM, and the forms service becomes production
+## 0. Current state — 5 November 2026: the module delivered to RBM (v1.2.0, with Unitaid's feedback), and the forms service becomes production
 
 *Start here in a new session. §0.1 below (3 November) is still the reference
 for how the forms service was built and tested and for the handover guide;
@@ -59,8 +59,47 @@ pipeline and the data. Where they disagree, this section is current.*
   naming `v1.1.1`, and separately the setting values. The test forms values
   are the current project's; the email warns that the test forms address may
   change (decision 3). Production forms values "to follow".
+- **5 Nov, later: Unitaid's feedback, built and delivered as `v1.2.0`**
+  (Kyler with Claude Code). Unitaid asked to remove "Recommended ·
+  underutilized", to take the cost figures off until they are checked
+  ("keep the presentation but remove the numbers"), and to make the
+  disclaimer yellow. **The map stays.** Full record:
+  [unitaid-feedback-nov5-notes.md](../unitaid-feedback-nov5-notes.md).
+  - The state before any of it is kept on the branch
+    `archive/main-before-unitaid-2026-11-05` (`6cdab21`, pushed).
+  - This repo: #148 (`36e8d81`, 11:15 UTC) and #149 (`6054af6`, 11:25 UTC),
+    both merged by Kyler. The bots ran (history `81e26b1`, translations
+    `bb14a5c`; all 17 new strings in French and Portuguese).
+  - Published by hand ("Publish now", dry run first): data repo `17dfa3c`,
+    11:27 UTC. Checked on Pages: en, fr and pt dated 5 Nov, no dollar amount.
+  - The module: #7 (`1f754b3`, 11:35 UTC, admin bypass, no review), CI green
+    on `main`, tag **`v1.2.0`**. Checked on Node 20 against the new data and
+    against the bundled copy alone: 12 presentation tiles for DHA–PPQ, no
+    dollar amount, no label, no page error, in all three languages.
+  - A short note to Antonio drafted: import `v1.2.0` instead of `v1.1.1`.
+  - The before/after screenshots, with the options shown to the owner, are a
+    private page in Kyler's claude.ai artifacts ("Unitaid Feedback Preview").
 
-### Decisions of 5 November
+### Decisions of 5 November: Unitaid's feedback
+
+Each with its rejected options in
+[unitaid-feedback-nov5-notes.md](../unitaid-feedback-nov5-notes.md).
+
+- **Cost figures come out of the data, not just off the page** (the CSV,
+  `dashboard.json` and the served data file all carried them), into
+  `data/parked/2026-11-05-procurement.json`, which nothing reads. The
+  procurement card lists the presentations bought (new optional field
+  `detail.procurement`), sorted by strength and pack size so the order
+  implies no quantity. Start years ("Since 2018", "Since 2008") stay.
+- **The label is removed, not reworded** (owner's choice). `classLabel` now
+  reads "WHO-recommended" because it may not be empty; the dashboard does not
+  draw it for the two recommended medicines.
+- **One neutral changelog line**, which the subscriber email sends. Older
+  lines that quoted the figures were reworded; all are dated before 3 Nov, so
+  the email's date floor does not send them again.
+- **Pale yellow** disclaimer; wording unchanged until Unitaid confirms it.
+
+### Decisions of 5 November: the forms service
 
 The full record, with what was rejected, is in
 [forms-service-notes.md](../forms-service-notes.md) §2.11.
@@ -99,12 +138,12 @@ The full record, with what was rejected, is in
 
 | Repo or service | Where | State |
 | --- | --- | --- |
-| `rbm-data-initiative/rbm-module-unitaid` | `main` | `1799880` (#6, 5 Nov), tag **`v1.1.1`**, the delivered version; also `v1.0.0` (`9d44794`) and `v1.1.0` (`bd2d8c0`). CI green, no open pull requests |
-| RBM's test site | `rbm-testdashboards.ecritportfolio.org/en/unitaid` | 404 (5 Nov): RBM has not imported the module yet. Its home page answers |
-| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | `6cdab21` (#147, Oakkar, 5 Nov) |
+| `rbm-data-initiative/rbm-module-unitaid` | `main` | `1f754b3` (#7, 5 Nov), tag **`v1.2.0`**, the delivered version; earlier tags `v1.0.0` (`9d44794`), `v1.1.0` (`bd2d8c0`), `v1.1.1` (`1799880`). CI green, no open pull requests |
+| RBM's test site | `rbm-testdashboards.ecritportfolio.org/en/unitaid` | 404 (5 Nov, afternoon): RBM has not imported the module yet. Production `dashboards.endmalaria.org/en/unitaid` also 404 |
+| `Quantum-Sage-Technologies/UnitAid-dev` (this repo) | `main` | `6054af6` (#149, 5 Nov). Branch `archive/main-before-unitaid-2026-11-05` keeps `6cdab21`. No open pull requests |
 | Supabase | `launch-forms-test` (`tbllmexjrmjwopgrfmce`) | In the Oqtiva AI organisation (§0.1's table still says Kyler's personal one), Nano, function `api` version 3. Test secrets plus `RBM_TEST_FORMS_TOKEN`. To become production (decision 1) |
 | `codebyjackson/launch-rbm-test` | `main` | `4232610` (#38, 4 Nov): the React version. The static pages are kept at the tag `static-pages-final`; GitHub Pages is off (404, 5 Nov) |
-| `Quantum-Sage-Technologies/unitaid-launch-data` | GitHub Pages | `v1/dashboard.en.json` 200 (5 Nov) |
+| `Quantum-Sage-Technologies/unitaid-launch-data` | GitHub Pages | `17dfa3c`, published 5 Nov 11:27 UTC from `6054af6`; `v1/dashboard.en.json` 200 |
 
 Local on Kyler's Mac:
 - `~/Downloads/rbm-module-unitaid`: the clone of RBM's repo, on `main`.
@@ -114,13 +153,20 @@ Local on Kyler's Mac:
   test project's secrets, now with `RBM_TEST_FORMS_TOKEN`. Git-ignored.
 - `~/Downloads/launch-development-handoff-nov5` (`docs/handoff-nov-5`): this
   update.
+- `~/Downloads/launch-development-unitaid-nov5`: the worktree the Unitaid
+  changes were built in (#148, #149), merged; safe to remove with
+  `git worktree remove`.
+- Node 20 for checking the module like RBM's host: `~/.nvm/versions/node/v20.20.2`.
 
 ### Still to do before 10 November
 
-1. **Send Antonio the two emails** (drafted 5 Nov): the delivery, and, to
-   him only, the values. He said email is fine for them. Copy each secret
-   value from its file with `grep '^NAME=' <file> | cut -d= -f2- | pbcopy`,
-   so it is never shown on screen, in a chat or in a pull request.
+1. **Emails to Antonio.** The delivery email (naming `v1.1.1`) went on 5 Nov;
+   check that the values email went too. Copy each secret value from its
+   file with `grep '^NAME=' <file> | cut -d= -f2- | pbcopy`, so it is never
+   shown on screen, in a chat or in a pull request. Then the short note
+   drafted the same afternoon: **import `v1.2.0`, not `v1.1.1`**. Sent before
+   RBM imports, it also avoids the re-import trap (below): `v1.2.0` changes
+   three of our own message keys.
 2. **The test project for RBM's test site** (decision 3, once agreed): a
    Free project in Kyler's personal organisation. Then, from
    `~/Downloads/launch-development-supabase-forms`, run
@@ -164,6 +210,20 @@ Local on Kyler's Mac:
    was checked in Chrome only.
 8. After RBM tests: remove `localhost:3000` from `PARTNERS` and `SITES`
    (§0.1, item 6).
+9. **"Itself an underuse signal"** (the owner's call, asked 5 Nov). DHA–PPQ's
+   registration note still ends its Nigeria sentence with "(registrations not
+   being maintained, itself an underuse signal)" ("sous-utilisation",
+   "subutilização"). Not the label Unitaid named, but the same judgement; it
+   shows in that step's panel and in the CSV. Removing it is a LAUNCH pull
+   request and a publish only: the module reads the data live, and its
+   bundled copy can follow in the next release.
+10. **The disclaimer wording**, when Unitaid confirms it: the page
+    (`index.html`), the React message (`i18n/ui.en.json`, `disclaimer`), the
+    translate bot, a check that French and Portuguese really changed, then
+    `build-rbm-messages.js` into the module and a small release (`v1.2.1`).
+11. **The translators** could review the new sentences the bot translated on
+    5 Nov: the procurement notice, heading and scope line, and the two
+    procurement step notes.
 
 **Checking a site's key without sending email:**
 
@@ -183,14 +243,17 @@ never its value. Compare it with
 ### Waiting on others
 
 - **RBM (Antonio):**
-  - import `v1.1.1` to the test site (it starts with item 1);
+  - import **`v1.2.0`** to the test site (item 1);
   - the sidebar group for the page (`INTEGRATION.md` §2);
   - whether the collapsed 60 px sidebar strip stays on phones (below).
   - §0.1's open questions still stand unless answered.
 - **The Oqtiva AI organisation's Owner:** the production swap, or making
   Kyler Administrator.
 - **Unitaid:** approved Supabase (Kyler, 5 Nov). Still open: who owns the
-  Resend account, for the production key.
+  Resend account, for the production key; the disclaimer's exact wording
+  (item 10); when the procurement figures may come back
+  (`data/parked/2026-11-05-procurement.json`; restoring is in the Unitaid
+  notes).
 - **The WHO mailbox:** accepts outside mail (Kyler, 5 Nov). Not yet proven by
   an email from the service (item 3's check).
 - **The team:** the header photo RBM asked us to replace (which photo, its
@@ -198,10 +261,30 @@ never its value. Compare it with
 
 ### Found on the way, left alone
 
-- **Merges without review in the module repo:** #3 (Kyler), #5 and #6
+- **Merges without review in the module repo:** #3 and #7 (Kyler), #5 and #6
   (Oakkar) went in by admin bypass. RBM's ruleset asks for one code-owner
   approval (#4 had Antonio's). Agree with Oakkar to review each other's pull
   requests there.
+- **Traps found with Unitaid's feedback (5 Nov)**, detail in the Unitaid notes:
+  - `test-build-dataset.js` (and the message test) **skip and still exit 0**
+    while `i18n/content.en.json` is stale, which it always is right after a
+    page or data change. Run `node scripts/assemble-content.js` first. #148
+    passed CI this way while missing the React copy of About LAUNCH; `main`
+    then failed the message test until #149.
+  - **Changing an English sentence makes it a new translation key**, so the
+    bot replaces the professional translators' French and Portuguese with
+    machine text. #149 put theirs back by hand. Check any reworded sentence
+    the translators had done.
+  - A page change needs its React twin in `i18n/ui.en.json`; the message test
+    catches a mismatch only once `content.en.json` is current.
+  - The Portuguese translations of the presentation names mostly lack the
+    " · " separator (13 of 14); the card splits them at " - " or a run of
+    spaces too.
+- **Left as they are:** the synthetic dataset and the Power BI CSVs still say
+  "Recommended · underutilized" (neither is on the public site); the
+  linked-data export does not carry `detail.procurement`; "Operational
+  research" sits alone on its row beside the full-width procurement card, as
+  it did beside the old table.
 - **Phones:** the dashboard needs about 330 px (340 px in French), and RBM's
   collapsed sidebar keeps a 60 px strip. So phones narrower than about
   400 px scroll sideways (Chrome: English fits at 390 px, French does not;
@@ -215,8 +298,10 @@ never its value. Compare it with
 - `copy-rbm-messages.js` still copies only to `launch-rbm-test`. The module
   copy is by hand, as the developer guide says (#147).
 
-This update: branch `docs/handoff-nov-5`, from `main` at `6cdab21`, docs
-only (this file and `docs/forms-service-notes.md`).
+This update: branch `docs/handoff-nov-5`, first written on `main` at
+`6cdab21`, rebased on `6054af6` and extended with Unitaid's feedback the same
+day. Docs only: this file, `docs/forms-service-notes.md` and
+`docs/unitaid-feedback-nov5-notes.md` (its status).
 
 ## 0.1 Earlier state — 3 November 2026: the handover guide for RBM, the forms on Supabase
 
