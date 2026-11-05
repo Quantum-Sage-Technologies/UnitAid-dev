@@ -148,6 +148,10 @@ Portuguese; none was left in English. Two follow-ups, on the branch
   `content.en.json` rebuilt so CI sees the new message. Lesson: on a branch
   that changes page text, run `node scripts/assemble-content.js` before the
   message and dataset tests, then decide whether to commit it.
+- **Two React messages for the module's card**: `product.procurement.boughtHeading`
+  and `boughtScope`, worded exactly as the page, so the bot's translations
+  apply (`build-rbm-messages.js`: French and Portuguese 100%, 71 passed). The
+  Portuguese heading lost the full stop the bot gave it.
 
 ## Restoring the figures
 

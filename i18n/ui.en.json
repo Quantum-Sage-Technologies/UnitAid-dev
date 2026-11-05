@@ -146,7 +146,9 @@
       "transactions": "Transactions",
       "packs": "Packs",
       "courses": "Treatment courses (est.)",
-      "notEstimated": "not estimated"
+      "notEstimated": "not estimated",
+      "boughtHeading": "Presentations bought through Global Fund-financed orders",
+      "boughtScope": "Orders paid for by other donors, national governments or private buyers are not included."
     },
     "milestones": {
       "milestone": "Milestone",
