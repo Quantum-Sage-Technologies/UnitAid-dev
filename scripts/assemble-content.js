@@ -107,6 +107,8 @@ function collect() {
     add("data", p.acknowledgement, `${b}.acknowledgement`);
     const d = p.detail || {};
     add("data", d.volumeNote, `${b}.detail.volumeNote`);
+    // the presentations bought, listed while the figures are parked (5 Nov 2026)
+    ((d.procurement || {}).presentations || []).forEach((x, j) => add("data", x, `${b}.detail.procurement.presentations[${j}]`));
     add("data", d.useCase, `${b}.detail.useCase`);
     (d.access || []).forEach((x, j) => add("data", x, `${b}.detail.access[${j}]`));
     (d.adoption || []).forEach((x, j) => add("data", x, `${b}.detail.adoption[${j}]`));

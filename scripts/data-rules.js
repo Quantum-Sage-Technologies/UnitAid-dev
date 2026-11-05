@@ -338,6 +338,22 @@
               err(`${tag}: detail.volume.byPresentation needs a "coursesRule" saying how courses were counted`);
           }
         }
+        // The presentations bought, with no figures (Unitaid, 5 Nov 2026): the
+        // page lists them while detail.volume is parked, and only then.
+        // See docs/unitaid-feedback-nov5-notes.md.
+        if (d.procurement !== undefined) {
+          const pr = d.procurement;
+          if (!pr || typeof pr !== "object" || Array.isArray(pr)) err(`${tag}: detail.procurement must be an object`);
+          else {
+            const list = pr.presentations;
+            if (!Array.isArray(list) || !list.length || list.some((x) => typeof x !== "string" || !x.trim()))
+              err(`${tag}: detail.procurement.presentations must be a non-empty list of presentation names`);
+            else if (new Set(list).size !== list.length)
+              err(`${tag}: detail.procurement.presentations names a presentation twice`);
+            if (!pr.source && !(pr.sources || []).length) warn(`${tag}: detail.procurement has no "source"`);
+            if (d.volume) warn(`${tag}: detail.procurement is not shown while detail.volume has figures; remove one of them`);
+          }
+        }
         if (d.milestones != null && !Array.isArray(d.milestones)) {
           err(`${tag}: detail.milestones must be an array`);
         } else if (Array.isArray(d.milestones)) {

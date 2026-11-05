@@ -213,7 +213,8 @@ expected step. Empty strings are fine for fields that don't apply.
 | `journey` | array of `{ label, year }` (optional) | The "time between gates" timeline and the cross-product timing chart. `year` is an integer or `"TBC"`. Keep chronological. Only add gates with verifiable dates. |
 | `countries` | `{ status, note, list[] }` (optional) | Feeds the country access map. `status`: `illustrative` / `draft` / `verified` — anything but `verified` renders a warning overlay on the map (and needs a `note`). `list` entries are `{ "iso3": "GHA", "level": "registered" \| "guidelines" \| "mft" }` — one entry per country, highest level wins. Replace the illustrative lists with the verified country survey and flip `status`. |
 | `volume` | `{ total, period, split[], source }` or `null` | `split` entries are `{ channel, pct }` and must sum to 100. |
-| `volumeNote` | string | Required when `volume` is `null` — say why (pre-launch, data being compiled). |
+| `volumeNote` | string | Required when `volume` is `null` — say why (pre-launch, data being compiled, figures under review). |
+| `procurement` | `{ presentations[], source, sources[] }` (optional) | The presentations bought, with no figures. Shown in the procurement card only while `volume` is `null`; ASPY and DHA–PPQ use it since 5 Nov 2026, when Unitaid asked for the procurement figures to come off the dashboard (they are parked in `data/parked/2026-11-05-procurement.json`). Keep the names sorted by strength and pack size, never by amount bought. See `docs/unitaid-feedback-nov5-notes.md`. |
 | `milestones` | array | `{ milestone, status, label, date, next, anticipated, source }`. `label` is the pill text (e.g. "25+ countries", "Delayed +2 qtrs"). |
 
 ### Placeholder product (e.g. spatial emanators)
@@ -326,6 +327,8 @@ any major milestone event.
 | *countries.status must be illustrative/draft/verified* | Use one of the three values; `"verified"` only when the survey is signed off. |
 | *unverified detail.countries needs a substantive "note"* | Write the map-overlay warning text (what the data is and isn't). |
 | *countries.list[N].iso3 / .level* | 3-letter uppercase ISO codes; level is `registered`, `guidelines` or `mft`; no duplicate countries. |
+| *detail.procurement.presentations must be a non-empty list* / *names a presentation twice* | One name per presentation bought, as text, each once. |
+| *detail.procurement is not shown while detail.volume has figures* (warning) | You restored `volume`: delete `procurement`, or the other way round. |
 
 Warnings (missing `asOf`, missing source on a done milestone) don't block a
 push, but treat them as your to-do list.

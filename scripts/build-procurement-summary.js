@@ -126,6 +126,8 @@ function main() {
   const next = JSON.parse(JSON.stringify(data));
   for (const pid of PRODUCTS) {
     const p = next.products.find((x) => x.id === pid);
+    if (p && p.detail && !p.detail.volume && p.detail.procurement)
+      throw new Error(`${pid}: its procurement figures are parked (data/parked/2026-11-05-procurement.json) until Unitaid confirms them; see docs/unitaid-feedback-nov5-notes.md before restoring detail.volume`);
     if (!p || !p.detail || !p.detail.volume) throw new Error(`${pid}: no detail.volume in data/products.js to fill`);
     const s = summarise(pid, rows);
     const { _check, ...fields } = s;
