@@ -70,13 +70,14 @@ if (!process.argv[2]) {
         else if (!s.public) errors.push(`product ${p.id}: countries ${e.iso3} cites "${sid}", which is not public in data/sources.js`);
       }));
       // Citations on individual claims (15 Oct feedback, 19 Oct 2026): a
-      // stage's, a milestone's or the volume's "sources" are registry ids the
-      // page links to, so each must be public in data/sources.js.
+      // stage's, a milestone's, the volume's or the procurement list's "sources"
+      // are registry ids the page links to, so each must be public in data/sources.js.
       const d = p.detail || {};
       const cited = [];
       (p.stages || []).forEach((st, i) => cited.push([`stages[${i}]`, st.sources]));
       (d.milestones || []).forEach((m, i) => cited.push([`milestones[${i}]`, m.sources]));
       if (d.volume) cited.push(["volume", d.volume.sources]);
+      if (d.procurement) cited.push(["procurement", d.procurement.sources]);
       cited.forEach(([at, ids]) => {
         if (ids === undefined) return;
         if (!Array.isArray(ids) || ids.some((x) => typeof x !== "string")) { errors.push(`product ${p.id}: ${at}.sources must be an array of data/sources.js ids`); return; }

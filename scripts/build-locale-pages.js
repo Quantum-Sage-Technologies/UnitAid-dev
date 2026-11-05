@@ -176,6 +176,7 @@ function localiseProducts(D, loc) {
     const d = p.detail || {};
     if (d.useCase) d.useCase = T(d.useCase);
     if (d.volumeNote) d.volumeNote = T(d.volumeNote);
+    if (d.procurement && Array.isArray(d.procurement.presentations)) d.procurement.presentations = d.procurement.presentations.map(T);
     if (Array.isArray(d.access)) d.access = d.access.map(T);
     if (Array.isArray(d.adoption)) d.adoption = d.adoption.map(T);
     if (d.research) ["question", "lead", "geographies", "timeline"].forEach((k) => { if (d.research[k]) d.research[k] = T(d.research[k]); });

@@ -212,7 +212,7 @@
   // Category = card colour. Derived from classLabel keywords so new products
   // fall into a sensible bucket without a schema change.
   function category(p) {
-    if (p.class === "market") return { cls: "market", label: "Marketed, underutilized", color: "var(--cat-market)" };
+    if (p.class === "market") return { cls: "market", label: "WHO-recommended", color: "var(--cat-market)" };
     if (/triple/i.test(p.classLabel)) return { cls: "tact", label: "Triple ACT", color: "var(--cat-tact)" };
     return { cls: "newclass", label: "New chemical class", color: "var(--cat-newclass)" };
   }
@@ -258,7 +258,7 @@
   document.getElementById("legend").innerHTML = `
     <span class="key"><span class="sw" style="background:var(--cat-newclass)"></span> New chemical class</span>
     <span class="key"><span class="sw" style="background:var(--cat-tact)"></span> Triple ACT</span>
-    <span class="key"><span class="sw" style="background:var(--cat-market)"></span> Marketed, underutilized</span>
+    <span class="key"><span class="sw" style="background:var(--cat-market)"></span> WHO-recommended</span>
     <span class="key"><span class="sw" style="background:var(--cat-prevention)"></span> Prevention (planned)</span>${SHOW_BARRIERS ? `
     <span class="key"><span class="flagdot"></span> Active bottleneck — see the illustrated journey</span>` : ""}`;
 
