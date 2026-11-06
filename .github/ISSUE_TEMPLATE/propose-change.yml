@@ -44,7 +44,7 @@ body:
       description: The eight stages of the access pathway, in order.
       options:
         - "R&D and Clinical"
-        - "Stringent Regulatory Review (SRA)"
+        - "Stringent Regulatory Approval (SRA)"
         - "WHO recommendation"
         - "WHO PQ listing"
         - "Country registration"

@@ -508,6 +508,11 @@
   .tsa .run.prog { background: var(--warn); } .tsa .run.late { background: var(--crit); }
   .tsa .pt { position: absolute; top: 22px; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 2px var(--surface); }
   .tsa .pt.prog { background: var(--warn); } .tsa .pt.late { background: var(--crit); }
+  /* every dot on the year line has its stage's colour (6 Nov 2026): green
+     completed, amber started ("since YYYY"), grey not started. Only the
+     current stage's dot had one; a started step and a not-started current
+     step drew green. */
+  .tsa .pt.idle { background: var(--idle); }
   .tsa .stem { position: absolute; top: 32px; width: 1px; margin-left: -.5px; background: var(--line); }
   .tsa .it { position: absolute; z-index: 1; flex: none; min-width: 0; width: 104px; margin-left: -52px; display: flex; flex-direction: column; align-items: center; }
   .tsa .it .smark { margin: 0; }
@@ -1711,15 +1716,20 @@
 
   const DATA = window.LAUNCH_DATA;
   const STAGES = DATA.stages;
-  // A step can have a second name for a medicine that has completed it
-  // (stageInfo[i].doneName, 6 Nov 2026): stage 2 reads "Stringent Regulatory
-  // Review (SRA)" until the medicine's approval is done, then "Stringent
-  // Regulatory Approval (SRA)". Places that show one medicine's steps shadow
-  // STAGES with stageNamesFor(p), so the template text the translation build
-  // collects stays exactly as it was. Places that name a step in general
-  // (the strip, the step explainer, the expected-times note) keep STAGES.
-  const STAGE_DONE = (DATA.stageInfo || []).map(x => (x && x.doneName) || null);
-  const stageNamesFor = p => STAGES.map((n, i) => (p && p.stages[i] && p.stages[i].status === "done" && STAGE_DONE[i]) || n);
+  // A step can have a second name for a medicine that has not completed it
+  // (6 Nov 2026): stage 2 is "Stringent Regulatory Approval (SRA)" in general
+  // and once done, "Stringent Regulatory Review (SRA)" before
+  // (stageInfo[i].pendingName), and a product's own stage entry may name it
+  // (GanLum: "Stringent Health Authority Review (SRA)"). Places that show one
+  // medicine's steps shadow STAGES with stageNamesFor(p), so the template text
+  // the translation build collects stays exactly as it was. Places that name a
+  // step in general (the strip, the step explainer, the expected-times note)
+  // keep STAGES.
+  const STAGE_PENDING = (DATA.stageInfo || []).map(x => (x && x.pendingName) || null);
+  const stageNamesFor = p => STAGES.map((n, i) => {
+    const st = p && p.stages[i];
+    return !st || st.status === "done" ? n : st.pendingName || STAGE_PENDING[i] || n;
+  });
   const PRODUCTS = DATA.products;
 
   // stageColumns groups stage indices into display columns; a column with
@@ -2330,7 +2340,7 @@
     const cur = p.stages[p.currentStage];
     let h = `<div class="ax"></div>`;
     ticks.forEach(t => { h += `<i class="tt" style="left:${x(t)}%"></i><span class="tk" style="left:${x(t)}%">${t}</span>`; });
-    h += `<span class="tk now" style="left:${x(hi)}%">${hi} <i>today</i></span><i class="today" style="left:${x(hi)}%;height:${TOP - 20}px"></i>`;
+    h += `<span class="tk now" style="left:${x(hi)}%">${hi}</span><i class="today" style="left:${x(hi)}%;height:${TOP - 20}px"></i>`;
     if (since != null && since < hi) {
       h += `<i class="run ${cur.status}" style="left:${x(since)}%;width:${x(hi) - x(since)}%"></i>`;
     }
@@ -2342,7 +2352,7 @@
         : it.from != null ? `<div class="syear">since ${it.from}</div>`
         : `<div class="syear">${stageYear(st)}</div>`;
       h += `<i class="stem" data-tier="${it.tier}" style="left:${it.x}%;height:${top - 32}px"></i>` +
-        `<i class="pt${it.cur ? " " + st.status : ""}" style="left:${it.x}%"></i>` +
+        `<i class="pt ${st.status}" style="left:${it.x}%"></i>` +
         `<div class="it stage s-${st.status}${it.cur ? " cur" : ""}" data-tier="${it.tier}" style="left:${it.x}%;top:${top}px">` +
         `${stageMarkHtml(p, it.i)}<div class="lbl">${esc(STAGES[it.i])}</div>${sub}</div>`;
     });

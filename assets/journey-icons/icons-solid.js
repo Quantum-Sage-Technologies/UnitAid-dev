@@ -30,7 +30,7 @@
     },
     {
       id: "02-regulatory-approval",
-      title: "Stringent Regulatory Review (SRA)",
+      title: "Stringent Regulatory Approval (SRA)",
       // The authority itself: pediment, entablature, columns, plinth.
       body: `
         <path d="M12 2.6 21.3 7.8M12 2.6 2.7 7.8"/>

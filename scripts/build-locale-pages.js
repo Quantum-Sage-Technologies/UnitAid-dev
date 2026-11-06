@@ -168,7 +168,7 @@ function readData(rel) {
 function localiseProducts(D, loc) {
   const T = (v) => (typeof v === "string" && v.trim() ? tr(loc, v) : v);
   if (Array.isArray(D.stages)) D.stages = D.stages.map(T);
-  (D.stageInfo || []).forEach((x) => { ["what", "who", "stall", "source", "doneName"].forEach((k) => { if (x[k]) x[k] = T(x[k]); }); });
+  (D.stageInfo || []).forEach((x) => { ["what", "who", "stall", "source", "pendingName"].forEach((k) => { if (x[k]) x[k] = T(x[k]); }); });
   if (D.glossary) for (const k of Object.keys(D.glossary)) D.glossary[k] = T(D.glossary[k]);
   (D.changelog || []).forEach((c) => { c.plain = T(c.plain); c.summary = T(c.summary); });
   (D.products || []).forEach((p) => {
@@ -196,6 +196,7 @@ function localiseProducts(D, loc) {
     const Tdate = (v) => (/^tbc$/i.test(String(v || "").trim()) ? v : T(v));
     (p.stages || []).forEach((st) => {
       if (st.note) st.note = T(st.note);
+      if (st.pendingName) st.pendingName = T(st.pendingName);
       if (st.next) st.next = T(st.next);
       if (st.date) st.date = Tdate(st.date);
       if (st.nextDate) st.nextDate = Tdate(st.nextDate);
