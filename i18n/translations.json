@@ -2211,6 +2211,13 @@
       "fr": "Formation des personnels de santé sur le nouveau schéma thérapeutique",
       "pt": "Capacitação dos profissionais de saúde sobre o novo regime"
     },
+    "47eb21209fdc54ba": {
+      "en": "The second step is now called \"Stringent Regulatory Review (SRA)\" while a medicine is still waiting for approval, and \"Stringent Regulatory Approval (SRA)\" once it has been approved. No dates, statuses or figures changed.",
+      "where": "products.changelog[0].plain",
+      "bucket": "data",
+      "fr": "La deuxième étape est désormais appelée « Examen réglementaire rigoureux (SRA) » tant qu'un médicament est en attente d'autorisation, et « Autorisation réglementaire rigoureuse (SRA) » une fois qu'il a été autorisé. Aucune date, aucun statut ni aucun chiffre n'ont été modifiés.",
+      "pt": "A segunda etapa agora é chamada de \"Análise Regulatória Rigorosa (SRA)\" enquanto um medicamento ainda aguarda aprovação, e \"Aprovação Regulatória Rigorosa (SRA)\" após a aprovação. Nenhuma data, status ou número foi alterado."
+    },
     "484a1aa07f49d36e": {
       "en": "Use ⌘ + scroll to zoom the map",
       "where": "line 2617",
@@ -5194,6 +5201,13 @@
       "bucket": "js",
       "fr": "Atteint, année non consignée",
       "pt": "Alcançado, ano não registrado"
+    },
+    "a712959defb74b6a": {
+      "en": "Stringent Regulatory Review (SRA)",
+      "where": "products.stages[1]",
+      "bucket": "data",
+      "fr": "Examen réglementaire rigoureux (SRA)",
+      "pt": "Análise regulatória rigorosa (SRA)"
     },
     "a7692387c3d3d29c": {
       "en": "Not started (stage glyph dimmed, no badge)",
