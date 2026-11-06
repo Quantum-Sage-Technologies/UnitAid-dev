@@ -4002,6 +4002,13 @@
       "fr": "U.S. President’s Malaria Initiative",
       "pt": "Iniciativa do Presidente dos EUA contra a Malária"
     },
+    "7f406f1131948acf": {
+      "en": "Stringent Health Authority Review (SRA)",
+      "where": "products.products[0].stages[1].pendingName",
+      "bucket": "data",
+      "fr": "Examen rigoureux des autorités sanitaires (SRA)",
+      "pt": "Análise rigorosa da autoridade sanitária (SRA)"
+    },
     "7f46adca4bbe58a9": {
       "en": "button, a, .gloss",
       "where": "line 2099",
@@ -5320,6 +5327,13 @@
       "where": "line 3316",
       "bucket": "js",
       "fr": "Tous les sites"
+    },
+    "ac0ee72ab08e3227": {
+      "en": "The second step is called \"Stringent Regulatory Approval (SRA)\". A medicine that has not yet completed it shows \"Stringent Regulatory Review (SRA)\" instead, and GanLum shows \"Stringent Health Authority Review (SRA)\". No dates, statuses or figures changed.",
+      "where": "products.changelog[0].plain",
+      "bucket": "data",
+      "fr": "La deuxième étape est intitulée « Approbation réglementaire rigoureuse (SRA) ». Un médicament n'ayant pas encore franchi cette étape affiche « Examen réglementaire rigoureux (SRA) », et un médicament affichant « Examen rigoureux par les autorités sanitaires (GanLum) » affiche « Examen rigoureux par les autorités sanitaires (SRA) ». Aucune date, aucun statut ni aucun chiffre n'ont été modifiés.",
+      "pt": "A segunda etapa é chamada de \"Aprovação Regulatória Rigorosa (SRA)\". Um medicamento que ainda não a concluiu mostra \"Revisão Regulatória Rigorosa (SRA)\" em vez disso, e GanLum mostra \"Revisão Rigorosa da Autoridade de Saúde (SRA)\". Nenhuma data, status ou número foi alterado."
     },
     "ac748c19cc5ef5cc": {
       "en": "We found a real example of a country acting on the World Health Organization's advice: Ghana added this medicine as a backup first-choice treatment in 2022. It's still the only country confirmed to have done so. We also recorded the years Global Fund purchasing began for both underused medicines (2018 and 2008).",
