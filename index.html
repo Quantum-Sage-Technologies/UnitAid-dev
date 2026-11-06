@@ -1711,6 +1711,15 @@
 
   const DATA = window.LAUNCH_DATA;
   const STAGES = DATA.stages;
+  // A step can have a second name for a medicine that has completed it
+  // (stageInfo[i].doneName, 6 Nov 2026): stage 2 reads "Stringent Regulatory
+  // Review (SRA)" until the medicine's approval is done, then "Stringent
+  // Regulatory Approval (SRA)". Places that show one medicine's steps shadow
+  // STAGES with stageNamesFor(p), so the template text the translation build
+  // collects stays exactly as it was. Places that name a step in general
+  // (the strip, the step explainer, the expected-times note) keep STAGES.
+  const STAGE_DONE = (DATA.stageInfo || []).map(x => (x && x.doneName) || null);
+  const stageNamesFor = p => STAGES.map((n, i) => (p && p.stages[i] && p.stages[i].status === "done" && STAGE_DONE[i]) || n);
   const PRODUCTS = DATA.products;
 
   // stageColumns groups stage indices into display columns; a column with
@@ -2033,6 +2042,7 @@
   // read "since 2015" beside Global Fund orders "since 2008" (feedback, 15 Oct
   // 2026); it now reads "since WHO PQ listing (2015)".
   function sinceFrom(p) {
+    const STAGES = stageNamesFor(p);
     const j = p.detail && p.detail.journey;
     if (Array.isArray(j) && j.length > 1 && j[j.length - 1].year === "TBC") {
       const last = [...j].reverse().find(g => Number.isInteger(g.year));
@@ -2151,6 +2161,7 @@
   }
   // the box at the top of an open row: expected, actual so far and the variance
   function yardBox(p) {
+    const STAGES = stageNamesFor(p);
     const y = yardstick(p);
     if (!y || !y.approved) return "";
     const due = y.start + y.whole.exp, late = y.whole.late, going = y.whole.kind === "going";
@@ -2166,6 +2177,7 @@
   }
   // the "Time taken" view: expected against actual, under the two access groups
   function yardTable(p) {
+    const STAGES = stageNamesFor(p);
     const y = yardstick(p);
     if (!y) return "";
     if (!y.approved) return `<div class="ysempty"><b>Not approved yet.</b> We start comparing once the medicine has a dated regulatory approval.</div>`;
@@ -2244,6 +2256,7 @@
               <p style="margin:4px 0 2px 14px;font-size:13px;color:var(--ink-3)">A country can count at more than one stage.</p>`;
   }
   function miniJourney(p) {
+    const STAGES = stageNamesFor(p);
     const done = p.stages.filter(st => st.status === "done").length;
     const dot = i => `<i class="md ${p.stages[i].status}" title="${esc(STAGES[i])}${statusShown(p, p.stages[i].status) ? ": " + LABEL[p.stages[i].status] : ""}"></i>`;
     return `<div class="mini" role="img" aria-label="${done} of ${p.stages.length} milestones complete">` +
@@ -2257,6 +2270,7 @@
     board.querySelectorAll(".jcell").forEach(cell => cell.classList.toggle("on", +cell.dataset.c === c));
   }
   function stageMarkHtml(p, i) {
+    const STAGES = stageNamesFor(p);
     const st = p.stages[i];
     // Shadows peekLine for this medicine. The aria-label below is translated as
     // one string, code and all, so its text has to stay exactly as it is.
@@ -2283,6 +2297,7 @@
     return i !== p.currentStage && (st.status === "prog" || st.status === "late") ? sinceYearOf(st) : null;
   };
   function journeyTime(p) {
+    const STAGES = stageNamesFor(p);
     const from = sinceFrom(p), since = from ? from.year : null;
     const ys = p.stages.map((st, i) => (stageYear(st) != null ? stageYear(st) : startedYear(p, i))).filter(y => y != null);
     if (since != null) ys.push(since);
@@ -2461,6 +2476,7 @@
   })();
 
   tracked.forEach(p => {
+    const STAGES = stageNamesFor(p);
     const years = p.stages.map(stageYear);
     const peekLine = peekLineFor(p);   // as in stageMarkHtml: keeps the aria-label's text
 
@@ -2890,6 +2906,7 @@
   }
 
   function gatePanelHTML(p, i) {
+    const STAGES = stageNamesFor(p);
     const st = p.stages[i];
     const el2 = stalledSince(p, i);
     const isCur = i === p.currentStage;
@@ -3798,6 +3815,7 @@
 
     function detFacts() {
       const p = curProduct();
+      const STAGES = stageNamesFor(p);
       const vol = p.detail && p.detail.volume && p.detail.volume.total;
       return `<div class="det-card"><h4>${esc(p.name)} · medicine facts</h4>` +
         `<div class="det-small">${esc(p.inn || "")}</div>` +
@@ -4217,6 +4235,7 @@
     const rows = [[CSV_COL.product, CSV_COL.record, CSV_COL.item, CSV_COL.status, CSV_COL.detail,
       CSV_COL.date, CSV_COL.next, CSV_COL.anticipated, CSV_COL.source, CSV_COL.asOf]];
     tracked.forEach(p => {
+      const STAGES = stageNamesFor(p);
       p.stages.forEach((s, i) =>
         rows.push([p.name, CSV_REC.stageRow, STAGES[i], statusShown(p, s.status) ? LABEL[s.status] : "", s.note, s.date, s.next, s.nextDate, s.source || "", s.asOf || ""]));
       p.detail.milestones.forEach(m =>
