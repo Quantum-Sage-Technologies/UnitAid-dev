@@ -28,7 +28,7 @@
       "@type": "Concept",
       "inScheme": "launch:PathwayStageScheme",
       "notation": "1",
-      "prefLabel": "Stringent Regulatory Review (SRA)",
+      "prefLabel": "Stringent Regulatory Approval (SRA)",
       "stageIndex": 1,
       "operatedBy": [
         "https://kochrisdev.github.io/launch-transparency-dashboard/ontology/launch-data.jsonld#org-ema",
@@ -1580,7 +1580,7 @@
       "@type": "ChangelogEntry",
       "changeDate": "2026-11-06",
       "productDisplayName": "All",
-      "changeText": "Stage 2 is named by its status. While a medicine has not completed it (not started, in progress or delayed) it reads \"Stringent Regulatory Review (SRA)\"; once completed it reads \"Stringent Regulatory Approval (SRA)\" (new optional field stageInfo[].doneName). Places that name the step without a medicine (the pathway strip, the step explainer, the expected-times note, the journey icons and the change-proposal form) use \"Stringent Regulatory Review (SRA)\". No dates, statuses or figures changed."
+      "changeText": "Stage 2 is named by its status. It is \"Stringent Regulatory Approval (SRA)\" wherever the step is named in general (the pathway strip, the step explainer, the expected-times note, the journey icons and the change-proposal form) and on a medicine that has completed it. A medicine that has not completed it (not started, in progress or delayed) reads \"Stringent Regulatory Review (SRA)\" (new optional field stageInfo[].pendingName), and GanLum reads \"Stringent Health Authority Review (SRA)\" (new optional field products[].stages[].pendingName). No dates, statuses or figures changed."
     },
     {
       "@id": "https://kochrisdev.github.io/launch-transparency-dashboard/ontology/launch-data.jsonld#change-1",

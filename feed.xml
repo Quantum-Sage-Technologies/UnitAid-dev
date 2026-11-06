@@ -7,10 +7,10 @@
     <language>en</language>
     <lastBuildDate>Fri, 06 Nov 2026 12:00:00 GMT</lastBuildDate>
     <item>
-      <title>All: Stage 2 is named by its status. While a medicine has not completed it (not st…</title>
-      <description>Stage 2 is named by its status. While a medicine has not completed it (not started, in progress or delayed) it reads "Stringent Regulatory Review (SRA)"; once completed it reads "Stringent Regulatory Approval (SRA)" (new optional field stageInfo[].doneName). Places that name the step without a medicine (the pathway strip, the step explainer, the expected-times note, the journey icons and the change-proposal form) use "Stringent Regulatory Review (SRA)". No dates, statuses or figures changed.</description>
+      <title>All: Stage 2 is named by its status. It is "Stringent Regulatory Approval (SRA)" w…</title>
+      <description>Stage 2 is named by its status. It is "Stringent Regulatory Approval (SRA)" wherever the step is named in general (the pathway strip, the step explainer, the expected-times note, the journey icons and the change-proposal form) and on a medicine that has completed it. A medicine that has not completed it (not started, in progress or delayed) reads "Stringent Regulatory Review (SRA)" (new optional field stageInfo[].pendingName), and GanLum reads "Stringent Health Authority Review (SRA)" (new optional field products[].stages[].pendingName). No dates, statuses or figures changed.</description>
       <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
-      <guid isPermaLink="false">2026-11-06:All:Stage 2 is named by its status. While a </guid>
+      <guid isPermaLink="false">2026-11-06:All:Stage 2 is named by its status. It is "S</guid>
       <pubDate>Fri, 06 Nov 2026 12:00:00 GMT</pubDate>
     </item>
     <item>
