@@ -5,7 +5,14 @@
     <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
     <description>Changes to tracked antimalarial product statuses on the LAUNCH dashboard (draft data).</description>
     <language>en</language>
-    <lastBuildDate>Thu, 05 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>All: Stage 2 is named by its status. While a medicine has not completed it (not st…</title>
+      <description>Stage 2 is named by its status. While a medicine has not completed it (not started, in progress or delayed) it reads "Stringent Regulatory Review (SRA)"; once completed it reads "Stringent Regulatory Approval (SRA)" (new optional field stageInfo[].doneName). Places that name the step without a medicine (the pathway strip, the step explainer, the expected-times note, the journey icons and the change-proposal form) use "Stringent Regulatory Review (SRA)". No dates, statuses or figures changed.</description>
+      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
+      <guid isPermaLink="false">2026-11-06:All:Stage 2 is named by its status. While a </guid>
+      <pubDate>Fri, 06 Nov 2026 12:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>ASPY, DHA–PPQ: From partner feedback (Unitaid, 5 Nov 2026). Procurement figures are withdraw…</title>
       <description>From partner feedback (Unitaid, 5 Nov 2026). Procurement figures are withdrawn while they are reviewed. Each medicine's procurement card now lists only the presentations bought through Global Fund-financed orders (new field detail.procurement, sorted by strength and pack size); the totals, values, transactions, packs, treatment courses and top buyers are removed from the card, the procurement step, the Procurement scale-up milestone and the map's side panel, as are DHA–PPQ's share of Global Fund orders (flag and barrier) and its PQR median pack price. Older changelog lines no longer quote these figures. The class label shown on the two recommended medicines is removed from the page (classLabel now reads "WHO-recommended"). Every value removed is kept unchanged in data/parked/2026-11-05-procurement.json.</description>
@@ -207,13 +214,6 @@
       <description>Version 2 preview: first collected-data updates from the public-source staging layer (Global Fund PQR extract 23 Aug 2026, WHO PQ lists, EMA EU-M4all table, ClinicalTrials.gov).</description>
       <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
       <guid isPermaLink="false">2026-08-23:All:Version 2 preview: first collected-data </guid>
-      <pubDate>Sun, 23 Aug 2026 12:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>DHA–PPQ: Global Fund volumes filled from PQR (orders since 2008). Nine PQ'd presentati…</title>
-      <description>Global Fund volumes filled from PQR (orders since 2008). Nine PQ'd presentations across Alfasigma, Guilin and Beijing Holley (2015–2023) recorded.</description>
-      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
-      <guid isPermaLink="false">2026-08-23:DHA–PPQ:Global Fund volumes filled from PQR (ord</guid>
       <pubDate>Sun, 23 Aug 2026 12:00:00 GMT</pubDate>
     </item>
   </channel>
