@@ -217,6 +217,16 @@ wording, not Jan's, and Jan has not reviewed it.** It is a new footer section,
 > concept the scope is these four medicines; it may later expand to other
 > medicines and malaria tools.
 
+**6 Nov 2026:** the owner changed the first words to "The LAUNCH Transparency
+Initiative, led by Unitaid and funded by the Gates Foundation, is a proof of
+concept ..."; the rest is unchanged. French and Portuguese keep the
+translators' text with only the opening edited by hand ("L’initiative LAUNCH
+pour la transparence, menée par Unitaid et financée par la Fondation Gates",
+"A Iniciativa de Transparência LAUNCH, liderada pela Unitaid e financiada pela
+Fundação Gates"; "Il"/"Ele" become "Elle"/"Ela" in the next sentence). The new
+key is not in the translators' record, so `export-xliff.js` puts it in their
+next file for review.
+
 ### Decisions
 
 1. **Every claim comes from something already in the repo.** "Unitaid-funded"
