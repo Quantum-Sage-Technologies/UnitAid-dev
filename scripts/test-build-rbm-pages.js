@@ -27,8 +27,11 @@ ok(/<script src="data\/world-map\.js"><\/script>/.test(out) && /src="data\/world
 ok(/src="assets\/report-issue\.js"/.test(out), "the feedback widget loads from the language's own assets/");
 ok(!/(src|href)="(assets|data)\/(?!world-map\.js"|world-map-geo\.js"|report-issue\.js")/.test(out), "every other relative asset path points one level up");
 ok(!/site-nav\.js/.test(out), "no site menu");
-// the two forms, with an API to post to
-ok(!/#sub-open, #subwrap \{ display: none/.test(out), "Subscribe shows");
+// the two forms, with an API to post to. The build adds no rule hiding
+// Subscribe: checked on the loader, not the whole page, because since 6 Nov
+// 2026 index.html hides Subscribe itself (switched off for now; see
+// docs/hide-subscribe-notes.md), which is the page's choice, not the build's
+ok(!/#sub-open, #subwrap \{ display: none/.test(loader("fr", API)), "with an API, the build does not hide Subscribe");
 ok(out.includes(`fetch("${API}/api/subscribe"`) && !out.includes('fetch("/api/subscribe"'), "Subscribe posts to the LAUNCH API");
 ok(/\bconnected: true\b/.test(out), "Send feedback stays connected");
 { const settings = out.indexOf("window.LAUNCH_FEEDBACK_COPY"), open = out.lastIndexOf("<script", settings);

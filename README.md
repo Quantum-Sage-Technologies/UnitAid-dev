@@ -29,8 +29,9 @@ Developers start with [CLAUDE.md](CLAUDE.md) and the
 Every view reads the same data file and is deployed with the site:
 
 - **Illustrated journey** (`index.html`): the production page. It is the
-  only view that is translated, has the Subscribe and Send feedback forms and
-  the MapLibre country map, and is built for RBM.
+  only view that is translated, has the Send feedback form (Subscribe for
+  updates is hidden for now, 6 Nov 2026; see `docs/hide-subscribe-notes.md`)
+  and the MapLibre country map, and is built for RBM.
 - **Illustrated journey, before Launch v1.0**
   (`illustrated-journey-dashboard.html`): the same page as it was before the
   Launch v1.0 changes (it still shows "Delayed", "In progress" and barrier
