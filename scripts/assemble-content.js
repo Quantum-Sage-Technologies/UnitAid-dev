@@ -89,7 +89,7 @@ function collect() {
   // translated too (owner's decision, 2 Oct 2026); citations are the products'
   // own `source` fields below, which stay English.
   (P.stageInfo || []).forEach((x, i) => {
-    ["what", "who", "stall", "source", "doneName"].forEach((k) => add("data", x[k], `products.stageInfo[${i}].${k}`));
+    ["what", "who", "stall", "source", "pendingName"].forEach((k) => add("data", x[k], `products.stageInfo[${i}].${k}`));
   });
   Object.entries(P.glossary || {}).forEach(([k, v]) => add("data", v, `products.glossary.${k}`));
   (P.changelog || []).forEach((c, i) => {
@@ -141,6 +141,7 @@ function collect() {
     const notTbc = (v) => (/^tbc$/i.test(String(v || "").trim()) ? undefined : v);
     (p.stages || []).forEach((st, j) => {
       add("data", st.note, `${b}.stages[${j}].note`);
+      add("data", st.pendingName, `${b}.stages[${j}].pendingName`);
       add("data", st.next, `${b}.stages[${j}].next`);
       add("data", notTbc(st.date), `${b}.stages[${j}].date`);
       add("data", notTbc(st.nextDate), `${b}.stages[${j}].nextDate`);

@@ -187,7 +187,7 @@ four plain strings:
 | `who` | Who runs or decides it. |
 | `stall` | The usual reason it takes longer than expected. |
 | `source` | Where a reader can check it (a register or publication name, not a URL). |
-| `doneName` | Optional. The step's name on a medicine that has completed it. Stage 2 is "Stringent Regulatory Review (SRA)" in `stages` and "Stringent Regulatory Approval (SRA)" here, so a medicine reads "Approval" only once its SRA step is done. Translated like the stage names. |
+| `pendingName` | Optional. The step's name on a medicine that has not completed it. Stage 2 is "Stringent Regulatory Approval (SRA)" in `stages` and "Stringent Regulatory Review (SRA)" here, so a medicine reads "Approval" only once its SRA step is done. A product's own stage entry can carry a `pendingName` of its own, which wins (GanLum: "Stringent Health Authority Review (SRA)"). Translated like the stage names. |
 
 It describes the step in general, not any one medicine; per-medicine status and
 notes come from each product's `stages` entry. Optional, but if present it must

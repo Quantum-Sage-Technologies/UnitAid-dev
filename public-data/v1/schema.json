@@ -55,7 +55,7 @@
               "who": { "$ref": "#/$defs/text" },
               "stall": { "$ref": "#/$defs/text" },
               "source": { "$ref": "#/$defs/text", "description": "The kind of source behind the step, e.g. National medicines registers. A label, so it is translated." },
-              "doneName": { "$ref": "#/$defs/text", "description": "Optional. The step's name on a product that has completed it (status done), in place of stages[i]: stage 2 is Stringent Regulatory Review (SRA) until done, then Stringent Regulatory Approval (SRA)." }
+              "pendingName": { "$ref": "#/$defs/text", "description": "Optional. The step's name on a product that has not completed it (status other than done), in place of stages[i]: stage 2 is Stringent Regulatory Approval (SRA), and Stringent Regulatory Review (SRA) until a product completes it. A product's own stages[i].pendingName wins." }
             }
           }
         },
@@ -109,7 +109,8 @@
                   "properties": {
                     "status": { "enum": ["done", "prog", "late", "idle"] },
                     "note": { "$ref": "#/$defs/textOrNull" },
-                    "next": { "$ref": "#/$defs/textOrNull" }
+                    "next": { "$ref": "#/$defs/textOrNull" },
+                    "pendingName": { "$ref": "#/$defs/text", "description": "Optional. This product's name for the step until it completes it, in place of stageInfo[i].pendingName (GanLum: Stringent Health Authority Review (SRA))." }
                   }
                 }
               },

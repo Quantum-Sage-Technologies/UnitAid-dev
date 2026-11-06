@@ -149,9 +149,9 @@
             if (!si || typeof si[k] !== "string" || !si[k].trim())
               err(`stageInfo[${i}] (${data.stages[i]}): "${k}" must be a non-empty string`);
           });
-          // optional: the step's name on a medicine that has completed it
-          if (si && si.doneName !== undefined && (typeof si.doneName !== "string" || !si.doneName.trim()))
-            err(`stageInfo[${i}] (${data.stages[i]}): "doneName" must be a non-empty string when given`);
+          // optional: the step's name on a medicine that has not completed it
+          if (si && si.pendingName !== undefined && (typeof si.pendingName !== "string" || !si.pendingName.trim()))
+            err(`stageInfo[${i}] (${data.stages[i]}): "pendingName" must be a non-empty string when given`);
         });
       }
     }
@@ -223,6 +223,9 @@
               if (!s.note || s.note.trim().length < 15)
                 err(`${stag}: a delayed stage must carry a substantive reason in "note"`);
             }
+            // optional: this medicine's own name for the step until it completes it
+            if (s.pendingName !== undefined && (typeof s.pendingName !== "string" || !s.pendingName.trim()))
+              err(`${stag}: "pendingName" must be a non-empty string when given`);
             if (s.status !== "idle" && !s.asOf)
               warn(`${stag}: no "asOf" verification date`);
             if (s.asOf && !/^\d{4}-\d{2}-\d{2}$/.test(s.asOf))

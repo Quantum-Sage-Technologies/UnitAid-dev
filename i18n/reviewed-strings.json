@@ -10,7 +10,6 @@
     { "file": "index.html", "src": "? `${yrsText(n)} so far` :", "en": "${yrsText(n)} so far" },
     { "file": "index.html", "src": "\"c-path\">Country Access ${accessInfo()}<", "en": "Country Access" },
     { "file": "index.html", "src": "aria-label=\"${done} of ${p.stages.length} milestones complete\"", "en": "${done} of ${p.stages.length} milestones complete" },
-    { "file": "index.html", "src": "<i>today</i>", "en": "today" },
     { "file": "index.html", "src": "\"ssince\">since ${esc(from.label)} (${since}) · ${yrsText(hi - since)}<", "en": "since ${esc(from.label)} (${since}) · ${yrsText(hi - since)}" },
     { "file": "index.html", "src": "\"syear\">since ${it.from}<", "en": "since ${it.from}" },
     { "file": "index.html", "src": "=== \"late\" ? \"delayed\" :", "en": "delayed" },

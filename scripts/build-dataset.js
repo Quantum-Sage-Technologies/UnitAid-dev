@@ -67,12 +67,12 @@ const LOCALES = ["en", ...locale.LOCALES];          // en, fr, pt
 const TEXT_PATHS = {
   products: [
     "stages[]",
-    "stageInfo[].what", "stageInfo[].who", "stageInfo[].stall", "stageInfo[].source", "stageInfo[].doneName",
+    "stageInfo[].what", "stageInfo[].who", "stageInfo[].stall", "stageInfo[].source", "stageInfo[].pendingName",
     "glossary.*",
     "changelog[].plain",
     "products[].classLabel", "products[].flag", "products[].barrier", "products[].note", "products[].next",
     "products[].acknowledgement",
-    "products[].stages[].note", "products[].stages[].next",
+    "products[].stages[].note", "products[].stages[].next", "products[].stages[].pendingName",
     "products[].stages[].date", "products[].stages[].nextDate",
     "products[].detail.useCase", "products[].detail.access[]", "products[].detail.adoption[]",
     "products[].detail.research.question", "products[].detail.research.lead",
@@ -241,8 +241,8 @@ function build() {
       host: meta.host,
       stages: D.stages,
       stageColumns: D.stageColumns,
-      // doneName: the step's name on a medicine that has completed it (optional)
-      stageInfo: (D.stageInfo || []).map((x) => ({ what: x.what, who: x.who, stall: x.stall, source: x.source, ...(x.doneName ? { doneName: x.doneName } : {}) })),
+      // pendingName: the step's name on a medicine that has not completed it (optional)
+      stageInfo: (D.stageInfo || []).map((x) => ({ what: x.what, who: x.who, stall: x.stall, source: x.source, ...(x.pendingName ? { pendingName: x.pendingName } : {}) })),
       // numbers only (no text to localise); left out when the data has none
       ...(D.yardstick ? { yardstick: { wholeYears: D.yardstick.wholeYears, expected: D.yardstick.expected } } : {}),
       glossary: D.glossary,

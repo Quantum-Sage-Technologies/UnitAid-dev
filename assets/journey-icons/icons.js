@@ -22,7 +22,7 @@
     },
     {
       id: "02-regulatory-approval",
-      title: "Stringent Regulatory Review (SRA)",
+      title: "Stringent Regulatory Approval (SRA)",
       // Dossier with a folded corner and a cleared review mark.
       body: `
         <path d="M13 2.75H7.5A1.75 1.75 0 0 0 5.75 4.5v15A1.75 1.75 0 0 0 7.5 21.25h9a1.75 1.75 0 0 0 1.75-1.75V8Z"/>

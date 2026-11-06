@@ -100,7 +100,6 @@
     "dotTitle": "{stage}: {status}",
     "parallelGroupLabel": "{names} — independent approvals, no defined order between them",
     "timeline": {
-      "today": "today",
       "since": "since {milestone} ({year}) · {duration}",
       "sinceYear": "since {year}",
       "reachedNoYear": "Reached · year not recorded",
