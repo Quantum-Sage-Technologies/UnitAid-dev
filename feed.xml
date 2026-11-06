@@ -7,8 +7,15 @@
     <language>en</language>
     <lastBuildDate>Fri, 06 Nov 2026 12:00:00 GMT</lastBuildDate>
     <item>
+      <title>Ganaplacide–lumefantrine: GanLum is now named by its active ingredients: name "Ganaplacide–lumefantrine…</title>
+      <description>GanLum is now named by its active ingredients: name "Ganaplacide–lumefantrine" (was "GanLum") and, under it, inn "KLU156", its development code (was "Ganaplacide–lumefantrine (KLU156)"). The About LAUNCH paragraph reads "ganaplacide–lumefantrine (KLU156)". Older changelog lines keep "GanLum", so the subscriber email does not resend them.</description>
+      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
+      <guid isPermaLink="false">2026-11-06:Ganaplacide–lumefantrine:GanLum is now named by its active ingred</guid>
+      <pubDate>Fri, 06 Nov 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>All: Stage 2 is named by its status. It is "Stringent Regulatory Approval (SRA)" w…</title>
-      <description>Stage 2 is named by its status. It is "Stringent Regulatory Approval (SRA)" wherever the step is named in general (the pathway strip, the step explainer, the expected-times note, the journey icons and the change-proposal form) and on a medicine that has completed it. A medicine that has not completed it (not started, in progress or delayed) reads "Stringent Regulatory Review (SRA)" (new optional field stageInfo[].pendingName), and GanLum reads "Stringent Health Authority Review (SRA)" (new optional field products[].stages[].pendingName). No dates, statuses or figures changed.</description>
+      <description>Stage 2 is named by its status. It is "Stringent Regulatory Approval (SRA)" wherever the step is named in general (the pathway strip, the step explainer, the expected-times note, the journey icons and the change-proposal form) and on a medicine that has completed it. A medicine that has not completed it (not started, in progress or delayed) reads "Stringent Regulatory Review (SRA)" (new optional field stageInfo[].pendingName), and Ganaplacide–lumefantrine (GanLum) reads "Stringent Health Authority Review (SRA)" (new optional field products[].stages[].pendingName). No dates, statuses or figures changed.</description>
       <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
       <guid isPermaLink="false">2026-11-06:All:Stage 2 is named by its status. It is "S</guid>
       <pubDate>Fri, 06 Nov 2026 12:00:00 GMT</pubDate>
@@ -207,13 +214,6 @@
       <description>Use-case wording aligned with the sourced Novartis claim (first major innovation in malaria treatment since ACTs were introduced 25+ years ago).</description>
       <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
       <guid isPermaLink="false">2026-08-23:GanLum:Use-case wording aligned with the source</guid>
-      <pubDate>Sun, 23 Aug 2026 12:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>All: Version 2 preview: first collected-data updates from the public-source stagin…</title>
-      <description>Version 2 preview: first collected-data updates from the public-source staging layer (Global Fund PQR extract 23 Aug 2026, WHO PQ lists, EMA EU-M4all table, ClinicalTrials.gov).</description>
-      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
-      <guid isPermaLink="false">2026-08-23:All:Version 2 preview: first collected-data </guid>
       <pubDate>Sun, 23 Aug 2026 12:00:00 GMT</pubDate>
     </item>
   </channel>
