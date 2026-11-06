@@ -67,7 +67,7 @@ const LOCALES = ["en", ...locale.LOCALES];          // en, fr, pt
 const TEXT_PATHS = {
   products: [
     "stages[]",
-    "stageInfo[].what", "stageInfo[].who", "stageInfo[].stall", "stageInfo[].source",
+    "stageInfo[].what", "stageInfo[].who", "stageInfo[].stall", "stageInfo[].source", "stageInfo[].doneName",
     "glossary.*",
     "changelog[].plain",
     "products[].classLabel", "products[].flag", "products[].barrier", "products[].note", "products[].next",
@@ -241,7 +241,8 @@ function build() {
       host: meta.host,
       stages: D.stages,
       stageColumns: D.stageColumns,
-      stageInfo: (D.stageInfo || []).map((x) => ({ what: x.what, who: x.who, stall: x.stall, source: x.source })),
+      // doneName: the step's name on a medicine that has completed it (optional)
+      stageInfo: (D.stageInfo || []).map((x) => ({ what: x.what, who: x.who, stall: x.stall, source: x.source, ...(x.doneName ? { doneName: x.doneName } : {}) })),
       // numbers only (no text to localise); left out when the data has none
       ...(D.yardstick ? { yardstick: { wholeYears: D.yardstick.wholeYears, expected: D.yardstick.expected } } : {}),
       glossary: D.glossary,

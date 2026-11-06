@@ -149,6 +149,9 @@
             if (!si || typeof si[k] !== "string" || !si[k].trim())
               err(`stageInfo[${i}] (${data.stages[i]}): "${k}" must be a non-empty string`);
           });
+          // optional: the step's name on a medicine that has completed it
+          if (si && si.doneName !== undefined && (typeof si.doneName !== "string" || !si.doneName.trim()))
+            err(`stageInfo[${i}] (${data.stages[i]}): "doneName" must be a non-empty string when given`);
         });
       }
     }

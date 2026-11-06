@@ -89,7 +89,7 @@ function collect() {
   // translated too (owner's decision, 2 Oct 2026); citations are the products'
   // own `source` fields below, which stay English.
   (P.stageInfo || []).forEach((x, i) => {
-    ["what", "who", "stall", "source"].forEach((k) => add("data", x[k], `products.stageInfo[${i}].${k}`));
+    ["what", "who", "stall", "source", "doneName"].forEach((k) => add("data", x[k], `products.stageInfo[${i}].${k}`));
   });
   Object.entries(P.glossary || {}).forEach(([k, v]) => add("data", v, `products.glossary.${k}`));
   (P.changelog || []).forEach((c, i) => {
