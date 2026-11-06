@@ -29,7 +29,7 @@ const CONTENT = path.join(ROOT, "i18n", "content.en.json");
 const RECORDS = path.join(ROOT, "i18n", "translator");
 // memory locale → XLIFF target-language and file suffix, as the translators' own files
 const FILES = { fr: { language: "fr", suffix: "FRA" }, pt: { language: "pt-br", suffix: "PT-BZ" } };
-const NOTE = "Do not translate: the medicine names GanLum, ALAQ, ASPY and DHA-PPQ; organisation names such as WHO, EMA, MMV and the Global Fund; trial or register codes such as NCT05842954. 'TBC' means 'to be confirmed' and should be translated. Tags (placeholders) are filled in by the page with numbers, names or dates: keep every tag, you may move it within the sentence.";
+const NOTE = "Do not translate: the medicine names Ganaplacide–lumefantrine (formerly GanLum), ALAQ, ASPY and DHA-PPQ; organisation names such as WHO, EMA, MMV and the Global Fund; trial or register codes such as NCT05842954. 'TBC' means 'to be confirmed' and should be translated. Tags (placeholders) are filled in by the page with numbers, names or dates: keep every tag, you may move it within the sentence.";
 
 const escapeXml = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 

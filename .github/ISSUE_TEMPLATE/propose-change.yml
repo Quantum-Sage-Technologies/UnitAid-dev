@@ -30,7 +30,7 @@ body:
     attributes:
       label: Medicine
       options:
-        - "GanLum"
+        - "Ganaplacide–lumefantrine"
         - "ALAQ"
         - "ASPY (Pyramax)"
         - "DHA–PPQ"

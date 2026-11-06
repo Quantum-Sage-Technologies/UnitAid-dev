@@ -5,6 +5,27 @@
     "pt": "pt"
   },
   "entries": {
+    "55c753de6048c537": {
+      "en": "It starts with four medicines relevant to multiple first-line therapy (MFT) strategies, which use more than one first-line treatment in a population to reduce the risk of drug resistance. Two are already recommended by WHO: artesunate–pyronaridine (ASPY) and dihydroartemisinin–piperaquine (DHA–PPQ). Two are in late-stage development: ganaplacide–lumefantrine (KLU156) and artemether–lumefantrine–amodiaquine (ALAQ). Together they cover both halves of the pathway: approval for the medicines in development, and adoption and procurement for those already recommended.",
+      "where": "i18n/ui.en.json:about.launchScope",
+      "bucket": "ui",
+      "fr": "LAUNCH suit pour l’instant quatre médicaments entrant dans le cadre des stratégies de traitements de première intention multiples (MFT), qui consistent à utiliser plusieurs traitements de première intention au sein d’une même population afin de réduire le risque de pharmacorésistance. Deux d’entre eux sont déjà recommandés par l’OMS : l’artésunate-pyronaridine (ASPY) et la dihydroartémisinine-pipéraquine (DHA–PPQ). Les deux autres, le ganaplacide-luméfantrine (KLU156) et l’artéméther-luméfantrine-amodiaquine (ALAQ), sont en phase avancée de développement. À eux quatre, ces médicaments couvrent les deux volets du parcours d’accès : l’approbation des médicaments en cours de développement, ainsi que l’adoption et l’achat de ceux déjà recommandés.",
+      "pt": "O projeto começa com quatro medicamentos relevantes para as estratégias de terapia múltipla de primeira linha (MFT), que utilizam mais de um tratamento de primeira linha em uma população para reduzir o risco de resistência aos medicamentos. Dois já são recomendados pela OMS: artesunato–pironaridina (ASPY) e di-hidroartemisinina–piperaquina (DHA–PPQ). Dois estão em estágio avançado de desenvolvimento: ganaplacida–lumefantrina (KLU156) e arteméter–lumefantrina–amodiaquina (ALAQ). Juntos, eles abrangem as duas partes do processo: a aprovação dos medicamentos em desenvolvimento e adoção e aquisição daqueles já recomendados."
+    },
+    "373fad2564f960c8": {
+      "en": "This medicine is now listed under its full name, Ganaplacide–lumefantrine, with its development code KLU156. It was listed as GanLum.",
+      "where": "products.changelog[0].plain",
+      "bucket": "data",
+      "fr": "Ce médicament figure désormais sous son nom complet, Ganaplacide–lumefantrine, avec son code de développement KLU156. Il figurait auparavant sous le nom GanLum.",
+      "pt": "Este medicamento agora aparece com o seu nome completo, Ganaplacide–lumefantrine, e o código de desenvolvimento KLU156. Antes aparecia como GanLum."
+    },
+    "0e14ad01593afa31": {
+      "en": "The second step is called \"Stringent Regulatory Approval (SRA)\". A medicine that has not yet completed it shows \"Stringent Regulatory Review (SRA)\" instead, and Ganaplacide–lumefantrine shows \"Stringent Health Authority Review (SRA)\". No dates, statuses or figures changed.",
+      "where": "products.changelog[1].plain",
+      "bucket": "data",
+      "fr": "La deuxième étape s’intitule « Approbation d’une autorité de réglementation rigoureuse (SRA) ». Un médicament qui ne l’a pas encore franchie affiche « Examen réglementaire rigoureux (SRA) », et Ganaplacide–lumefantrine affiche « Examen rigoureux des autorités sanitaires (SRA) ». Aucune date, aucun statut ni aucun chiffre n’a été modifié.",
+      "pt": "A segunda etapa é chamada de \"Aprovação Regulatória Rigorosa (SRA)\". Um medicamento que ainda não a concluiu mostra \"Análise regulatória rigorosa (SRA)\" em vez disso, e o Ganaplacide–lumefantrine mostra \"Análise rigorosa da autoridade sanitária (SRA)\". Nenhuma data, status ou número foi alterado."
+    },
     "0048937723511d62": {
       "en": "We reworded the explanations of the steps on the pathway after partner feedback, and renamed the first two steps \"R&D and Clinical\" and \"Stringent Regulatory Approval (SRA)\". No dates, statuses or figures changed.",
       "where": "products.changelog[6].plain",

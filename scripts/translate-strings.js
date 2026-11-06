@@ -162,7 +162,7 @@ const HOLE = /\$\{(?:[^{}]|\{[^{}]*\})*\}|\{[A-Za-z][A-Za-z0-9]*\}/g;
 // ---------------------------------------------------------------------------
 const PROTECT = [
   // project and product names
-  "LAUNCH", "GanLum", "Pyramax", "Eurartesim", "Coartem", "KALUMA", "ALAQ",
+  "LAUNCH", "GanLum", "Ganaplacide–lumefantrine", "Pyramax", "Eurartesim", "Coartem", "KALUMA", "ALAQ",
   // organisations whose names do not localise
   "Unitaid", "Novartis", "NAFDAC", "TMDA", "MMV", "RBM",
   // domain acronyms that are read as words if translated
