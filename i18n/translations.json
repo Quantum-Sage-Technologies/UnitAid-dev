@@ -4329,6 +4329,13 @@
       "fr": "En développement · triple CTA",
       "pt": "Desenvolvimento · terapia combinada à base de artemisinina (ACT) tripla"
     },
+    "8b1b181db6c880f5": {
+      "en": "The LAUNCH Transparency Initiative, led by Unitaid and funded by the Gates Foundation, is a proof of concept for making the access pathway of new antimalarial medicines transparent. It brings public information on each medicine together in one place, from development and regulatory approval through WHO recommendation and prequalification to registration, policy, procurement and delivery in countries, so that partners can see where access is held up and act on it.",
+      "where": "static text",
+      "bucket": "markup",
+      "fr": "L’initiative LAUNCH pour la transparence, menée par Unitaid et financée par la Fondation Gates, constitue une démonstration de faisabilité visant à apporter plus de transparence au parcours d’accès des nouveaux médicaments antipaludiques. Elle rassemble en un seul et même endroit des informations publiques sur chaque médicament – développement, approbation réglementaire via les recommandations et la préqualification de l’OMS, enregistrement, politiques nationales et mise en œuvre dans les pays – afin que les partenaires puissent identifier les obstacles à l’accès et prendre les mesures qui s’imposent.",
+      "pt": "A Iniciativa de Transparência LAUNCH, liderada pela Unitaid e financiada pela Fundação Gates, é uma prova de conceito destinada a tornar transparente o processo de acesso a novos medicamentos antimaláricos. Ela reúne em um só lugar informações públicas sobre cada medicamento, desde o desenvolvimento e a aprovação regulatória, passando pela recomendação e pré-qualificação da OMS, até o registro, as políticas, aquisições e a distribuição nos países, para que os parceiros possam identificar onde o acesso está sendo dificultado e tomar medidas para solucionar esses obstáculos."
+    },
     "8b36e5ff54f38149": {
       "en": "It starts with four medicines relevant to multiple first-line therapy (MFT) strategies, which use more than one first-line treatment in a population to reduce the risk of drug resistance. Two are already recommended by WHO but underused: artesunate–pyronaridine (ASPY) and dihydroartemisinin–piperaquine (DHA–PPQ). Two are in late-stage development: ganaplacide–lumefantrine (GanLum) and artemether–lumefantrine–amodiaquine (ALAQ). Together they cover both halves of the pathway: approval for the medicines in development, and adoption and procurement for those already recommended.",
       "where": "static text",
