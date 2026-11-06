@@ -1329,6 +1329,14 @@
   }
   .sub-btn:hover { background: #0C4A5E; border-color: #0C4A5E; }
   .sub-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  /* Subscribe for updates is switched off for now (owner's call, 6 Nov 2026:
+     not in this phase). Only hidden: the button, its panel and the script
+     behind them stay, so bringing it back is deleting this one rule. The
+     panel opens from nothing but the button. Send feedback is the separate
+     widget (assets/report-issue.js) and is untouched. Existing subscribers
+     still get the update emails and can still unsubscribe.
+     See docs/hide-subscribe-notes.md. */
+  #sub-open, #subwrap { display: none !important; }
 
   /* The panel it opens. Front end only for now — see the seam in the script.
      Anchored to .hdr-actions rather than sitting inline in the document: an
