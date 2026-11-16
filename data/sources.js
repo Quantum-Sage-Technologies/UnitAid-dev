@@ -491,6 +491,23 @@ window.LAUNCH_SOURCES =
       "checked": "2026-09-21"
     },
     {
+      "id": "novartis-ganlum-submission",
+      "label": "Novartis: GanLum submitted for approval, Nov 2026",
+      "title": "Novartis ranks first place in 2026 Access to Medicine Index (media release, 10 November 2026)",
+      "org": "Novartis",
+      "category": "Manufacturer",
+      "group": "document",
+      "url": "https://www.novartis.com/news/media-releases/novartis-ranks-first-place-2026-access-medicine-index",
+      "year": "2026",
+      "products": ["ganlum"],
+      "plain": "The manufacturer announcing that GanLum has been submitted to Swissmedic and the US FDA for approval.",
+      "collection": "static",
+      "public": true,
+      "findings": "Media release dated Basel, November 10, 2026, on the 2026 Access to Medicine Index. Among the achievements it lists: \"Completed submission of KLU156 (ganaplacide/lumefantrine), the first next-generation antimalarial, to Swissmedic and the U.S. FDA and received priority review\". It does not say which authority granted priority review, nor the date of either submission. Read directly on novartis.com on 2026-11-16 (GlobeNewswire's copy refused automated requests with a 403).",
+      "relevance": "The source for GanLum's regulatory stage moving from Not started to In progress, and for the SRA dossier submission milestone (feedback, Nov 2026).",
+      "checked": "2026-11-16"
+    },
+    {
       "id": "plos-aspy-cem",
       "label": "PLOS Medicine: ASPY in routine use",
       "title": "Pyronaridine-artesunate real-world safety, tolerability and effectiveness in malaria patients in 5 African countries",
