@@ -5,7 +5,21 @@
     <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
     <description>Changes to tracked antimalarial product statuses on the LAUNCH dashboard (draft data).</description>
     <language>en</language>
-    <lastBuildDate>Fri, 06 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>DHA–PPQ: Country registration stage: register detail recounted from the NAFDAC Greenbo…</title>
+      <description>Country registration stage: register detail recounted from the NAFDAC Greenbook and TMDA IMIS2 extracts of 3 Nov 2026, with the fetchers' own matching (which reproduces the earlier figures from the 31 Aug extracts). Tanzania: 8 presentations, was 10. Guilin's two D-Artepp Dispersible registrations TZ 16 H 0343 and TZ 16 H 0316, both expiring 1 Oct 2026, are no longer returned by the register; Guilin's D-ARTEPP Dispersible TZ 18 H 0202 is still registered. "four manufacturers" corrected to three: Guilin, KBN-Zhejiang (spelled three ways in the register) and Ajanta. Nigeria: 46 presentations, of which 23 are active and 23 have lapsed, was 47, 25 and 22. Upxin (B4-3672) and Fanexin Suspension Powder (B4-5146) expired on 27 Oct 2026 and are now Inactive; Pymal Suspension (C4-1046), lapsed since Sep 2025, is no longer returned. Both countries still register DHA–PPQ, so the map and the 20 registers are unchanged.</description>
+      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
+      <guid isPermaLink="false">2026-11-16:DHA–PPQ:Country registration stage: register det</guid>
+      <pubDate>Mon, 16 Nov 2026 12:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Ganaplacide–lumefantrine: Stringent Health Authority Review (SRA) stage: status changed from Not starte…</title>
+      <description>Stringent Health Authority Review (SRA) stage: status changed from Not started to In progress (feedback, Nov 2026: the step is already under review). Novartis's media release of 10 Nov 2026 lists "Completed submission of KLU156 (ganaplacide/lumefantrine), the first next-generation antimalarial, to Swissmedic and the U.S. FDA and received priority review". The stage line now reads "Submitted to Swissmedic and the US FDA, and under review. Novartis reported on 10 Nov 2026 that the submission is complete and that it has received priority review.", recorded "Submission announced 10 Nov 2026", next step "Regulatory decision (Swissmedic, US FDA)", TBC. It replaces the 19 Oct 2026 line "Regulatory submission in preparation following Phase III success; no filing announced as of 15 Oct 2026". The access milestone "SRA dossier submission" changed from In preparation to Submitted, announced 10 Nov 2026. New source: Novartis: GanLum submitted for approval, Nov 2026.</description>
+      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
+      <guid isPermaLink="false">2026-11-16:Ganaplacide–lumefantrine:Stringent Health Authority Review (SRA) </guid>
+      <pubDate>Mon, 16 Nov 2026 12:00:00 GMT</pubDate>
+    </item>
     <item>
       <title>Ganaplacide–lumefantrine: GanLum is now named by its active ingredients: name "Ganaplacide–lumefantrine…</title>
       <description>GanLum is now named by its active ingredients: name "Ganaplacide–lumefantrine" (was "GanLum") and, under it, inn "KLU156", its development code (was "Ganaplacide–lumefantrine (KLU156)"). The About LAUNCH paragraph reads "ganaplacide–lumefantrine (KLU156)". Older changelog lines keep "GanLum", so the subscriber email does not resend them.</description>
@@ -200,20 +214,6 @@
       <description>WHO guideline recommendation year corrected to 2010 (second-edition treatment guidelines; reaffirmed 2015) — previously shown as 2015.</description>
       <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
       <guid isPermaLink="false">2026-08-23:DHA–PPQ:WHO guideline recommendation year correc</guid>
-      <pubDate>Sun, 23 Aug 2026 12:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>ALAQ: Co-formulated pivotal Phase III renamed to FD-TACT (successor to the DeTACT p…</title>
-      <description>Co-formulated pivotal Phase III renamed to FD-TACT (successor to the DeTACT programme); unverified 'taste-masked' wording replaced with the sourced 'child-friendly dispersible'.</description>
-      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
-      <guid isPermaLink="false">2026-08-23:ALAQ:Co-formulated pivotal Phase III renamed </guid>
-      <pubDate>Sun, 23 Aug 2026 12:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>GanLum: Use-case wording aligned with the sourced Novartis claim (first major innovat…</title>
-      <description>Use-case wording aligned with the sourced Novartis claim (first major innovation in malaria treatment since ACTs were introduced 25+ years ago).</description>
-      <link>https://kochrisdev.github.io/launch-transparency-dashboard/</link>
-      <guid isPermaLink="false">2026-08-23:GanLum:Use-case wording aligned with the source</guid>
       <pubDate>Sun, 23 Aug 2026 12:00:00 GMT</pubDate>
     </item>
   </channel>
