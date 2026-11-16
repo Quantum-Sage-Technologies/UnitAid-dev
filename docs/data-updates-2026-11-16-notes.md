@@ -5,6 +5,8 @@ changes on one branch, one commit each: both edit the newest changelog line
 and `lastUpdated` in `data/products.js`, so two pull requests would conflict,
 and one branch needs one translate run and one "Publish now".
 
+Status: two commits, pushed 16 Nov 2026 so CI runs; no pull request yet.
+
 # 1. GanLum: submitted, under review
 
 ## What was flagged
@@ -95,3 +97,54 @@ Phase III release, so neither was used.
 - Watch issue #158: KALUMA results are now posted on ClinicalTrials.gov. The
   R&D note still says "Company-reported; not yet peer-reviewed", which stays
   true. Separate change if wanted.
+
+# 2. DHA–PPQ: Nigeria and Tanzania register counts
+
+From watch issues #140 (NAFDAC) and #142 (TMDA), both 3 Nov 2026.
+
+## The numbers
+
+Recounted with the fetchers' own code: `toRow` and the de-duplication key
+cut from `scripts/fetch-nafdac.js` (the register's `product_id`, not the
+NAFDAC number, which two Upxin presentations share) and
+`scripts/fetch-tmda.js`. As a check, the same count on the 31 Aug snapshots
+gives 47 / 25 active / 22 and 10, the figures the dashboard showed, so the
+method matches whoever counted them.
+
+| | 31 Aug 2026 | 3 Nov 2026 |
+| --- | --- | --- |
+| Nigeria, presentations | 47 | 46 |
+| Nigeria, Active | 25 | 23 |
+| Nigeria, Inactive ("lapsed") | 22 | 23 |
+| Tanzania, presentations | 10 | 8 |
+
+- Nigeria: Upxin (B4-3672) and Fanexin Suspension Powder (B4-5146) expired
+  27 Oct 2026 and went Active → Inactive. Pymal Suspension (C4-1046), Inactive
+  since its Sep 2025 expiry, is no longer returned.
+- Tanzania: Guilin's D-Artepp Dispersible TZ 16 H 0343 and TZ 16 H 0316, both
+  expiring 1 Oct 2026, are no longer returned. That they expired rather than
+  were withdrawn is an inference from the dates; the register gives no reason.
+  The paediatric dispersible TZ 18 H 0202 (expires 2028) is still there.
+
+## Decisions
+
+- **"four manufacturers" → three** (owner's call, 16 Nov 2026). The register
+  names Guilin, KBN-Zhejiang (three spellings) and Ajanta, in both snapshots.
+- **"lapsed" stays the register's status Inactive.** The two Zomal entries
+  (A11-100074, A11-100075) were given new dates on 3 Nov (approved
+  26 Aug 2026, expiring 2031) but the register still says Inactive, so they
+  are counted as lapsed. If NAFDAC updates the status, the next monthly fetch
+  will show it.
+- **A hand-made change, not proposals.** A proposal replaces a stage's
+  `sources` with the one source chosen in the form
+  (`scripts/proposal-lib.js:320`). This stage cites 21 registers; a NAFDAC or
+  TMDA proposal would have left it citing one, and no check would object.
+- The 23 Aug changelog line that first gave 47 and 10 is history and is left
+  as it was.
+
+## Left alone
+
+- The country map: Nigeria and Tanzania still register DHA–PPQ, so neither
+  map entry changes.
+- The proposal-form trap above affects any stage with more than one source.
+  Not fixed here; the form should at least warn.
