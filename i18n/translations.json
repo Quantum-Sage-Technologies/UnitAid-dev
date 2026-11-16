@@ -5,27 +5,6 @@
     "pt": "pt"
   },
   "entries": {
-    "55c753de6048c537": {
-      "en": "It starts with four medicines relevant to multiple first-line therapy (MFT) strategies, which use more than one first-line treatment in a population to reduce the risk of drug resistance. Two are already recommended by WHO: artesunate–pyronaridine (ASPY) and dihydroartemisinin–piperaquine (DHA–PPQ). Two are in late-stage development: ganaplacide–lumefantrine (KLU156) and artemether–lumefantrine–amodiaquine (ALAQ). Together they cover both halves of the pathway: approval for the medicines in development, and adoption and procurement for those already recommended.",
-      "where": "i18n/ui.en.json:about.launchScope",
-      "bucket": "ui",
-      "fr": "LAUNCH suit pour l’instant quatre médicaments entrant dans le cadre des stratégies de traitements de première intention multiples (MFT), qui consistent à utiliser plusieurs traitements de première intention au sein d’une même population afin de réduire le risque de pharmacorésistance. Deux d’entre eux sont déjà recommandés par l’OMS : l’artésunate-pyronaridine (ASPY) et la dihydroartémisinine-pipéraquine (DHA–PPQ). Les deux autres, le ganaplacide-luméfantrine (KLU156) et l’artéméther-luméfantrine-amodiaquine (ALAQ), sont en phase avancée de développement. À eux quatre, ces médicaments couvrent les deux volets du parcours d’accès : l’approbation des médicaments en cours de développement, ainsi que l’adoption et l’achat de ceux déjà recommandés.",
-      "pt": "O projeto começa com quatro medicamentos relevantes para as estratégias de terapia múltipla de primeira linha (MFT), que utilizam mais de um tratamento de primeira linha em uma população para reduzir o risco de resistência aos medicamentos. Dois já são recomendados pela OMS: artesunato–pironaridina (ASPY) e di-hidroartemisinina–piperaquina (DHA–PPQ). Dois estão em estágio avançado de desenvolvimento: ganaplacida–lumefantrina (KLU156) e arteméter–lumefantrina–amodiaquina (ALAQ). Juntos, eles abrangem as duas partes do processo: a aprovação dos medicamentos em desenvolvimento e adoção e aquisição daqueles já recomendados."
-    },
-    "373fad2564f960c8": {
-      "en": "This medicine is now listed under its full name, Ganaplacide–lumefantrine, with its development code KLU156. It was listed as GanLum.",
-      "where": "products.changelog[0].plain",
-      "bucket": "data",
-      "fr": "Ce médicament figure désormais sous son nom complet, Ganaplacide–lumefantrine, avec son code de développement KLU156. Il figurait auparavant sous le nom GanLum.",
-      "pt": "Este medicamento agora aparece com o seu nome completo, Ganaplacide–lumefantrine, e o código de desenvolvimento KLU156. Antes aparecia como GanLum."
-    },
-    "0e14ad01593afa31": {
-      "en": "The second step is called \"Stringent Regulatory Approval (SRA)\". A medicine that has not yet completed it shows \"Stringent Regulatory Review (SRA)\" instead, and Ganaplacide–lumefantrine shows \"Stringent Health Authority Review (SRA)\". No dates, statuses or figures changed.",
-      "where": "products.changelog[1].plain",
-      "bucket": "data",
-      "fr": "La deuxième étape s’intitule « Approbation d’une autorité de réglementation rigoureuse (SRA) ». Un médicament qui ne l’a pas encore franchie affiche « Examen réglementaire rigoureux (SRA) », et Ganaplacide–lumefantrine affiche « Examen rigoureux des autorités sanitaires (SRA) ». Aucune date, aucun statut ni aucun chiffre n’a été modifié.",
-      "pt": "A segunda etapa é chamada de \"Aprovação Regulatória Rigorosa (SRA)\". Um medicamento que ainda não a concluiu mostra \"Análise regulatória rigorosa (SRA)\" em vez disso, e o Ganaplacide–lumefantrine mostra \"Análise rigorosa da autoridade sanitária (SRA)\". Nenhuma data, status ou número foi alterado."
-    },
     "0048937723511d62": {
       "en": "We reworded the explanations of the steps on the pathway after partner feedback, and renamed the first two steps \"R&D and Clinical\" and \"Stringent Regulatory Approval (SRA)\". No dates, statuses or figures changed.",
       "where": "products.changelog[6].plain",
@@ -127,6 +106,13 @@
       "fr": "Étude portant sur un projet pilote de MFT prévu dans le district de Kaya, au Burkina Faso, et comportant trois traitements.",
       "pt": "Um estudo de um projeto-piloto de MFT planejado no distrito de Kaya, em Burkina Faso, utilizando três tratamentos."
     },
+    "0417a28b86b74e5e": {
+      "en": "Submitted to Swissmedic and the US FDA, and under review. Novartis reported on 10 Nov 2026 that the submission is complete and that it has received priority review.",
+      "where": "products.products[0].stages[1].note",
+      "bucket": "data",
+      "fr": "Soumis à Swissmedic et à la FDA américaine, et en cours d'examen. Novartis a annoncé le 10 novembre 2026 que le dossier était complet et qu'il bénéficiait d'un examen prioritaire.",
+      "pt": "Submetido à Swissmedic e à FDA dos EUA, e em análise. Novartis informou em 10 de novembro de 2026 que a submissão está completa e que recebeu análise prioritária."
+    },
     "0475614aed28ff3f": {
       "en": "940k packs (GF, to 2025)",
       "where": "products.products[2].detail.milestones[6].label",
@@ -165,6 +151,13 @@
       "where": "assets/site-nav.js",
       "bucket": "reviewed",
       "fr": "Suivre chaque médicament à travers les sept étapes pour les patients."
+    },
+    "0542736011de73bd": {
+      "en": "Novartis: GanLum submitted for approval, Nov 2026",
+      "where": "sources.sources[25].label",
+      "bucket": "data",
+      "fr": "Novartis: GanLum soumis pour approbation, novembre 2026",
+      "pt": "Novartis: GanLum submetido para aprovação, novembro de 2026"
     },
     "054496e4e79ea6a1": {
       "en": "Recommended for P. falciparum",
@@ -386,6 +379,13 @@
       "bucket": "data",
       "fr": "Indonésie : Contrôle des produits BPOM",
       "pt": "Indonésia: Verificação de produtos pela BPOM"
+    },
+    "0e14ad01593afa31": {
+      "en": "The second step is called \"Stringent Regulatory Approval (SRA)\". A medicine that has not yet completed it shows \"Stringent Regulatory Review (SRA)\" instead, and Ganaplacide–lumefantrine shows \"Stringent Health Authority Review (SRA)\". No dates, statuses or figures changed.",
+      "where": "products.changelog[1].plain",
+      "bucket": "data",
+      "fr": "La deuxième étape s’intitule « Approbation d’une autorité de réglementation rigoureuse (SRA) ». Un médicament qui ne l’a pas encore franchie affiche « Examen réglementaire rigoureux (SRA) », et Ganaplacide–lumefantrine affiche « Examen rigoureux des autorités sanitaires (SRA) ». Aucune date, aucun statut ni aucun chiffre n’a été modifié.",
+      "pt": "A segunda etapa é chamada de \"Aprovação Regulatória Rigorosa (SRA)\". Um medicamento que ainda não a concluiu mostra \"Análise regulatória rigorosa (SRA)\" em vez disso, e o Ganaplacide–lumefantrine mostra \"Análise rigorosa da autoridade sanitária (SRA)\". Nenhuma data, status ou número foi alterado."
     },
     "0e47f09a748fa132": {
       "en": "Zoom in",
@@ -1182,6 +1182,13 @@
       "fr": "Toutes les transactions affichées correspondent à des commandes financées par le Fonds mondial et issues de sa base de données PQR. Les commandes réglées par d'autres donateurs, des gouvernements nationaux ou des acheteurs privés ne sont pas incluses ; ce chiffre ne reflète donc pas la totalité des achats mondiaux de ce produit.",
       "pt": "Todas as transações apresentadas são pedidos financiados pelo Fundo Global, provenientes de seu banco de dados PQR. Pedidos pagos por outros doadores, governos nacionais ou compradores privados não estão incluídos; portanto, este valor não representa o total de aquisições globais do produto."
     },
+    "26f9250ea180624c": {
+      "en": "We updated DHA–PPQ's register counts: Tanzania now lists 8 presentations from three manufacturers, and Nigeria 46, of which 23 are active.",
+      "where": "products.changelog[0].plain",
+      "bucket": "data",
+      "fr": "Nous avons mis à jour les chiffres du registre DHA–PPQ : la Tanzanie compte désormais 8 présentations de trois fabricants et le Nigéria 46, dont 23 sont actives.",
+      "pt": "Atualizamos os registros do DHA–PPQ: a Tanzânia agora lista 8 apresentações de três fabricantes e a Nigéria 46, das quais 23 estão ativas."
+    },
     "270e4a3ea9a08308": {
       "en": "${nS} sites in ${nM} marks — zoom in to separate.",
       "where": "line 3193",
@@ -1679,6 +1686,13 @@
       "fr": "Enregistrement national",
       "pt": "Registro de país"
     },
+    "373fad2564f960c8": {
+      "en": "This medicine is now listed under its full name, Ganaplacide–lumefantrine, with its development code KLU156. It was listed as GanLum.",
+      "where": "products.changelog[0].plain",
+      "bucket": "data",
+      "fr": "Ce médicament figure désormais sous son nom complet, Ganaplacide–lumefantrine, avec son code de développement KLU156. Il figurait auparavant sous le nom GanLum.",
+      "pt": "Este medicamento agora aparece com o seu nome completo, Ganaplacide–lumefantrine, e o código de desenvolvimento KLU156. Antes aparecia como GanLum."
+    },
     "37642f9bf90c4139": {
       "en": "' + esc(layerLabel(LAYER)) + '",
       "where": "line 3067 (in markup)",
@@ -2017,6 +2031,13 @@
       "bucket": "data",
       "fr": "15,3 millions de dollars US en 2025",
       "pt": "US$ 11,6 milhões em 2025"
+    },
+    "40642b2913477d63": {
+      "en": "Regulatory decision (Swissmedic, US FDA)",
+      "where": "products.products[0].stages[1].next",
+      "bucket": "data",
+      "fr": "Décision réglementaire (Swissmedic, FDA américaine)",
+      "pt": "Decisão regulatória (Swissmedic, FDA dos EUA)"
     },
     "4080343ee0fe2dc3": {
       "en": "Togo",
@@ -2773,6 +2794,13 @@
       "fr": "Recommandé pour le paludisme à Plasmodium vivax",
       "pt": "Recomendado para malária causada por Plasmodium vivax"
     },
+    "55c753de6048c537": {
+      "en": "It starts with four medicines relevant to multiple first-line therapy (MFT) strategies, which use more than one first-line treatment in a population to reduce the risk of drug resistance. Two are already recommended by WHO: artesunate–pyronaridine (ASPY) and dihydroartemisinin–piperaquine (DHA–PPQ). Two are in late-stage development: ganaplacide–lumefantrine (KLU156) and artemether–lumefantrine–amodiaquine (ALAQ). Together they cover both halves of the pathway: approval for the medicines in development, and adoption and procurement for those already recommended.",
+      "where": "i18n/ui.en.json:about.launchScope",
+      "bucket": "ui",
+      "fr": "LAUNCH suit pour l’instant quatre médicaments entrant dans le cadre des stratégies de traitements de première intention multiples (MFT), qui consistent à utiliser plusieurs traitements de première intention au sein d’une même population afin de réduire le risque de pharmacorésistance. Deux d’entre eux sont déjà recommandés par l’OMS : l’artésunate-pyronaridine (ASPY) et la dihydroartémisinine-pipéraquine (DHA–PPQ). Les deux autres, le ganaplacide-luméfantrine (KLU156) et l’artéméther-luméfantrine-amodiaquine (ALAQ), sont en phase avancée de développement. À eux quatre, ces médicaments couvrent les deux volets du parcours d’accès : l’approbation des médicaments en cours de développement, ainsi que l’adoption et l’achat de ceux déjà recommandés.",
+      "pt": "O projeto começa com quatro medicamentos relevantes para as estratégias de terapia múltipla de primeira linha (MFT), que utilizam mais de um tratamento de primeira linha em uma população para reduzir o risco de resistência aos medicamentos. Dois já são recomendados pela OMS: artesunato–pironaridina (ASPY) e di-hidroartemisinina–piperaquina (DHA–PPQ). Dois estão em estágio avançado de desenvolvimento: ganaplacida–lumefantrina (KLU156) e arteméter–lumefantrina–amodiaquina (ALAQ). Juntos, eles abrangem as duas partes do processo: a aprovação dos medicamentos em desenvolvimento e adoção e aquisição daqueles já recomendados."
+    },
     "55e1ea9bbe0754e4": {
       "en": "⚠ Draft figures — not yet verified.",
       "where": "line 1541 (in markup)",
@@ -3250,6 +3278,13 @@
       "where": "markers.meta.markerDrug[\"Pfplasmepsin 2-3 amplifications\"]",
       "bucket": "data",
       "fr": "Pipéraquine"
+    },
+    "64900440a8c9a5ed": {
+      "en": "Submitted",
+      "where": "products.products[0].detail.milestones[1].label",
+      "bucket": "data",
+      "fr": "Soumis",
+      "pt": "Enviado"
     },
     "652bcc3a47842889": {
       "en": "Item",
@@ -4130,6 +4165,13 @@
       "bucket": "markup",
       "fr": "Prototype — les données présentées ici peuvent ne pas être exactes"
     },
+    "83cb7ef649fe41c5": {
+      "en": "Announced 10 Nov 2026 (Swissmedic, US FDA)",
+      "where": "products.products[0].detail.milestones[1].date",
+      "bucket": "data",
+      "fr": "Annoncé le 10 novembre 2026 (Swissmedic, US FDA)",
+      "pt": "Anunciado em 10 de novembro de 2026 (Swissmedic, US FDA)"
+    },
     "83ce134f24f771de": {
       "en": "A separate WHO check of quality and manufacturing, including factory inspections. A place on the prequalified list is what lets UN agencies and the Global Fund buy the medicine. The product must first be invited through WHO's Expression of Interest (EOI) list.",
       "where": "products.stageInfo[3].what",
@@ -4841,6 +4883,13 @@
       "fr": "Accès aux pays",
       "pt": "Acesso no País"
     },
+    "9a64579f0d752422": {
+      "en": "Regulatory decision",
+      "where": "products.products[0].detail.milestones[1].next",
+      "bucket": "data",
+      "fr": "Décision réglementaire",
+      "pt": "Decisão regulatória"
+    },
     "9a745361aa61b2e5": {
       "en": "Rolling; earliest on the registers checked: Viet Nam 2013, Cameroon and Benin 2016",
       "where": "products.products[2].detail.milestones[4].date",
@@ -5445,6 +5494,13 @@
       "fr": "Le même communiqué est publié sur Business Wire.",
       "pt": "O mesmo comunicado foi divulgado pela Business Wire."
     },
+    "b0c8d59aa404affc": {
+      "en": "Confirmed in 20 national registers so far: Benin, Burkina Faso, Cameroon, Côte d'Ivoire, DR Congo, Ethiopia, Indonesia, Kenya, Mozambique, Myanmar (2022 renewal list), Namibia, Nigeria, Rwanda, Senegal, Tanzania, Thailand, The Gambia, Viet Nam, Zambia and Zimbabwe. Register detail: Tanzania — 8 presentations across three manufacturers (Guilin D-ARTEPP incl. paediatric dispersible, KBN-Zhejiang Duo-Cotecxin, Ajanta Ridmal), all Registered/Compliant; Nigeria — 46 presentations, of which 23 are active and 23 have lapsed (registrations not being maintained, itself an underuse signal). Since July 2015 Eurartesim has been entrusted exclusively to Pierre Fabre in 32 African countries (Sigma-Tau, now Alfasigma); that is a commercial licence, not a registration, so those countries are not counted here",
+      "where": "products.products[3].stages[4].note",
+      "bucket": "data",
+      "fr": "Confirmé dans 20 registres nationaux à ce jour : Bénin, Burkina Faso, Cameroun, Côte d’Ivoire, République démocratique du Congo, Éthiopie, Indonésie, Kenya, Mozambique, Myanmar (liste de renouvellement 2022), Namibie, Nigéria, Rwanda, Sénégal, Tanzanie, Thaïlande, Gambie, Viêt Nam, Zambie et Zimbabwe. Détails des registres : Tanzanie — 8 présentations réparties entre trois fabricants (Guilin D-ARTEPP, y compris la version pédiatrique dispersible, KBN-Zhejiang Duo-Cotecxin, Ajanta Ridmal), toutes enregistrées/conformes ; Nigéria — 46 présentations, dont 23 sont actives et 23 ont expiré (les enregistrements n’étant pas maintenus, ce qui constitue un signe de sous-utilisation). Depuis juillet 2015, la marque Eurartesim est détenue exclusivement par Pierre Fabre dans 32 pays africains (Sigma-Tau, devenue Alfasigma) ; il s’agit d’une licence commerciale et non d’un enregistrement, ces pays ne sont donc pas comptabilisés ici.",
+      "pt": "Confirmado em 20 registros nacionais até o momento: Benin, Burkina Faso, Camarões, Costa do Marfim, República Democrática do Congo, Etiópia, Indonésia, Quênia, Moçambique, Mianmar (lista de renovação de 2022), Namíbia, Nigéria, Ruanda, Senegal, Tanzânia, Tailândia, Gâmbia, Vietnã, Zâmbia e Zimbábue. Detalhes do registro: Tanzânia — 8 apresentações em três fabricantes (Guilin D-ARTEPP, incluindo dispersível pediátrico; KBN-Zhejiang Duo-Cotecxin; Ajanta Ridmal), todas registradas/em conformidade; Nigéria — 46 apresentações, das quais 23 estão ativas e 23 expiraram (registros não mantidos, o que por si só indica subutilização). Desde julho de 2015, o Eurartesim foi confiado exclusivamente à Pierre Fabre em 32 países africanos (Sigma-Tau, agora Alfasigma); trata-se de uma licença comercial, não de um registro, portanto esses países não estão incluídos aqui."
+    },
     "b0eafdef30da146a": {
       "en": "Acknowledgement",
       "where": "illustrated-journey-dashboard.html",
@@ -5458,6 +5514,13 @@
       "bucket": "data",
       "fr": "L’annonce par le fabricant des résultats de l’essai de phase III sur le GanLum.",
       "pt": "Comunicado do fabricante sobre os resultados de fase III do GanLum."
+    },
+    "b1a7812f3c2502c3": {
+      "en": "Submission announced 10 Nov 2026",
+      "where": "products.products[0].stages[1].date",
+      "bucket": "data",
+      "fr": "Annonce de la soumission le 10 novembre 2026",
+      "pt": "A submissão será anunciada em 10 de novembro de 2026."
     },
     "b1cb8eac5b3197a6": {
       "en": "Suriname",
@@ -6706,6 +6769,13 @@
       "bucket": "data",
       "fr": "SRA/Soumission WLA — le partenariat vise une approbation d'ici 2027"
     },
+    "d7b9ec5aa6c61a42": {
+      "en": "The regulatory review step now reads \"In progress\": Novartis announced on 10 November 2026 that it has submitted the medicine to the Swiss and US regulators, and that it has received priority review.",
+      "where": "products.changelog[1].plain",
+      "bucket": "data",
+      "fr": "L'étape d'examen réglementaire indique maintenant « En cours » : Novartis a annoncé le 10 novembre 2026 qu'elle a soumis le médicament aux autorités réglementaires suisses et américaines et qu'il a reçu un examen prioritaire.",
+      "pt": "A etapa de revisão regulatória agora indica \"Em andamento\": Novartis anunciou em 10 de novembro de 2026 que submeteu o medicamento aos reguladores suíços e americanos e que recebeu revisão prioritária."
+    },
     "d7c309b4f878e4e5": {
       "en": "We changed some wording after reviewer feedback. The price card is gone, the procurement step is labelled as public channels only, and the page now says that health-authority review progress is usually not public. GanLum now credits Novartis as its developer, with the required acknowledgement of its funders, and the page has a disclaimer.",
       "where": "products.changelog[0].plain",
@@ -6863,6 +6933,13 @@
       "where": "resistance.dict.country[31]",
       "bucket": "data",
       "fr": "Indonésie"
+    },
+    "dbf60f3b0c8d720d": {
+      "en": "The manufacturer announcing that GanLum has been submitted to Swissmedic and the US FDA for approval.",
+      "where": "sources.sources[25].plain",
+      "bucket": "data",
+      "fr": "Le fabricant annonce que GanLum a été soumis à Swissmedic et à la FDA américaine pour approbation.",
+      "pt": "O fabricante anunciou que o produto GanLum foi submetido à Swissmedic e à FDA dos EUA para aprovação."
     },
     "dbfb6f7d465ee928": {
       "en": "Bought through Global Fund-financed procurement since 2008; the timeline counts from WHO prequalification in 2015. The procurement figures are being reviewed and will be added later.",
