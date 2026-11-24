@@ -185,7 +185,6 @@
   "tooltip": {
     "clickForDetail": "Click for the full detail",
     "expected": "expected {date}",
-    "mapClickForDetails": "Click for details ›",
     "notListed": "not listed",
     "dataStatus": "{medicine} · {status} data"
   },
