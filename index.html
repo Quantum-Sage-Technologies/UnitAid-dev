@@ -1185,7 +1185,6 @@
   .det-chips { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
   .det-chip { font: inherit; font-size: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 2px 9px; cursor: pointer; }
   .det-chip:hover { border-color: var(--accent); }
-  .det-cta { margin-top: 4px; font-weight: 700; }
   .mapwrap { position: relative; }
   /* MapLibre's canvas has no viewBox/height:auto equivalent — an explicit
      aspect-ratio keeps the same responsive width-drives-height behaviour the
@@ -4094,9 +4093,12 @@
         if (!(iso3 in M.countries)) { hideTip(); map.getCanvas().style.cursor = ""; return; }
         const st = mftStage(iso3);
         map.getCanvas().style.cursor = "pointer";
+        // No "Click for details ›" line (24 Nov 2026): the tooltip follows the
+        // pointer and takes no clicks, so the line read as a link that could
+        // not be clicked, and a click where it stood opened the country under
+        // it. A click on the country opens it in the Detail panel, which says so.
         showTipAtPoint(e.originalEvent.clientX, e.originalEvent.clientY,
-          `<b>${esc(mftName(iso3))}</b><div class="tlvl"><span class="mapsw ${st.lvl}"></span>${esc(st.label)}</div>${mftTipLine(iso3)}` +
-          `<div class="tprod det-cta">Click for details ›</div>`);
+          `<b>${esc(mftName(iso3))}</b><div class="tlvl"><span class="mapsw ${st.lvl}"></span>${esc(st.label)}</div>${mftTipLine(iso3)}`);
       });
       map.on("mouseleave", "country-fill", () => { hideTip(); map.getCanvas().style.cursor = ""; });
       map.on("click", "country-fill", (e) => {
